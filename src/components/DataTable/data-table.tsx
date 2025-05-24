@@ -48,7 +48,7 @@ interface DataTableProps<TData, TValue> {
   pinedDefault?: string[];
 }
 
-function getCommonPinningStyles<T>(column: Column<T>, isHeader?: boolean): React.CSSProperties {
+function getCommonPinningStyles<T>(column: Column<T>): React.CSSProperties {
   const isPinned = column.getIsPinned();
   const isLastLeftPinnedColumn = isPinned === 'left' && column.getIsLastColumn('left');
   const isFirstRightPinnedColumn = isPinned === 'right' && column.getIsFirstColumn('right');
@@ -62,7 +62,7 @@ function getCommonPinningStyles<T>(column: Column<T>, isHeader?: boolean): React
           .otherwise(() => ''),
       ),
 
-    paddingLeft: isFirstRightPinnedColumn ? '30px' : isHeader ? '0px' : '10px',
+    paddingLeft: isFirstRightPinnedColumn ? '30px' : '0px',
     left: isPinned === 'left' ? `${column.getStart('left')}px` : undefined,
     right: isPinned === 'right' ? `${column.getAfter('right')}px` : undefined,
     opacity: isPinned ? 0.95 : 1,
@@ -148,7 +148,7 @@ export function DataTable<TData, TValue>({
       <div className="px-6 pt-3">
         {DataTableToolbar ? <DataTableToolbar table={table} setSearch={setSearch} /> : null}
       </div>
-      <div className="rounded-md overflow-hidden border-t border-b p-[1px]">
+      <div className="rounded-none overflow-hidden border-t border-b p-[1px]">
         <TableComp
           style={{
             ...columnSizeVars,
@@ -244,7 +244,7 @@ function TableBodyComp<TData, TValue>({ table, isFetching, columns }: TableBody<
                         <TableCell
                           key={cell.id}
                           className={cn(
-                            `group-hover:bg-secondary bg-background`,
+                            `group-hover:bg-secondary  bg-background `,
                             isNew &&
                               'bg-green-50 text-black group-hover:bg-emerald-100 group-hover:text-emebg-emerald-900',
                             isUpdate &&

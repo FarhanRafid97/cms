@@ -15,7 +15,7 @@ export const TableCellCostume = ({
   return (
     <div
       style={{ width: `calc(var(--header-${id}-size) * 1px )` }}
-      className={cn(' truncate overflow-hidden  text-[13px]  ', c)}
+      className={cn(' truncate overflow-hidden  text-[13px] px-1 ', c)}
     >
       {children || '-'}
     </div>

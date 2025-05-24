@@ -61,7 +61,7 @@ export function DataTableToolbar<TData>({ table, setSearch }: DataTableToolbarPr
                 bg-background/80 
                 border-border/60 
                 shadow-sm 
-                rounded-md
+                rounded-sm
                 transition-all 
                 duration-200 
                 ease-out
