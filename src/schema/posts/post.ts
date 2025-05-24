@@ -35,12 +35,7 @@ export interface PostWithAuthor extends Post {
   category_color?: string;
 }
 
-export interface CompletePost extends PostWithAuthor {
-  content: string;
-  raw_content?: string;
-  content_type: 'html' | 'markdown' | 'text';
-  word_count?: number;
-}
+export type CompletePost = Database['public']['Views']['complete_posts']['Row'];
 
 export interface PostWithStats extends Post {
   comment_count: number;

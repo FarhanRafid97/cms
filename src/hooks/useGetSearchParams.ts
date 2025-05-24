@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { FilterSearchParams } from '@/types/globals';
+import { LIMIT_GET_POSTS } from '@/lib/constant';
 
 interface QueryParams {
   [key: string]: string | string[];
@@ -22,12 +23,17 @@ export const useGetFilterSearchparams = (): { search: FilterSearchParams } => {
 
   const searchParams = useMemo(() => {
     const memoSearchParams = new URLSearchParams(search as unknown as string);
-    const obj = Object.fromEntries(memoSearchParams.entries());
-    return {
-      _limit: obj._limit || '50',
-      _page: obj._page || '1',
-      ...obj,
-    };
+    const obj = Object.fromEntries(memoSearchParams.entries()) as unknown as FilterSearchParams;
+
+    if (!obj._offsetFrom) {
+      obj._offsetFrom = '0';
+    }
+
+    if (!obj._offsetTo) {
+      obj._offsetTo = `${LIMIT_GET_POSTS}`;
+    }
+
+    return obj;
   }, [search]);
 
   return { search: searchParams };

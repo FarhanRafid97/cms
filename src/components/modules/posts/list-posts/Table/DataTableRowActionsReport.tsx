@@ -1,0 +1,49 @@
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { CompletePost, Tag } from '@/schema/posts/post';
+
+import { Edit, MoreHorizontal, Trash } from 'lucide-react';
+
+import { useState } from 'react';
+
+export function DataTableRowActionsReport({ row }: { row: CompletePost }) {
+  const [openEdit, setOpenEdit] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
+  return (
+    <>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <MoreHorizontal size={18} className="cursor-pointer" />
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end" className="w-[200px]">
+          <DropdownMenuLabel>Action</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem
+            className="flex gap-2 items-center"
+            onClick={() => {
+              setOpenEdit(true);
+            }}
+          >
+            <Edit size={16} />
+            Edit
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            className="flex gap-2 items-center"
+            onClick={() => {
+              setOpenDelete(true);
+            }}
+          >
+            <Trash size={16} />
+            Delete
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </>
+  );
+}

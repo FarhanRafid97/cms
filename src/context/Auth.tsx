@@ -1,4 +1,6 @@
+import { useGetFilterSearchparams } from '@/hooks/useGetSearchParams';
 import { supabase } from '@/lib/supabase';
+import { useSearchParamsClient } from '@/store/searchParams';
 import { Session, User } from '@supabase/supabase-js';
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 

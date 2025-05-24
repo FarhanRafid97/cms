@@ -6,3 +6,4 @@ export const FAILED_UPDATE_DATA = 'Failed Update Data';
 export const FAILED_DELETE_DATA = 'Failed Delete Data';
 export const FAILED_GET_DATA = 'Failed Get Data';
 export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+export const LIMIT_GET_POSTS = 50;

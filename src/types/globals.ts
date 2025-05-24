@@ -10,8 +10,8 @@ export type PrettifyType<T> = {
 } & unknown;
 
 export interface FilterSearchParams {
-  _limit: string;
-  _page: string;
+  _offsetFrom?: string;
+  _offsetTo: string;
   _idFile?: string;
   _status?: string;
   _startEffectiveDate?: string;
@@ -34,4 +34,12 @@ export interface DataTableToolbarProps<TData> {
   searchParams?: FilterSearchParams;
   id?: string;
   isPending?: boolean;
+}
+
+export interface StateSearchParam {
+  limit: number;
+  page: number;
+  _offset?: string;
+  _offsetFrom?: string;
+  _offsetTo: string;
 }

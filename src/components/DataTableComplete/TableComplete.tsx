@@ -27,9 +27,9 @@ import {
 
 import { cn } from '@/lib/utils';
 
-import { DataTableToolbarProps, FilterSearchParams, StateSearchParam } from '@/types/globals';
+import { DataTableToolbarProps, FilterSearchParams } from '@/types/globals';
 import { match } from 'ts-pattern';
-import PaginationWithNumber from './PaginationWithNumber';
+import PaginationNextOnly from './PaginationNext';
 
 type TableBody<TData, TValue> = {
   table: Table<TData>;
@@ -43,10 +43,8 @@ interface DataTableProps<TData, TValue> {
   pinedDefault?: string[];
   searchParams?: FilterSearchParams;
 
-  statePagination: StateSearchParam;
-  totalPage: number | undefined;
-  totalElement: number;
   id?: string;
+  totalElement: number;
   // eslint-disable-next-line no-unused-vars
   isFetching: boolean;
 }
@@ -81,9 +79,7 @@ export function DataTableComplete<TData, TValue>({
   searchParams,
   pinedDefault = [],
   id,
-  statePagination,
 
-  totalPage,
   isFetching = false,
   totalElement,
 }: DataTableProps<TData, TValue>) {
@@ -216,13 +212,7 @@ export function DataTableComplete<TData, TValue>({
           )}
         </TableComp>
       </div>
-      <PaginationWithNumber
-        isFetching={isFetching}
-        totalElement={totalElement}
-        table={table}
-        statePagination={statePagination}
-        totalPage={totalPage ?? 1}
-      />
+      <PaginationNextOnly isFetching={isFetching} totalElement={totalElement} />
     </div>
   );
 }
@@ -289,14 +279,14 @@ function TableBodyComp<TData, TValue>({ table, isFetching, columns }: TableBody<
 function LoadingRows<TData>({ table }: { table: Table<TData> }) {
   return (
     <>
-      {[...Array(20)].map((_, index) =>
+      {[...Array(10)].map((_, index) =>
         table.getHeaderGroups().map((headerGroup) => (
           <TableRow key={`${headerGroup.id}-${index}`}>
             {headerGroup.headers.map((header) => (
               <TableCell
                 key={header.id}
                 className={cn(
-                  '  animate-pulse h-7  bg-gray-300',
+                  '  animate-pulse h-6  bg-gray-300',
                   `animation-delay-[${400 + index * 50}ms]`,
                 )}
                 colSpan={header.colSpan}

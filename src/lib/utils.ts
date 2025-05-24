@@ -26,7 +26,7 @@ export const isValidEmail = (email: string) => {
   return regex.test(email);
 };
 
-export const formatedDateDDMMYYY = (date: string, isWithTime = true) => {
+export const formatedDateDDMMYYY = (date?: string, isWithTime = true) => {
   const formatString = isWithTime ? 'dd MMMM yyyy - HH:mm:ss' : 'dd MMMM yyyy';
 
   if (!date) {

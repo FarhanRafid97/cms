@@ -27,7 +27,7 @@ export const listMenu: {
     menus: [
       {
         title: 'Posts',
-        href: '/dashboard/posts',
+        href: '/dashboard/posts/list-post',
       },
     ],
   },
