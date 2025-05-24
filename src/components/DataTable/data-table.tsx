@@ -55,10 +55,10 @@ function getCommonPinningStyles<T>(column: Column<T>): React.CSSProperties {
 
   return {
     boxShadow: match(isLastLeftPinnedColumn)
-      .with(true, () => '-4px 0 4px -4px gray inset')
+      .with(true, () => '2.5px 0 4px -4px gray inset')
       .otherwise(() =>
         match(isFirstRightPinnedColumn)
-          .with(true, () => '4px 0 4px -4px gray inset')
+          .with(true, () => '2.5px 0 4px -4px gray inset')
           .otherwise(() => ''),
       ),
 
