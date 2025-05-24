@@ -10,8 +10,6 @@ import Link from 'next/link';
 const PageNoFound = () => {
   return (
     <ContainerContent>
-      <TitlePage title="Page Not Found" Icon={ValueNoneIcon} />
-
       <ContainerSection className="min-h-[50vh]">
         <div className="flex flex-col items-center justify-center pb-[50px]">
           <NotFound />

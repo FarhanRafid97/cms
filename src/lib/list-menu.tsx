@@ -1,19 +1,15 @@
-import { Album, Shield } from 'lucide-react';
+import { Album, Settings2 } from 'lucide-react';
 import { ReactNode } from 'react';
 const ICON_SIZE = 16;
 export const listMenu: {
-  groupMenu: 'Admin' | 'Post';
+  groupMenu: 'Parameter' | 'Post';
   icon: ReactNode;
   menus: { title: string; href: string }[];
 }[] = [
   {
-    groupMenu: 'Admin',
-    icon: <Shield size={ICON_SIZE} />,
+    groupMenu: 'Parameter',
+    icon: <Settings2 size={ICON_SIZE} />,
     menus: [
-      {
-        title: 'Dashboard',
-        href: '/dashboard/Category',
-      },
       {
         title: 'Category',
         href: '/dashboard/category',
@@ -21,12 +17,7 @@ export const listMenu: {
       {
         title: 'Tag',
 
-        href: '/dashboard/tag',
-      },
-      {
-        title: 'Logout',
-
-        href: '/logout',
+        href: '/dashboard/tags',
       },
     ],
   },
