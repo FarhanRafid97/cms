@@ -12,30 +12,27 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from '@/components/ui/sidebar';
+import { listMenu } from '@/lib/list-menu';
 import { cn } from '@/lib/utils';
-import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import RenderIconMenu from '../Layouts/RenderIconMenu';
 
 export function NavMain() {
-  const { data: session } = useSession();
-
   const router = useRouter();
   return (
     <SidebarGroup>
       <SidebarGroupLabel>List Menu</SidebarGroupLabel>
 
       <SidebarMenu>
-        {session?.user?.menu?.map((item) => (
-          <Collapsible key={item.label}>
+        {listMenu.map((item) => (
+          <Collapsible key={item.groupMenu}>
             <SidebarMenuItem>
-              <SidebarMenuButton asChild tooltip={item.label}>
-                <CollapsibleTrigger asChild className="cursor-pointer" data-test={item.label}>
+              <SidebarMenuButton asChild tooltip={item.groupMenu}>
+                <CollapsibleTrigger asChild className="cursor-pointer" data-test={item.groupMenu}>
                   <div>
-                    <RenderIconMenu menuItem={item.label} size={16} />
+                    {item.icon}
 
-                    <span className={cn('text-sm')}>{item.label}</span>
+                    <span className={cn('text-sm')}>{item.groupMenu}</span>
                   </div>
                 </CollapsibleTrigger>
               </SidebarMenuButton>
@@ -50,19 +47,19 @@ export function NavMain() {
                   <CollapsibleContent className="CollapsibleContent">
                     <SidebarMenuSub>
                       {item.menus?.map((subItem) => (
-                        <SidebarMenuSubItem key={subItem.menu}>
+                        <SidebarMenuSubItem key={subItem.title}>
                           <SidebarMenuSubButton
                             asChild
                             className={cn(
-                              router.pathname === subItem.url.split('?')[0] ? 'bg-muted  ' : '',
+                              router.pathname === subItem.href.split('?')[0] ? 'bg-muted  ' : '',
                             )}
                           >
                             <Link
-                              href={subItem.url}
+                              href={subItem.href}
                               className="text-xs"
-                              data-test={`${item.label}-${subItem.menu}`}
+                              data-test={`${item.groupMenu}-${subItem.title}`}
                             >
-                              <span className="text-xs">{subItem.menu}</span>
+                              <span className="text-xs">{subItem.title}</span>
                             </Link>
                           </SidebarMenuSubButton>
                         </SidebarMenuSubItem>
