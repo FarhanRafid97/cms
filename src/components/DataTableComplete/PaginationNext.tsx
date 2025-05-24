@@ -75,39 +75,35 @@ export default function PaginationNextOnly({
   }
 
   return (
-    <div className="grid grid-cols-1 items-center justify-end md:justify-between ">
-      <div className="grid md:grid-cols-2 grid-cols-1 items-center space-x-6 lg:space-x-8 ">
-        <div className="flex items-center space-x-2 justify-end ">
-          <PaginationContent
-            aria-label="pagination-prev"
-            disabled={Number(searchParams?._offsetFrom || 0) === 0}
-            pathname={pathname}
-            search={
-              '?' +
-              new URLSearchParams({
-                ...searchParams,
-                _offset: `${prevStep}`,
-              }).toString()
-            }
-          >
-            <ChevronLeftIcon width={12} />
-          </PaginationContent>
-          <PaginationContent
-            aria-label="pagination-last-next"
-            disabled={totalElement < LIMIT_GET_POSTS}
-            pathname={pathname}
-            search={
-              '?' +
-              new URLSearchParams({
-                ...searchParams,
-                _offsetTo: `${nextStep}`,
-              }).toString()
-            }
-          >
-            <ChevronRightIcon width={12} />
-          </PaginationContent>
-        </div>
-      </div>
+    <div className="flex justify-end gap-2">
+      <PaginationContent
+        aria-label="pagination-prev"
+        disabled={Number(searchParams?._offsetFrom || 0) === 0}
+        pathname={pathname}
+        search={
+          '?' +
+          new URLSearchParams({
+            ...searchParams,
+            _offset: `${prevStep}`,
+          }).toString()
+        }
+      >
+        <ChevronLeftIcon width={12} />
+      </PaginationContent>
+      <PaginationContent
+        aria-label="pagination-last-next"
+        disabled={totalElement < LIMIT_GET_POSTS}
+        pathname={pathname}
+        search={
+          '?' +
+          new URLSearchParams({
+            ...searchParams,
+            _offsetTo: `${nextStep}`,
+          }).toString()
+        }
+      >
+        <ChevronRightIcon width={12} />
+      </PaginationContent>
     </div>
   );
 }

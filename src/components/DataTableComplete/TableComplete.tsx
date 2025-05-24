@@ -144,7 +144,7 @@ export function DataTableComplete<TData, TValue>({
 
   return (
     <div className="space-y-4">
-      <div>
+      <div className="px-6 pt-3">
         {DataTableToolbar ? (
           <DataTableToolbar
             isPending={isFetching}
@@ -155,7 +155,7 @@ export function DataTableComplete<TData, TValue>({
           />
         ) : null}
       </div>
-      <div className="rounded-md overflow-hidden border p-[1px]">
+      <div className=" overflow-hidden border-y  p-[1px]">
         <TableComp
           className="w-full "
           style={{
@@ -212,7 +212,9 @@ export function DataTableComplete<TData, TValue>({
           )}
         </TableComp>
       </div>
-      <PaginationNextOnly isFetching={isFetching} totalElement={totalElement} />
+      <div className="px-6">
+        <PaginationNextOnly isFetching={isFetching} totalElement={totalElement} />
+      </div>
     </div>
   );
 }
