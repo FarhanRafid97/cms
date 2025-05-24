@@ -1,0 +1,93 @@
+.label {
+  position: absolute;
+  padding: 0 0.5rem;
+  cursor: text;
+  transition: top 100ms ease-in, left 100ms ease-in, font-size 100ms ease-in !important;
+  z-index: 2;
+}
+.labelError {
+  position: absolute;
+  left: 5px;
+  top: 13px;
+  padding: 0 0.5rem;
+  cursor: text;
+  transition: top 150ms ease-in, left 150ms ease-in, font-size 150ms ease-in;
+
+  z-index: 2;
+}
+
+.input:focus + .label {
+  color: blue;
+  top: 0;
+  font-size: 0.7rem;
+  left: 7px;
+  z-index: 2;
+}
+
+.input:not(:placeholder-shown).input:not(:focus) + .label {
+  @apply text-gray-500;
+  top: 0;
+  font-size: 0.7rem;
+  left: 7px;
+  z-index: 2;
+}
+
+.input:not(:placeholder-shown).input:not(:focus) + .labelError {
+  @apply text-gray-500;
+  top: -10px;
+  font-size: 0.8rem;
+  left: 15px;
+  z-index: 2;
+}
+
+.inputSelecinputt:not(:placeholder-shown).input:not(:focus) + .labelTest {
+  @apply text-black top-[-18px] left-[-3px] text-[0.7rem];
+  transition: top 150ms ease-in, left 150ms ease-in, font-size 150ms ease-in;
+}
+
+.transitionInput {
+  transition: top 150ms ease-in, left 150ms ease-in, font-size 150ms ease-in;
+}
+
+.input:focus + .borderLabel {
+  border-color: blue;
+}
+
+.input:focus + .labelError {
+  color: red;
+  top: -10px;
+  font-size: 0.7rem;
+  left: 5px;
+  z-index: 2;
+}
+
+.input:not(:placeholder-shown).input:not(:focus) + .textarea {
+  @apply text-gray-500;
+  top: -10px;
+  font-size: 0.8rem;
+  left: 5px;
+  z-index: 2;
+}
+
+.label_search {
+  position: absolute;
+  padding: 0 0.5rem;
+  cursor: text;
+  transition: top 150ms ease-out, left 150ms ease-out, font-size 150ms ease-out;
+  z-index: 2;
+}
+
+.input_search:not(:placeholder-shown).input_search:not(:focus) + .label_search {
+  @apply text-gray-500;
+  top: 0;
+  font-size: 0.7rem;
+  left: 7px;
+  z-index: 2;
+}
+.input_search:not(:placeholder-shown).input_search:focus + .label_search {
+  @apply text-gray-500;
+  top: 0;
+  font-size: 0.7rem;
+  left: 7px;
+  z-index: 2;
+}

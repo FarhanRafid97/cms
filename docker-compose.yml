@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  mcr:
+    container_name: mrc-mdb
+    hostname: 'mcr-mdb'
+    image: image-repo.bri.co.id/cbp-dev/ui-brimasspro-mcr-mdb:v1
+    restart: always
+    ports:
+      - '3000:3000'

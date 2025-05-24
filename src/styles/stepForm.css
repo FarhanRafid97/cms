@@ -1,0 +1,18 @@
+.step_form:not(:last-child)::after {
+  content: '';
+  height: 4px;
+  width: 100%;
+  position: absolute;
+  left: 10%;
+  top: 32%;
+  background: #d8e2ef;
+}
+.step_form_active:not(:last-child)::after {
+  content: '';
+  height: 4px;
+  width: 100%;
+  position: absolute;
+  left: 10%;
+  top: 32%;
+  @apply bg-green-500;
+}
