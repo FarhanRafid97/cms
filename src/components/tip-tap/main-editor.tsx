@@ -2,19 +2,18 @@
 
 import type React from 'react';
 
-import { useEditor, EditorContent } from '@tiptap/react';
-import StarterKit from '@tiptap/starter-kit';
-import Image from '@tiptap/extension-image';
-import { TextAlign } from '@tiptap/extension-text-align';
-import Placeholder from '@tiptap/extension-placeholder';
-import { useRef, useState } from 'react';
-import { EditorToolbar } from './editor-toolbar';
-import TextStyle from '@tiptap/extension-text-style';
 import { Color } from '@tiptap/extension-color';
 import { Highlight } from '@tiptap/extension-highlight';
+import Image from '@tiptap/extension-image';
+import Placeholder from '@tiptap/extension-placeholder';
+import { TextAlign } from '@tiptap/extension-text-align';
+import TextStyle from '@tiptap/extension-text-style';
+import { EditorContent, useEditor } from '@tiptap/react';
+import StarterKit from '@tiptap/starter-kit';
+import { useRef, useState } from 'react';
 import ImageResize from 'tiptap-extension-resize-image';
+import { EditorToolbar } from './editor-toolbar';
 import Link from './extension/link-extension';
-import { Scan } from 'lucide-react';
 
 export function Editor() {
   const [isUploading, setIsUploading] = useState(false);
@@ -54,7 +53,7 @@ export function Editor() {
         autocorrect: 'off',
         autocapitalize: 'off',
         'aria-label': 'Main content area, start typing to enter text.',
-        class: 'prose prose-sm sm:pros lg:prose-sm focus:outline-none max-w-full',
+        class: 'prose prose-sm sm:pros lg:prose-sm focus:outline-none max-w-full p-1',
       },
     },
   });
@@ -94,14 +93,9 @@ export function Editor() {
   if (!editor) {
     return null;
   }
-
+  console.log(editor.getJSON());
   return (
-    <div className="relative h-full">
-      <div className="w-full  bg-red-400 p-2">
-        tst
-        <Scan />
-      </div>
-
+    <div className="relative h-full py-4">
       <div
         className="py-2 flex justify-center "
         onClick={() => {

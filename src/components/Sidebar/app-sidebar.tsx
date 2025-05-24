@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/sidebar';
 import Image from 'next/image';
 import Link from 'next/link';
-import CutOffTime from '../Layouts/CutOffTime';
+
 import { NavMain } from './nav-main';
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
@@ -49,9 +49,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent className="">
         <NavMain />
       </SidebarContent>
-      <SidebarFooter>
-        <CutOffTime isShow={true} />
-      </SidebarFooter>
+      <SidebarFooter></SidebarFooter>
     </Sidebar>
   );
 }

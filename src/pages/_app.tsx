@@ -1,5 +1,6 @@
 import Layout from '@/components/Layouts/Layout';
 import ListMenuSearch from '@/components/Layouts/ListMenuSearch';
+import { ProvideAuth } from '@/context/Auth';
 import Providers from '@/querries/Providers';
 import { useLogoutUser } from '@/store/logout';
 import '@/styles/calendar.css';
@@ -42,40 +43,42 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore: Unreachable code error
     <ThemeProvider defaultTheme="light" disableTransitionOnChange>
-      <SessionProvider session={session} refetchOnWindowFocus={true}>
-        {/* <script src="https://unpkg.com/react-scan/dist/auto.global.js" async /> */}
-        <Providers>
-          {isLogout && (
-            <div className="fixed bg-white/70 backdrop-blur-md inset-0 z-[23123] w-screen h-screen flex justify-center items-center">
-              <div className="flex flex-col items-center justify-center gap-2">
-                <Loader2 size={40} className="animate-spin" />
-                Loading Sign Out...
-              </div>
-            </div>
-          )}
-          {match(router.pathname)
-            .with('/atmind666', '/login', '/atmind666/bristar', '/blog/create-blog', () => (
-              <Component {...pageProps} />
-            ))
-            .otherwise(() => (
-              <Layout id={data?.batch || ''}>
-                <Component {...pageProps} />
-                <div className="print:hidden">
-                  <ReactQueryDevtools initialIsOpen={false} />
+      <ProvideAuth>
+        <SessionProvider session={session} refetchOnWindowFocus={true}>
+          {/* <script src="https://unpkg.com/react-scan/dist/auto.global.js" async /> */}
+          <Providers>
+            {isLogout && (
+              <div className="fixed bg-white/70 backdrop-blur-md inset-0 z-[23123] w-screen h-screen flex justify-center items-center">
+                <div className="flex flex-col items-center justify-center gap-2">
+                  <Loader2 size={40} className="animate-spin" />
+                  Loading Sign Out...
                 </div>
-              </Layout>
-            ))}
-          <ListMenuSearch />
-          <Toaster
-            richColors
-            visibleToasts={3}
-            duration={3000}
-            closeButton
-            position="top-right"
-            theme="dark"
-          />
-        </Providers>
-      </SessionProvider>
+              </div>
+            )}
+            {match(router.pathname)
+              .with('/atmind666', '/login', '/atmind666/bristar', () => (
+                <Component {...pageProps} />
+              ))
+              .otherwise(() => (
+                <Layout id={data?.batch || ''}>
+                  <Component {...pageProps} />
+                  <div className="print:hidden">
+                    <ReactQueryDevtools initialIsOpen={false} />
+                  </div>
+                </Layout>
+              ))}
+            <ListMenuSearch />
+            <Toaster
+              richColors
+              visibleToasts={3}
+              duration={3000}
+              closeButton
+              position="top-right"
+              theme="dark"
+            />
+          </Providers>
+        </SessionProvider>
+      </ProvideAuth>
     </ThemeProvider>
   );
 }
