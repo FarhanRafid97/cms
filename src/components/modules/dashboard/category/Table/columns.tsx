@@ -14,7 +14,9 @@ export const columns: ColumnDef<Category>[] = [
       <DataTableColumnHeaderComplete header={header} column={column} title="ID" />
     ),
     cell: ({ row, column }) => (
-      <TableCellCostume id={column.id}>{row.original.id}</TableCellCostume>
+      <TableCellCostume className="ml-6" id={column.id}>
+        {row.original.id}
+      </TableCellCostume>
     ),
   },
   {

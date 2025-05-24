@@ -94,7 +94,7 @@ export function DataTableViewOptions<TData>({ table }: DataTableViewOptionsProps
                       key={column.id}
                       className={cn(
                         'flex items-center py-1.5 px-2 rounded-md transition-all cursor-pointer hover:bg-secondary',
-                        isVisible && 'bg-border hover:bg-secondary/80',
+                        isVisible && 'bg-secondary hover:bg-secondary/80',
                       )}
                       onClick={() => {
                         column.toggleVisibility();

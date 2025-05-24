@@ -1,8 +1,7 @@
-import { IconProps } from '@radix-ui/react-icons/dist/types';
-import { useSession } from 'next-auth/react';
+import { listMenu } from '@/lib/list-menu';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { FC, ForwardRefExoticComponent, ReactNode, RefAttributes } from 'react';
+import { FC, ReactNode } from 'react';
 interface TitlePageProps {
   Icon: ReactNode;
   title: string;
@@ -17,9 +16,8 @@ interface BreadcrumbProps {
 export const useBreadcrumbs = (id: string | undefined): BreadcrumbProps[] => {
   const { pathname } = useRouter();
 
-  const { data: session } = useSession();
-  const menus = session?.user.menu.flatMap((d) => {
-    return d.menus.map((menu) => menu.url);
+  const menus = listMenu.flatMap((d) => {
+    return d.menus.map((menu) => menu.href);
   });
 
   const pathSegments = pathname.replace(/(^\/)|(\/$)/g, '').split('/');

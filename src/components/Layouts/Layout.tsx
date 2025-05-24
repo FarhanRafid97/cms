@@ -9,6 +9,7 @@ import { SidebarInset, SidebarProvider, SidebarTrigger } from '../ui/sidebar';
 import SearchMenu from './SearchMenu';
 import UserLogged from './UserLogged';
 import ProtectedRoute from './Protection';
+import BreadcrumbURL from '../BreadcrumbURL';
 
 interface ILayoutProps {
   children: ReactNode;
@@ -21,12 +22,13 @@ const Layout: React.FC<ILayoutProps> = ({ children }) => {
       <SidebarProvider className="bg-sidebar flex justify-center ">
         <AppSidebar className="print:hidden " />
         <SidebarInset className="overflow-auto h-[90vh]  print:fixed print:inset-0  print:margin-r-72 print:z-[9999] print:border-none print:shadow-none">
-          <header className="flex h-16 shrink-0 items-center gap-2 print:hidden border-b-[0.5px]">
-            <div className="flex items-center gap-2 px-4">
+          <header className="flex h-16 shrink-0 items-center px-6 gap-2 print:hidden border-b-[0.5px]">
+            <div className="flex items-center gap-2 ">
               <SidebarTrigger className="-ml-1" />
               <Separator orientation="vertical" className="h-4  mr-2" />
+              <BreadcrumbURL />
             </div>
-            <div className="flex gap-4 items-center ml-auto pr-4">
+            <div className="flex gap-4 items-center ml-auto ">
               <SearchMenu />
 
               <UserLogged />

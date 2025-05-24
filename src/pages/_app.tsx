@@ -9,7 +9,7 @@ import '@/styles/nprogress.css';
 import '@/styles/quil.editor.css';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Loader2 } from 'lucide-react';
-import { SessionProvider } from 'next-auth/react';
+
 import { ThemeProvider } from 'next-themes';
 import { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
@@ -20,7 +20,7 @@ import { match } from 'ts-pattern';
 
 const progress = nProgress.configure({ showSpinner: false });
 
-export default function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+export default function App({ Component, pageProps: { ...pageProps } }: AppProps) {
   const router = useRouter();
 
   const { data } = pageProps;
@@ -44,40 +44,36 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
     // @ts-ignore: Unreachable code error
     <ThemeProvider defaultTheme="light" disableTransitionOnChange>
       <ProvideAuth>
-        <SessionProvider session={session} refetchOnWindowFocus={true}>
-          {/* <script src="https://unpkg.com/react-scan/dist/auto.global.js" async /> */}
-          <Providers>
-            {isLogout && (
-              <div className="fixed bg-white/70 backdrop-blur-md inset-0 z-[23123] w-screen h-screen flex justify-center items-center">
-                <div className="flex flex-col items-center justify-center gap-2">
-                  <Loader2 size={40} className="animate-spin" />
-                  Loading Sign Out...
-                </div>
+        {/* <script src="https://unpkg.com/react-scan/dist/auto.global.js" async /> */}
+        <Providers>
+          {isLogout && (
+            <div className="fixed bg-white/70 backdrop-blur-md inset-0 z-[23123] w-screen h-screen flex justify-center items-center">
+              <div className="flex flex-col items-center justify-center gap-2">
+                <Loader2 size={40} className="animate-spin" />
+                Loading Sign Out...
               </div>
-            )}
-            {match(router.pathname)
-              .with('/atmind666', '/login', '/atmind666/bristar', () => (
+            </div>
+          )}
+          {match(router.pathname)
+            .with('/atmind666', '/login', '/atmind666/bristar', () => <Component {...pageProps} />)
+            .otherwise(() => (
+              <Layout id={data?.batch || ''}>
                 <Component {...pageProps} />
-              ))
-              .otherwise(() => (
-                <Layout id={data?.batch || ''}>
-                  <Component {...pageProps} />
-                  <div className="print:hidden">
-                    <ReactQueryDevtools initialIsOpen={false} />
-                  </div>
-                </Layout>
-              ))}
-            <ListMenuSearch />
-            <Toaster
-              richColors
-              visibleToasts={3}
-              duration={3000}
-              closeButton
-              position="top-right"
-              theme="dark"
-            />
-          </Providers>
-        </SessionProvider>
+                <div className="print:hidden">
+                  <ReactQueryDevtools initialIsOpen={false} />
+                </div>
+              </Layout>
+            ))}
+          <ListMenuSearch />
+          <Toaster
+            richColors
+            visibleToasts={3}
+            duration={3000}
+            closeButton
+            position="top-right"
+            theme="dark"
+          />
+        </Providers>
       </ProvideAuth>
     </ThemeProvider>
   );

@@ -1,14 +1,17 @@
 import { SESSION_EXPIRED_TIME } from '@/lib/constant';
-import { signOut } from 'next-auth/react';
+import { supabase } from '@/lib/supabase';
+import { useRouter } from 'next/router';
+
 import { useEffect, useRef } from 'react';
 
 export const useDetectUserAFK = () => {
   const ref = useRef<NodeJS.Timeout | null>(null);
-
+  const router = useRouter();
   useEffect(() => {
     const startIdleTimer = () => {
       ref.current = setTimeout(() => {
-        signOut();
+        supabase.auth.signOut();
+        router.push('/login');
       }, SESSION_EXPIRED_TIME);
     };
 

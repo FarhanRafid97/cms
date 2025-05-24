@@ -2,7 +2,7 @@ import { Album, Shield } from 'lucide-react';
 import { ReactNode } from 'react';
 const ICON_SIZE = 16;
 export const listMenu: {
-  groupMenu: string;
+  groupMenu: 'Admin' | 'Post';
   icon: ReactNode;
   menus: { title: string; href: string }[];
 }[] = [
@@ -40,4 +40,4 @@ export const listMenu: {
       },
     ],
   },
-];
+] as const;

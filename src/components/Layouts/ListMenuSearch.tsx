@@ -8,17 +8,15 @@ import {
 } from '@/components/ui/command';
 import { useOutsideClick } from '@/hooks/useOutsideClick';
 import { setSearchMenuTogle, useOpenSearchMenu } from '@/store/searchMenu';
-import { useSession } from 'next-auth/react';
+
+import { listMenu } from '@/lib/list-menu';
+import { cn } from '@/lib/utils';
 import { useRouter } from 'next/router';
 import { Fragment, useRef } from 'react';
-import RenderIconMenu from './RenderIconMenu';
-import { cn } from '@/lib/utils';
 
 const ListMenuSearch = () => {
   const { isOpen } = useOpenSearchMenu();
   const refCommand = useRef<HTMLDivElement>(null);
-
-  const { data: session } = useSession();
 
   const router = useRouter();
   useOutsideClick({ isOpen, ref: refCommand, setIsOpen: setSearchMenuTogle });
@@ -32,21 +30,21 @@ const ListMenuSearch = () => {
         <CommandInput placeholder="Type a menu or search..." autoFocus={true} />
         <CommandList>
           <CommandEmpty>No Menu found.</CommandEmpty>
-          {session?.user?.menu?.map((groupMenu, idx) => (
+          {listMenu.map((groupMenu, idx) => (
             <Fragment key={idx}>
-              <CommandGroup heading={groupMenu.label}>
+              <CommandGroup heading={groupMenu.groupMenu}>
                 {groupMenu.menus.map((menu) => (
                   <CommandItem
-                    key={menu.url}
+                    key={menu.href}
                     className={cn('flex items-center gap-2')}
-                    value={menu.url + menu.menu}
+                    value={menu.href + menu.title}
                     onSelect={() => {
                       setSearchMenuTogle(false);
-                      router.push(menu.url);
+                      router.push(menu.href);
                     }}
                   >
-                    <RenderIconMenu menuItem={menu.headerMenu} size={12} />
-                    {menu.menu}
+                    {groupMenu.icon}
+                    {menu.title}
                   </CommandItem>
                 ))}
               </CommandGroup>

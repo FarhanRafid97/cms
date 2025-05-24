@@ -144,9 +144,11 @@ export function DataTable<TData, TValue>({
   }, [table.getState().columnSizingInfo.isResizingColumn]);
 
   return (
-    <div className={cn(' space-y-4 ', c)}>
-      {DataTableToolbar ? <DataTableToolbar table={table} setSearch={setSearch} /> : null}
-      <div className="rounded-md overflow-hidden border p-[1px]">
+    <div className={cn(' space-y-3 ', c)}>
+      <div className="px-6 pt-3">
+        {DataTableToolbar ? <DataTableToolbar table={table} setSearch={setSearch} /> : null}
+      </div>
+      <div className="rounded-md overflow-hidden border-t border-b p-[1px]">
         <TableComp
           style={{
             ...columnSizeVars,
@@ -157,18 +159,17 @@ export function DataTable<TData, TValue>({
               table.getHeaderGroups().map((headerGroup) => {
                 return (
                   <TableRow key={headerGroup.id} className="tr ">
-                    {headerGroup.headers.map((header) => {
+                    {headerGroup.headers.map((header, idx) => {
                       return (
                         <TableHead
                           scope="col"
-                          onMouseDown={header.getResizeHandler()}
-                          onTouchStart={header.getResizeHandler()}
-                          className={
-                            header.column.getIsPinned() ? ' bg-background/80 backdrop-blur' : ''
-                          }
+                          className={cn(
+                            header.column.getIsPinned() ? ' bg-background/80 backdrop-blur' : '',
+                          )}
                           style={{
                             ...getCommonPinningStyles(header.column),
                             width: `calc(var(--header-${header?.id}-size) * 1px)`,
+                            paddingLeft: idx === 0 ? '1.5rem' : '0px',
                           }}
                           key={header.id}
                         >
@@ -177,10 +178,12 @@ export function DataTable<TData, TValue>({
                             : flexRender(header.column.columnDef.header, header.getContext())}
                           {header.column.id === 'actions' ? null : (
                             <div
+                              onMouseDown={header.getResizeHandler()}
+                              onTouchStart={header.getResizeHandler()}
                               {...{
                                 onDoubleClick: () => header.column.resetSize(),
 
-                                className: `resizer ${
+                                className: `resizer  ${
                                   header.column.getIsResizing() ? 'isResizing' : ''
                                 }`,
                               }}
@@ -208,7 +211,9 @@ export function DataTable<TData, TValue>({
           )}
         </TableComp>
       </div>
-      <DataTablePagination table={table} />
+      <div className="px-6">
+        <DataTablePagination table={table} />
+      </div>
     </div>
   );
 }

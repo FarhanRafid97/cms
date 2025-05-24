@@ -2,6 +2,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { BASE_URL } from '@/lib/constant';
 import { supabase } from '@/lib/supabase';
 import { isValidEmail } from '@/lib/utils';
 import { ArrowRight, CheckCircle, Mail } from 'lucide-react';
@@ -32,7 +33,7 @@ const Login = () => {
         email: userEmail,
         options: {
           shouldCreateUser: false,
-          emailRedirectTo: 'http://localhost:3000/dashboard',
+          emailRedirectTo: `${BASE_URL}/dashboard`,
         },
       });
 

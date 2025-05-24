@@ -1,3 +1,4 @@
+import RenderIconMenu from '@/components/Layouts/RenderIconMenu';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -5,15 +6,14 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { listMenu } from '@/lib/list-menu';
 import { cn } from '@/lib/utils';
 import { ChevronRight, Home } from 'lucide-react';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { FC, Fragment } from 'react';
-import RenderIconMenu from '@/components/Layouts/RenderIconMenu';
-import { useSession } from 'next-auth/react';
-import Link from 'next/link';
 import { match } from 'ts-pattern';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 interface BreadcrumbURLProps {
   id?: string;
@@ -29,7 +29,9 @@ interface BreadcrumbProps {
 export const useBreadcrumbs = (id: string | undefined): BreadcrumbProps[] => {
   const { pathname } = useRouter();
 
-  const { data: session } = useSession();
+  const menus = listMenu.flatMap((d) => {
+    return d.menus.map((menu) => menu.href);
+  });
 
   const pathSegments = pathname.replace(/(^\/)|(\/$)/g, '').split('/');
 

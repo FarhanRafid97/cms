@@ -43,13 +43,13 @@ export function DataTableColumnHeaderComplete<TData, TValue>({
           <Button
             variant="ghost"
             size="sm"
-            className="h-8 px-2 hover:bg-gray-100 transition-colors duration-200 rounded-md border border-transparent  focus:outline-none focus-visible:ring-0 focus:ring-gray-300 "
+            className="h-8  hover:bg-gray-100 transition-colors duration-200 rounded-md border border-transparent  focus:outline-none focus-visible:ring-0 focus:ring-gray-300 "
           >
             <div
               className="truncate overflow-hidden text-start"
               style={{ width: `calc(var(--header-${header.id}-size) * 1px - 16px` }}
             >
-              <span className="text-[12px] font-bold  text-start text-black-shadow ">{title}</span>
+              <span className="text-[12px] font-[400]  text-start text-black-shadow ">{title}</span>
             </div>
             {match(column.getIsSorted())
               .with('desc', () => (
