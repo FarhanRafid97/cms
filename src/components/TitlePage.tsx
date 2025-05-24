@@ -2,9 +2,9 @@ import { IconProps } from '@radix-ui/react-icons/dist/types';
 import { useSession } from 'next-auth/react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { FC, ForwardRefExoticComponent, RefAttributes } from 'react';
+import { FC, ForwardRefExoticComponent, ReactNode, RefAttributes } from 'react';
 interface TitlePageProps {
-  Icon: ForwardRefExoticComponent<IconProps & RefAttributes<SVGSVGElement>>;
+  Icon: ReactNode;
   title: string;
   id?: string;
 }
@@ -57,9 +57,7 @@ const TitlePage: FC<TitlePageProps> = ({ Icon, title, id }) => {
       </Head>
       <div className="print:hidden mt-6">
         <div className="flex items-center mb-2 gap-2 ">
-          <div className="bg-primary p-2 w-fit rounded-md">
-            <Icon width={16} height={16} className="text-background" />
-          </div>
+          <div className="bg-primary p-2 w-fit rounded-md">{Icon}</div>
           <div>
             <h1 className="  text-lg tracking-wide  text-primary">{title}</h1>
           </div>

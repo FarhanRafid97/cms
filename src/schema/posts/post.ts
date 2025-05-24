@@ -1,112 +1,28 @@
+import { Database } from 'database.types';
 import { z } from 'zod';
 
 // ===============================
 // TYPESCRIPT INTERFACES
 // ===============================
 
-export interface Author {
-  id: string;
-  email: string;
-  username: string;
-  first_name: string;
-  last_name: string;
-  bio?: string;
-  avatar_url?: string;
-  social_links?: Record<string, string>;
-  is_active: boolean;
-  created_at: string;
-  updated_at: string;
-}
+export type Author = Database['public']['Tables']['authors']['Row'];
 
-export interface Category {
-  id: string;
-  name: string;
-  slug: string;
-  description?: string;
-  color?: string;
-  is_active: boolean;
-  created_at: string;
-}
+export type Category = Database['public']['Tables']['categories']['Row'];
 
-export interface Tag {
-  id: string;
-  name: string;
-  slug: string;
-  created_at: string;
-}
+export type Tag = Database['public']['Tables']['tags']['Row'];
 
-export interface Post {
-  id: string;
-  title: string;
-  slug: string;
-  excerpt?: string;
-  featured_image_url?: string;
-  meta_title?: string;
-  meta_description?: string;
-  author_id: string;
-  category_id?: string;
-  status: 'draft' | 'published' | 'archived';
-  is_featured: boolean;
-  view_count: number;
-  reading_time?: number;
-  published_at?: string;
-  created_at: string;
-  updated_at: string;
-}
+export type Post = Database['public']['Tables']['posts']['Row'];
 
-export interface PostDetail {
-  id: string;
-  post_id: string;
-  content: string;
-  raw_content?: string;
-  content_type: 'html' | 'markdown' | 'text';
-  word_count?: number;
-  created_at: string;
-  updated_at: string;
-}
+export type PostDetail = Database['public']['Tables']['post_details']['Row'];
 
-export interface PostTag {
-  post_id: string;
-  tag_id: string;
-}
+export type PostTag = Database['public']['Tables']['post_tags']['Row'];
+export type Comment = Database['public']['Tables']['comments']['Row'];
 
-export interface Comment {
-  id: string;
-  post_id: string;
-  author_name: string;
-  author_email: string;
-  content: string;
-  parent_id?: string;
-  is_approved: boolean;
-  created_at: string;
-}
+export type Media = Database['public']['Tables']['media']['Row'];
 
-export interface Media {
-  id: string;
-  filename: string;
-  original_name: string;
-  file_path: string;
-  file_size?: number;
-  mime_type?: string;
-  alt_text?: string;
-  uploaded_by?: string;
-  created_at: string;
-}
+export type NewsletterSubscriber = Database['public']['Tables']['newsletter_subscribers']['Row'];
 
-export interface NewsletterSubscriber {
-  id: string;
-  email: string;
-  is_active: boolean;
-  subscribed_at: string;
-  unsubscribed_at?: string;
-}
-
-export interface SiteSetting {
-  key: string;
-  value?: string;
-  type: 'string' | 'number' | 'boolean' | 'json';
-  updated_at: string;
-}
+export type SiteSetting = Database['public']['Tables']['site_settings']['Row'];
 
 // Extended interfaces for joined data
 export interface PostWithAuthor extends Post {
