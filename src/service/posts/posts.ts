@@ -1,5 +1,6 @@
 import { LIMIT_GET_POSTS } from '@/lib/constant';
 import { supabase } from '@/lib/supabase';
+import { CreatePost, Post } from '@/schema/posts/post';
 import { toast } from 'sonner';
 
 export const getListCompletePosts = async ({
@@ -18,5 +19,15 @@ export const getListCompletePosts = async ({
     toast.error(`Error fetching categories: ${error.message}`);
     return [];
   }
+  return data;
+};
+
+export const createNewPost = async ({ dataPost }: { dataPost: CreatePost }) => {
+  const { data, error } = await supabase.from('posts').insert(dataPost);
+  if (error) {
+    toast.error(error.message);
+    return null;
+  }
+  console.log(data);
   return data;
 };

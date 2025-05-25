@@ -1,3 +1,4 @@
+import { MESSAGE_FIELD_REQUIRED, MESSAGE_MAXIMUM_CHARACTER } from '@/lib/constant';
 import { Database } from 'database.types';
 import { z } from 'zod';
 
@@ -162,22 +163,34 @@ export const PostSchema = z.object({
 });
 
 export const CreatePostSchema = z.object({
-  title: z.string().min(1).max(255),
+  title: z
+    .string()
+    .min(1, { message: MESSAGE_FIELD_REQUIRED })
+    .max(255, { message: `${MESSAGE_MAXIMUM_CHARACTER} 255` })
+    .default(''),
   slug: z
     .string()
-    .min(1)
-    .max(255)
-    .regex(/^[a-z0-9-]+$/),
-  excerpt: z.string().max(500).optional(),
-  featured_image_url: z.string().url().optional(),
-  meta_title: z.string().max(255).optional(),
-  meta_description: z.string().max(160).optional(),
-  author_id: z.string().uuid(),
-  category_id: z.string().uuid().optional(),
+    .min(1, { message: MESSAGE_FIELD_REQUIRED })
+    .max(255, { message: `${MESSAGE_MAXIMUM_CHARACTER} 255` })
+
+    .default(''),
+  excerpt: z
+    .string()
+    .max(500, { message: `${MESSAGE_MAXIMUM_CHARACTER} 255` })
+    .optional()
+    .default(''),
+  featured_image_url: z.string().optional().default(''),
+  meta_title: z
+    .string()
+    .max(255, { message: `${MESSAGE_MAXIMUM_CHARACTER} 255` })
+    .optional()
+    .default(''),
+  meta_description: z.string().max(160).optional().default(''),
+  author_id: z.string().uuid().default('00000000-0000-0000-0000-000000000000'),
+  category_id: z.string().uuid({ message: MESSAGE_FIELD_REQUIRED }).optional().default(''),
   status: z.enum(['draft', 'published', 'archived']).default('draft'),
   is_featured: z.boolean().default(false),
-  reading_time: z.number().int().min(1).optional(),
-  published_at: z.string().datetime().optional(),
+  reading_time: z.number().int().min(1).optional().default(0),
 });
 
 export const UpdatePostSchema = CreatePostSchema.partial();

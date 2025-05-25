@@ -1,11 +1,14 @@
 import { useGetFilterSearchparams } from '@/hooks/useGetSearchParams';
 import { supabase } from '@/lib/supabase';
+import { Author } from '@/schema/posts/post';
+import { getMyself } from '@/service/auth';
 import { useSearchParamsClient } from '@/store/searchParams';
 import { Session, User } from '@supabase/supabase-js';
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
+import { P } from 'ts-pattern';
 
 interface AuthContextType {
-  user: User | null | undefined;
+  user: Author | null | undefined;
   session: Session | null;
   loading: boolean;
 }
@@ -30,40 +33,39 @@ export function ProvideAuth({ children }: ProvideAuthProps) {
 }
 
 function useProvideAuth(): AuthContextType {
-  const [user, setUser] = useState<User | null | undefined>(null);
+  const [user, setUser] = useState<Author | null | undefined>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     // Get initial session
     const getInitialSession = async () => {
+      if (user) {
+        return;
+      }
+      console.log('heree');
       const {
         data: { session },
         error,
       } = await supabase.auth.getSession();
+      console.log(error);
       if (error) {
         setUser(undefined);
         return;
       }
+
+      const detailMySelf = await getMyself({ user_id: session?.user.id || '' });
+      if (!detailMySelf) {
+        setUser(undefined);
+        return;
+      }
       setSession(session);
-      setUser(session?.user ?? null);
+      setUser(detailMySelf);
       setLoading(false);
     };
 
     getInitialSession();
-
-    // Listen for auth changes
-    const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange(async (event, session) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      setLoading(false);
-    });
-
-    // Cleanup subscription on unmount
-    return () => subscription.unsubscribe();
-  }, []);
+  }, [user]);
 
   return {
     user,

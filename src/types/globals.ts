@@ -43,3 +43,8 @@ export interface StateSearchParam {
   _offsetFrom?: string;
   _offsetTo: string;
 }
+
+export interface DefaultOptionSelectDropDown {
+  label: string;
+  value: string;
+}

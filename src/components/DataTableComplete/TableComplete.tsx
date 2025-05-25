@@ -48,22 +48,21 @@ interface DataTableProps<TData, TValue> {
   // eslint-disable-next-line no-unused-vars
   isFetching: boolean;
 }
-
-function getCommonPinningStyles<T>(column: Column<T>, isHeader?: boolean): CSSProperties {
+function getCommonPinningStyles<T>(column: Column<T>): React.CSSProperties {
   const isPinned = column.getIsPinned();
   const isLastLeftPinnedColumn = isPinned === 'left' && column.getIsLastColumn('left');
   const isFirstRightPinnedColumn = isPinned === 'right' && column.getIsFirstColumn('right');
 
   return {
     boxShadow: match(isLastLeftPinnedColumn)
-      .with(true, () => '-4px 0 4px -4px gray inset')
+      .with(true, () => '2.5px 0 4px -4px gray inset')
       .otherwise(() =>
         match(isFirstRightPinnedColumn)
-          .with(true, () => '4px 0 4px -4px gray inset')
+          .with(true, () => '2.5px 0 4px -4px gray inset')
           .otherwise(() => ''),
       ),
 
-    paddingLeft: isFirstRightPinnedColumn ? '30px' : isHeader ? '0px' : '10px',
+    paddingLeft: isFirstRightPinnedColumn ? '30px' : '0px',
     left: isPinned === 'left' ? `${column.getStart('left')}px` : undefined,
     right: isPinned === 'right' ? `${column.getAfter('right')}px` : undefined,
     opacity: isPinned ? 0.95 : 1,
@@ -71,7 +70,6 @@ function getCommonPinningStyles<T>(column: Column<T>, isHeader?: boolean): CSSPr
     zIndex: isPinned ? 1 : 0,
   };
 }
-
 export function DataTableComplete<TData, TValue>({
   columns,
   data,
@@ -143,68 +141,66 @@ export function DataTableComplete<TData, TValue>({
   }, [table.getState().columnSizingInfo.isResizingColumn]);
 
   return (
-    <div className="space-y-4">
+    <div className={cn(' space-y-3 ')}>
       <div className="px-6 pt-3">
-        {DataTableToolbar ? (
-          <DataTableToolbar
-            isPending={isFetching}
-            id={`${id}`}
-            searchParams={searchParams}
-            table={table}
-            setSearch={setSearch}
-          />
-        ) : null}
+        {DataTableToolbar ? <DataTableToolbar table={table} setSearch={setSearch} /> : null}
       </div>
-      <div className=" overflow-hidden border-y  p-[1px]">
+      <div className="rounded-none overflow-hidden border-t border-b p-[1px]">
         <TableComp
-          className="w-full "
           style={{
             ...columnSizeVars,
           }}
         >
           <TableHeader>
             {!!table.getRowModel().rows?.length ? (
-              table.getHeaderGroups().map((headerGroup) => (
-                <TableRow key={headerGroup.id} className="tr ">
-                  {headerGroup.headers.map((header) => (
-                    <TableHead
-                      onMouseDown={header.getResizeHandler()}
-                      onTouchStart={header.getResizeHandler()}
-                      key={header.id}
-                      className={cn(
-                        header.column.getIsPinned() ? ' bg-background/80 backdrop-blur' : '',
-                      )}
-                      style={{
-                        ...getCommonPinningStyles(header.column, true),
-                        width: `calc(var(--header-${header?.id}-size) * 1px)`,
-                      }}
-                    >
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(header.column.columnDef.header, header.getContext())}
-                      {header.column.id === 'actions' ? null : (
-                        <div
-                          {...{
-                            onDoubleClick: () => header.column.resetSize(),
-
-                            className: `resizer ${
-                              header.column.getIsResizing() ? 'isResizing' : ''
-                            }`,
+              table.getHeaderGroups().map((headerGroup) => {
+                return (
+                  <TableRow key={headerGroup.id} className="tr ">
+                    {headerGroup.headers.map((header, idx) => {
+                      return (
+                        <TableHead
+                          scope="col"
+                          className={cn(
+                            header.column.getIsPinned() ? ' bg-background/80 backdrop-blur' : '',
+                          )}
+                          style={{
+                            ...getCommonPinningStyles(header.column),
+                            width: `calc(var(--header-${header?.id}-size) * 1px)`,
+                            paddingLeft: idx === 0 ? '1.5rem' : '0px',
                           }}
+                          key={header.id}
                         >
-                          <div className="w-[2px] h-full bg-gray-300 rounded-sm" />
-                        </div>
-                      )}
-                    </TableHead>
-                  ))}
-                </TableRow>
-              ))
+                          {header.isPlaceholder
+                            ? null
+                            : flexRender(header.column.columnDef.header, header.getContext())}
+                          {header.column.id === 'actions' ? null : (
+                            <div
+                              onMouseDown={header.getResizeHandler()}
+                              onTouchStart={header.getResizeHandler()}
+                              {...{
+                                onDoubleClick: () => header.column.resetSize(),
+
+                                className: `resizer  ${
+                                  header.column.getIsResizing() ? 'isResizing' : ''
+                                }`,
+                              }}
+                            >
+                              <div className="w-[2px] h-full bg-gray-300 rounded-sm" />
+                            </div>
+                          )}
+                        </TableHead>
+                      );
+                    })}
+                  </TableRow>
+                );
+              })
             ) : (
               <TableRow>
                 <TableHead></TableHead>
               </TableRow>
             )}
           </TableHeader>
+
           {isSizing ? (
             <MemoizedTableBody table={table} columns={columns} isFetching={isFetching || false} />
           ) : (

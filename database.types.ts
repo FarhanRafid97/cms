@@ -21,6 +21,7 @@ export type Database = {
           last_name: string
           social_links: Json | null
           updated_at: string | null
+          user_id: string | null
           username: string
         }
         Insert: {
@@ -34,6 +35,7 @@ export type Database = {
           last_name: string
           social_links?: Json | null
           updated_at?: string | null
+          user_id?: string | null
           username: string
         }
         Update: {
@@ -47,6 +49,7 @@ export type Database = {
           last_name?: string
           social_links?: Json | null
           updated_at?: string | null
+          user_id?: string | null
           username?: string
         }
         Relationships: []

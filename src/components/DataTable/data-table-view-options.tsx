@@ -44,7 +44,7 @@ export function DataTableViewOptions<TData>({ table }: DataTableViewOptionsProps
           )}
         >
           <Columns className="h-4 w-4" />
-          <span className="hidden sm:inline">Columns</span>
+          <span className="hidden sm:inline font-medium">Columns</span>
           {visibleColumns.length > 0 && (
             <Badge variant="outline" className="ml-1 bg-gray-100 text-gray-700 border-gray-200">
               {visibleColumns.length}

@@ -7,6 +7,7 @@ import { DataTableRowActionsReport } from './DataTableRowActionsReport';
 
 import { formatedDateDDMMYYY } from '@/lib/utils';
 import { CompletePost } from '@/schema/posts/post';
+import { Badge } from '@/components/ui/badge';
 
 export const columns: ColumnDef<CompletePost>[] = [
   {
@@ -19,6 +20,7 @@ export const columns: ColumnDef<CompletePost>[] = [
         {row.original.id}
       </TableCellCostume>
     ),
+    size: 60,
   },
   {
     accessorKey: 'title',
@@ -39,6 +41,38 @@ export const columns: ColumnDef<CompletePost>[] = [
     ),
   },
   {
+    accessorKey: 'slug',
+    header: ({ column, header }) => (
+      <DataTableColumnHeaderComplete header={header} column={column} title="Slugs" />
+    ),
+    cell: ({ row, column }) => (
+      <TableCellCostume id={column.id}>
+        <div className="min-w-[400px] flex flex-wrap gap-2">
+          {row.original.slug?.split(',').map((s) => {
+            return <Badge key={s}>{s}</Badge>;
+          })}
+        </div>
+      </TableCellCostume>
+    ),
+  },
+  {
+    accessorKey: 'category',
+    header: ({ column, header }) => (
+      <DataTableColumnHeaderComplete header={header} column={column} title="Slugs" />
+    ),
+    cell: ({ row, column }) => (
+      <TableCellCostume id={column.id}>
+        <div
+          className={`text-white/80 font-medium w-fit px-1 rounded`}
+          style={{ backgroundColor: row.original.category_color || '' }}
+        >
+          {row.original.category_name}
+        </div>
+      </TableCellCostume>
+    ),
+  },
+
+  {
     accessorKey: 'created_at',
     header: ({ column, header }) => (
       <DataTableColumnHeaderComplete header={header} column={column} title="Created At" />
@@ -47,15 +81,6 @@ export const columns: ColumnDef<CompletePost>[] = [
       <TableCellCostume id={column.id}>
         {formatedDateDDMMYYY(row?.original?.created_at || '')}
       </TableCellCostume>
-    ),
-  },
-  {
-    accessorKey: 'slug',
-    header: ({ column, header }) => (
-      <DataTableColumnHeaderComplete header={header} column={column} title="Slugs" />
-    ),
-    cell: ({ row, column }) => (
-      <TableCellCostume id={column.id}>{row.original.slug}</TableCellCostume>
     ),
   },
 

@@ -16,11 +16,11 @@ function ProtectedRoute({ children }: ProtectedRouteProps) {
     setSearchParamsClient({ searchParams: search });
   }, [search]);
 
-  if (loading) {
+  if (user === null) {
     return <div>Loading...</div>;
   }
 
-  if (!user) {
+  if (user === undefined) {
     return <Navigate to="/login" replace />;
   }
 

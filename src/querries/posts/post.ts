@@ -1,6 +1,7 @@
 import { LIMIT_GET_POSTS } from '@/lib/constant';
-import { getListCompletePosts } from '@/service/posts/posts';
-import { useQuery } from '@tanstack/react-query';
+import { CreatePost, Post } from '@/schema/posts/post';
+import { createNewPost, getListCompletePosts } from '@/service/posts/posts';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 const UNIQUE_KEY = 'post';
 
@@ -23,6 +24,23 @@ export const useGetCompletePosts = ({
         data: result,
         totalData: result.length,
       };
+    },
+  });
+};
+
+export const useCreateNewPost = () => {
+  return useMutation({
+    mutationFn: async ({ payload }: { payload: CreatePost }) => {
+      try {
+        const response = await createNewPost({ dataPost: payload });
+
+        if (response) {
+          return { payload, response };
+        }
+        return { payload: null, response: null };
+      } catch (error) {
+        return { payload: null, response: null };
+      }
     },
   });
 };

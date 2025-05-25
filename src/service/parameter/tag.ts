@@ -7,5 +7,9 @@ export const getListTags = async () => {
     toast.error(`Error fetching categories: ${error.message}`);
     return [];
   }
+  if (!data) {
+    return [];
+  }
+
   return data;
 };
