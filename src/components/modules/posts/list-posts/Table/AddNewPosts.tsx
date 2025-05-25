@@ -42,7 +42,6 @@ export function AddNewPosts() {
     },
   });
   const { formState, watch, register, setValue, setError, clearErrors, reset } = hookForm;
-  console.log(formState.errors);
 
   const watchValueCategory = watch('category_id');
   const watchValueTag = watch('slug');
@@ -66,7 +65,12 @@ export function AddNewPosts() {
           Article Baru
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-2/4">
+      <DialogContent
+        className="sm:max-w-2/4"
+        onCloseAutoFocus={() => {
+          clearErrors();
+        }}
+      >
         <DialogHeader>
           <DialogTitle>Tambahkan Artikel Baru</DialogTitle>
         </DialogHeader>
