@@ -1,5 +1,7 @@
+import { BorderDashedIcon } from '@radix-ui/react-icons';
 import { clsx, type ClassValue } from 'clsx';
 import { format } from 'date-fns';
+import { Archive, CircleDashed, CircleDotDashed, LucideIcon, Rss } from 'lucide-react';
 import { twMerge } from 'tailwind-merge';
 
 export function cn(...inputs: ClassValue[]) {
@@ -35,4 +37,62 @@ export const formatedDateDDMMYYY = (date?: string, isWithTime = true) => {
 
   const parsedDate = date.endsWith('Z') ? date.slice(0, -1) : date;
   return format(parsedDate, formatString);
+};
+
+export const getStatusConfig = (status: string) => {
+  const normalizedStatus = status?.toLowerCase();
+
+  switch (normalizedStatus) {
+    case 'draft':
+      return {
+        label: 'Draft',
+        bgColor: 'bg-amber-50',
+        textColor: 'text-amber-700',
+        borderColor: 'border-amber-200',
+        dotColor: 'bg-amber-400',
+        icon: '✏️',
+      };
+    case 'published':
+      return {
+        label: 'Published',
+        bgColor: 'bg-emerald-50',
+        textColor: 'text-emerald-700',
+        borderColor: 'border-emerald-200',
+        dotColor: 'bg-emerald-400',
+        icon: '✓',
+      };
+    case 'archived':
+      return {
+        label: 'Archived',
+        bgColor: 'bg-slate-50',
+        textColor: 'text-slate-600',
+        borderColor: 'border-slate-200',
+        dotColor: 'bg-slate-400',
+        icon: '📦',
+      };
+    default:
+      return {
+        label: 'Unknown',
+        bgColor: 'bg-gray-50',
+        textColor: 'text-gray-600',
+        borderColor: 'border-gray-200',
+        dotColor: 'bg-gray-400',
+        icon: '?',
+      };
+  }
+};
+
+export const getStatusIcon = (status: string): LucideIcon => {
+  const normalizedStatus = status?.toLowerCase();
+
+  switch (normalizedStatus) {
+    case 'draft':
+      return CircleDashed;
+    case 'published':
+      return Rss;
+    case 'archived':
+      return Archive;
+    default:
+      return CircleDotDashed;
+  }
 };

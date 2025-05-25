@@ -7,7 +7,7 @@ import { DataTableRowActionsReport } from './DataTableRowActionsReport';
 
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Badge } from '@/components/ui/badge';
-import { formatedDateDDMMYYY } from '@/lib/utils';
+import { cn, formatedDateDDMMYYY, getStatusConfig, getStatusIcon } from '@/lib/utils';
 import { CompletePost } from '@/schema/posts/post';
 import { Hash } from 'lucide-react';
 import Image from 'next/image';
@@ -28,12 +28,13 @@ export const columns: ColumnDef<CompletePost>[] = [
 
   {
     accessorKey: 'featured_image_url',
+    enableResizing: false,
     header: ({ column, header }) => (
       <DataTableColumnHeaderComplete header={header} column={column} title="Thumbnail" />
     ),
     cell: ({ row, column }) => (
       <TableCellCostume id={column.id}>
-        <AspectRatio ratio={16 / 8} className="bg-muted w-11/12 h-3/4">
+        <AspectRatio ratio={16 / 8} className="bg-secondary/40 rounded border w-11/12 h-3/4">
           <Image
             src={
               row.original.featured_image_url
@@ -57,6 +58,7 @@ export const columns: ColumnDef<CompletePost>[] = [
       <TableCellCostume id={column.id}>{row.original.title}</TableCellCostume>
     ),
   },
+
   {
     accessorKey: 'username',
     header: ({ column, header }) => (
@@ -64,6 +66,23 @@ export const columns: ColumnDef<CompletePost>[] = [
     ),
     cell: ({ row, column }) => (
       <TableCellCostume id={column.id}>{row.original.username}</TableCellCostume>
+    ),
+  },
+  {
+    accessorKey: 'category',
+    header: ({ column, header }) => (
+      <DataTableColumnHeaderComplete header={header} column={column} title="Category" />
+    ),
+    cell: ({ row, column }) => (
+      <TableCellCostume id={column.id} className="">
+        <div className="text-primary font-medium w-fit px-1 rounded flex gap-1 items-center">
+          <div
+            className="w-2 h-2 rounded-full"
+            style={{ backgroundColor: row.original.category_color || '' }}
+          ></div>
+          <span>{row.original.category_name}</span>
+        </div>
+      </TableCellCostume>
     ),
   },
   {
@@ -85,29 +104,40 @@ export const columns: ColumnDef<CompletePost>[] = [
         </div>
       </TableCellCostume>
     ),
-  },
-  {
-    accessorKey: 'category',
-    header: ({ column, header }) => (
-      <DataTableColumnHeaderComplete header={header} column={column} title="Category" />
-    ),
-    cell: ({ row, column }) => (
-      <TableCellCostume id={column.id} className="">
-        <div className="text-primary font-medium w-fit px-1 rounded flex gap-2 items-center">
-          <div
-            className="w-2 h-2 rounded-full"
-            style={{ backgroundColor: row.original.category_color || '' }}
-          ></div>
-          <span>{row.original.category_name}</span>
-        </div>
-      </TableCellCostume>
-    ),
+    size: 140,
   },
 
   {
+    accessorKey: 'status',
+    header: ({ column, header }) => (
+      <DataTableColumnHeaderComplete header={header} column={column} title="Status" />
+    ),
+    cell: ({ row, column }) => {
+      const status = row.original.status;
+      const color = getStatusConfig(status || '');
+      const Icon = getStatusIcon(status || '');
+      return (
+        <TableCellCostume id={column.id}>
+          <Badge
+            variant="outline"
+            className={cn(
+              'gap-1 capitalize  font-medium',
+              color.borderColor,
+              color.bgColor,
+              color.textColor,
+            )}
+          >
+            <Icon size={10} className={`${color.textColor}`} />
+            {status}
+          </Badge>
+        </TableCellCostume>
+      );
+    },
+  },
+  {
     accessorKey: 'created_at',
     header: ({ column, header }) => (
-      <DataTableColumnHeaderComplete header={header} column={column} title="Created At" />
+      <DataTableColumnHeaderComplete header={header} column={column} title="Tanggal Pembuatan" />
     ),
     cell: ({ row, column }) => (
       <TableCellCostume id={column.id}>
@@ -119,5 +149,7 @@ export const columns: ColumnDef<CompletePost>[] = [
   {
     id: 'actions',
     cell: ({ row }) => <DataTableRowActionsReport row={row.original} />,
+    size: 80,
+    enableResizing: false,
   },
 ];

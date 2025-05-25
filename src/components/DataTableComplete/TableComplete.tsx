@@ -1,4 +1,4 @@
-import React, { CSSProperties, useMemo } from 'react';
+import React, { useMemo } from 'react';
 
 import {
   Column,
@@ -27,7 +27,7 @@ import {
 
 import { cn } from '@/lib/utils';
 
-import { DataTableToolbarProps, FilterSearchParams } from '@/types/globals';
+import { DataTableToolbarProps } from '@/types/globals';
 import { match } from 'ts-pattern';
 import PaginationNextOnly from './PaginationNext';
 
@@ -41,9 +41,7 @@ interface DataTableProps<TData, TValue> {
   data: TData[];
   DataTableToolbar: React.FC<DataTableToolbarProps<TData>>;
   pinedDefault?: string[];
-  searchParams?: FilterSearchParams;
 
-  id?: string;
   totalElement: number;
   // eslint-disable-next-line no-unused-vars
   isFetching: boolean;
@@ -63,6 +61,7 @@ function getCommonPinningStyles<T>(column: Column<T>): React.CSSProperties {
       ),
 
     paddingLeft: isFirstRightPinnedColumn ? '30px' : '0px',
+    paddingRight: isFirstRightPinnedColumn ? '30px' : '0px',
     left: isPinned === 'left' ? `${column.getStart('left')}px` : undefined,
     right: isPinned === 'right' ? `${column.getAfter('right')}px` : undefined,
     opacity: isPinned ? 0.95 : 1,
@@ -74,9 +73,8 @@ export function DataTableComplete<TData, TValue>({
   columns,
   data,
   DataTableToolbar,
-  searchParams,
+
   pinedDefault = [],
-  id,
 
   isFetching = false,
   totalElement,
@@ -167,13 +165,14 @@ export function DataTableComplete<TData, TValue>({
                             ...getCommonPinningStyles(header.column),
                             width: `calc(var(--header-${header?.id}-size) * 1px)`,
                             paddingLeft: idx === 0 ? '1.5rem' : '0px',
+                            paddingRight: '1.5rem',
                           }}
                           key={header.id}
                         >
                           {header.isPlaceholder
                             ? null
                             : flexRender(header.column.columnDef.header, header.getContext())}
-                          {header.column.id === 'actions' ? null : (
+                          {!header.column.getCanResize() ? null : (
                             <div
                               onMouseDown={header.getResizeHandler()}
                               onTouchStart={header.getResizeHandler()}
