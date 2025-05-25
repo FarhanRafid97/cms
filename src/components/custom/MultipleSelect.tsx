@@ -3,7 +3,6 @@ import { Button } from '@/components/ui/button';
 import {
   Command,
   CommandEmpty,
-  CommandGroup,
   CommandInput,
   CommandItem,
   CommandList,
@@ -13,11 +12,11 @@ import { Label } from '@/components/ui/label';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
-import { DefaultOptionSelectDropDown, FilterSearchParams } from '@/types/globals';
+import { DefaultOptionSelectDropDown } from '@/types/globals';
+import { ChevronDownIcon } from '@radix-ui/react-icons';
 import { PopoverClose } from '@radix-ui/react-popover';
 import { Check, X } from 'lucide-react';
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
-import { ChevronDownIcon } from '@radix-ui/react-icons';
+import { useState } from 'react';
 
 export function MultipleSelectDropdown({
   isPending,
@@ -27,16 +26,18 @@ export function MultipleSelectDropdown({
   options,
   handleChange,
   error,
+  isDisabled,
   isRequired,
 }: {
   label: string;
   options: DefaultOptionSelectDropDown[];
-
+  // eslint-disable-next-line no-unused-vars
   handleChange: (value: string) => void;
   isPending?: boolean;
   selectedData: string;
   error?: string;
   isRequired?: boolean;
+  isDisabled?: boolean;
 }) {
   const [valueSelected, setValueSelected] = useState<Map<string, string>>(() => {
     if (selectedData) {
@@ -53,8 +54,6 @@ export function MultipleSelectDropdown({
       return new Map();
     }
   });
-
-  const debounceTimer = useRef(null);
 
   const handleSetState = () => {
     const multipleSelectData = Array.from(valueSelected.keys()).join(',');
@@ -75,14 +74,6 @@ export function MultipleSelectDropdown({
     return copyMap;
   };
 
-  useEffect(() => {
-    return () => {
-      if (debounceTimer.current) {
-        clearTimeout(debounceTimer.current);
-      }
-    };
-  }, []);
-
   if (isPending) {
     return <Skeleton className="w-[100px]" />;
   }
@@ -98,6 +89,7 @@ export function MultipleSelectDropdown({
       <Popover>
         <PopoverTrigger asChild disabled={isPending} className="col-span-4">
           <Button
+            disabled={isDisabled}
             variant="ghost"
             size="sm"
             className="h-8 rounded-none border-l-0 border-t-0 border-r-0 border-b flex justify-between shadow-none px-1"
@@ -132,6 +124,7 @@ export function MultipleSelectDropdown({
                               key: option?.[0] || '',
                             });
                             const multipleSelectData = Array.from(selectedMap.keys()).join(',');
+                            handleChange(multipleSelectData);
                           }}
                         />
                       </Badge>

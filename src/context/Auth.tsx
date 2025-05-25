@@ -1,11 +1,8 @@
-import { useGetFilterSearchparams } from '@/hooks/useGetSearchParams';
 import { supabase } from '@/lib/supabase';
 import { Author } from '@/schema/posts/post';
 import { getMyself } from '@/service/auth';
-import { useSearchParamsClient } from '@/store/searchParams';
-import { Session, User } from '@supabase/supabase-js';
+import { Session } from '@supabase/supabase-js';
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
-import { P } from 'ts-pattern';
 
 interface AuthContextType {
   user: Author | null | undefined;
@@ -43,12 +40,12 @@ function useProvideAuth(): AuthContextType {
       if (user) {
         return;
       }
-      console.log('heree');
+
       const {
         data: { session },
         error,
       } = await supabase.auth.getSession();
-      console.log(error);
+
       if (error) {
         setUser(undefined);
         return;

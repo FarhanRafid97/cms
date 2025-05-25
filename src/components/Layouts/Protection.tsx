@@ -3,6 +3,7 @@ import { ReactNode, useEffect } from 'react';
 import Navigate from '../NavigateComp';
 import { useGetFilterSearchparams } from '@/hooks/useGetSearchParams';
 import { setSearchParamsClient } from '@/store/searchParams';
+import { LoadingPage } from './LoadingPage';
 
 interface ProtectedRouteProps {
   children: ReactNode;
@@ -11,13 +12,12 @@ interface ProtectedRouteProps {
 function ProtectedRoute({ children }: ProtectedRouteProps) {
   const { user, loading } = useAuth();
   const { search } = useGetFilterSearchparams();
-
   useEffect(() => {
     setSearchParamsClient({ searchParams: search });
   }, [search]);
 
-  if (user === null) {
-    return <div>Loading...</div>;
+  if (loading) {
+    return <LoadingPage />;
   }
 
   if (user === undefined) {

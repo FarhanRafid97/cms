@@ -458,8 +458,6 @@ export type Database = {
           category_id: string | null
           category_name: string | null
           category_slug: string | null
-          content: string | null
-          content_type: string | null
           created_at: string | null
           excerpt: string | null
           featured_image_url: string | null
@@ -470,7 +468,6 @@ export type Database = {
           meta_description: string | null
           meta_title: string | null
           published_at: string | null
-          raw_content: string | null
           reading_time: number | null
           slug: string | null
           status: string | null
@@ -478,7 +475,6 @@ export type Database = {
           updated_at: string | null
           username: string | null
           view_count: number | null
-          word_count: number | null
         }
         Relationships: [
           {

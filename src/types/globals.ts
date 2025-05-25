@@ -48,3 +48,16 @@ export interface DefaultOptionSelectDropDown {
   label: string;
   value: string;
 }
+
+export interface Cloudinary {
+  timestamp: number;
+  signature: string;
+  cloudName: string | undefined;
+  apiKey: string | undefined;
+}
+
+export interface AdditionalData {
+  isNew?: boolean;
+  isUpdate?: boolean;
+  isError?: boolean;
+}

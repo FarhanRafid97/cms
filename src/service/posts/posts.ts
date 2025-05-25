@@ -1,6 +1,6 @@
 import { LIMIT_GET_POSTS } from '@/lib/constant';
 import { supabase } from '@/lib/supabase';
-import { CreatePost, Post } from '@/schema/posts/post';
+import { CreatePost } from '@/schema/posts/post';
 import { toast } from 'sonner';
 
 export const getListCompletePosts = async ({
@@ -23,11 +23,23 @@ export const getListCompletePosts = async ({
 };
 
 export const createNewPost = async ({ dataPost }: { dataPost: CreatePost }) => {
-  const { data, error } = await supabase.from('posts').insert(dataPost);
+  const { data, error } = await supabase
+    .from('posts')
+    .insert(dataPost)
+    .select('*,authors(*),categories(*)');
   if (error) {
     toast.error(error.message);
     return null;
   }
-  console.log(data);
-  return data;
+  const responseCreatePost = data[0];
+  const { error: errorPostDetail } = await supabase
+    .from('post_details')
+    .insert({ content: '', post_id: responseCreatePost.id });
+
+  if (errorPostDetail) {
+    toast.error(errorPostDetail.message);
+    return responseCreatePost;
+  }
+
+  return responseCreatePost;
 };

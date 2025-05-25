@@ -65,14 +65,7 @@ export default function App({ Component, pageProps: { ...pageProps } }: AppProps
               </Layout>
             ))}
           <ListMenuSearch />
-          <Toaster
-            richColors
-            visibleToasts={3}
-            duration={3000}
-            closeButton
-            position="top-right"
-            theme="dark"
-          />
+          <Toaster richColors visibleToasts={3} duration={3000} closeButton position="top-right" />
         </Providers>
       </ProvideAuth>
     </ThemeProvider>

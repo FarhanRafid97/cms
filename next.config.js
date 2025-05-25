@@ -9,6 +9,10 @@ const nextConfig = {
         port: '',
         pathname: '/bristars/foto/get/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+      },
     ],
   },
 };

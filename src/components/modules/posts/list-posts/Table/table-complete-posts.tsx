@@ -6,7 +6,7 @@ import { useSearchParamsClient } from '@/store/searchParams';
 
 export default function TableListPosts() {
   const { searchParams } = useSearchParamsClient();
-  console.log('searchParams post', searchParams);
+
   const { data, isFetching } = useGetCompletePosts({
     offsetFrom: Number(searchParams?._offsetFrom || 0),
     offsetTo: Number(searchParams?._offsetTo),
