@@ -4,9 +4,13 @@ import ViewDetailPost from './ViewDetailPost';
 import { Button } from '@/components/ui/button';
 import { Edit3Icon } from 'lucide-react';
 import LoadingArticle from './LoadingDetailArticle';
+import { formatedDateDDMMYYY } from '@/lib/utils';
+import { useState } from 'react';
+import { Editor } from './EditDetailPost';
 
 const DetailPostData = ({ row }: { row: CompletePost }) => {
   const { data, isLoading } = useGetPostDetail({ postId: row.id || '' });
+  const [edit, setEdit] = useState(false);
   if (isLoading) {
     return (
       <div className="w-full flex justify-center items-start">
@@ -16,15 +20,32 @@ const DetailPostData = ({ row }: { row: CompletePost }) => {
       </div>
     );
   }
+  if (!data) {
+    return <div>No Data</div>;
+  }
+  if (edit) {
+    return (
+      <div key="editor-post" className="flex gap-4  w-full justify-center">
+        <div className="flex  pb-4 mb-4 w-8/12">
+          <Editor key={edit ? 'edited' : 'notEdited'} row={data} edit={edit} setEdit={setEdit} />
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="flex flex-col gap-4   items-center ">
+    <div key="view-post" className="flex flex-col gap-4   items-center ">
       <div className="flex flex-col gap-4  w-8/12">
         <div className="flex flex-col gap-2 border-b pb-4 mb-4 ">
           <div className="flex ">
             <h1 className="text-2xl font-bold capitalize w-3/4">{row.title}</h1>
             <div className="flex justify-end w-1/4">
-              <Button className="gap-2">
+              <Button
+                className="gap-2"
+                onClick={() => {
+                  setEdit(true);
+                }}
+              >
                 <Edit3Icon size={14} /> Edit
               </Button>
             </div>
@@ -34,7 +55,7 @@ const DetailPostData = ({ row }: { row: CompletePost }) => {
             {row.username} - {row.category_name}
           </span>
           <span className="text-sm text-gray-500">
-            {row.published_at} - {row?.reading_time} menit
+            {formatedDateDDMMYYY(row.created_at || '')} - {row?.reading_time} menit
           </span>
         </div>
         <ViewDetailPost content={data?.content || ''} />

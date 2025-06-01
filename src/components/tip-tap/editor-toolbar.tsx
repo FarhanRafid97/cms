@@ -90,7 +90,7 @@ export function EditorToolbar({ editor, onImageUpload, isUploading }: EditorTool
   ];
 
   return (
-    <div className=" p-4 fixed bottom-0 z-10 w-full">
+    <div className=" p-4  w-full">
       <div className="flex w-fit  rounded shadow border-lg gap-2 mx-auto bg-background border-[#dbdbdb] p-2">
         <TooltipProvider delayDuration={300}>
           {/* Text Formatting Group */}
@@ -227,7 +227,7 @@ export function EditorToolbar({ editor, onImageUpload, isUploading }: EditorTool
                     })}
                 </Button>
               </PopoverTrigger>
-              <PopoverContent className="p-1 w-fit ">
+              <PopoverContent className="p-1 w-fit " isContentWidthAuto={false}>
                 <div>
                   <TextAlignButton align="left" editor={editor} />
                   <TextAlignButton align="justify" editor={editor} />
@@ -249,7 +249,7 @@ export function EditorToolbar({ editor, onImageUpload, isUploading }: EditorTool
               </TooltipTrigger>
               <TooltipContent>Text Color</TooltipContent>
             </Tooltip>
-            <PopoverContent className="w-64 p-2">
+            <PopoverContent className="w-64 p-2" isContentWidthAuto={false}>
               <div className="grid grid-cols-6 gap-1">
                 {colors.map((color) =>
                   color === 'transparent' ? (
@@ -297,7 +297,7 @@ export function EditorToolbar({ editor, onImageUpload, isUploading }: EditorTool
               </TooltipTrigger>
               <TooltipContent>Highlight</TooltipContent>
             </Tooltip>
-            <PopoverContent className="w-64 p-2">
+            <PopoverContent className="w-64 p-2" isContentWidthAuto={false}>
               <div className="grid grid-cols-6 gap-1">
                 {colors.map((color) =>
                   color === 'transparent' ? (
@@ -369,6 +369,7 @@ export function EditorToolbar({ editor, onImageUpload, isUploading }: EditorTool
               <TooltipContent>Link</TooltipContent>
             </Tooltip>
             <PopoverContent
+              isContentWidthAuto={false}
               className="w-80 p-3"
               onOpenAutoFocus={() => {
                 const previousUrl = editor.getAttributes('link').href;

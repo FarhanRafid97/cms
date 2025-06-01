@@ -25,21 +25,19 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <SidebarMenuButton size="lg" asChild>
               <Link href="/">
                 <div className="flex aspect-square size-8 items-center justify-center rounded-lg  text-sidebar-primary-foreground">
-                  <div
-                    className={`  items-center font-serif p-1 bg-[#09090B] dark:bg-[#09090B] py-2  flex justify-center rounded `}
-                  >
+                  <div className="bg-background p-1 rounded-xl">
                     <Image
-                      src="/logo-mass-pro.png"
-                      width={35}
-                      height={25}
+                      src="/book-logo.png"
+                      width={40}
+                      height={40}
                       alt="logo mass pro"
                       className="object-cover "
                     />
                   </div>
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">Mass Pro</span>
-                  <span className="truncate text-xs">Mass Kredit / Debet</span>
+                  <span className="truncate font-semibold">Book Pro</span>
+                  <span className="truncate text-xs">Komunitas buku</span>
                 </div>
               </Link>
             </SidebarMenuButton>

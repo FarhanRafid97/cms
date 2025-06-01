@@ -13,6 +13,7 @@ import { Edit, MoreHorizontal, Trash } from 'lucide-react';
 import { useState } from 'react';
 import DetailPostData from './detail-post/DetailPostData';
 import WrapperModalDetailPost from './detail-post/WrapperDetailPost';
+import { AnimatePresence } from 'motion/react';
 
 export function DataTableRowActionsReport({ row }: { row: CompletePost }) {
   const [openDetailArticle, setOpenDetailArticle] = useState(false);
