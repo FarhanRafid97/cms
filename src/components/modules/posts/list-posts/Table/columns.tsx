@@ -52,7 +52,7 @@ export const columns: ColumnDef<CompletePost>[] = [
   {
     accessorKey: 'title',
     header: ({ column, header }) => (
-      <DataTableColumnHeaderComplete header={header} column={column} title="Title" />
+      <DataTableColumnHeaderComplete header={header} column={column} title="Judul Artikel" />
     ),
     cell: ({ row, column }) => (
       <TableCellCostume id={column.id}>{row.original.title}</TableCellCostume>
@@ -62,7 +62,7 @@ export const columns: ColumnDef<CompletePost>[] = [
   {
     accessorKey: 'username',
     header: ({ column, header }) => (
-      <DataTableColumnHeaderComplete header={header} column={column} title="Author" />
+      <DataTableColumnHeaderComplete header={header} column={column} title="Penulis" />
     ),
     cell: ({ row, column }) => (
       <TableCellCostume id={column.id}>{row.original.username}</TableCellCostume>
@@ -71,7 +71,7 @@ export const columns: ColumnDef<CompletePost>[] = [
   {
     accessorKey: 'category',
     header: ({ column, header }) => (
-      <DataTableColumnHeaderComplete header={header} column={column} title="Category" />
+      <DataTableColumnHeaderComplete header={header} column={column} title="Kategori" />
     ),
     cell: ({ row, column }) => (
       <TableCellCostume id={column.id} className="">

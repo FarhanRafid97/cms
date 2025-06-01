@@ -1,4 +1,4 @@
-import { LIMIT_GET_POSTS } from '@/lib/constant';
+import { DETAULT_DETAIL_POST, LIMIT_GET_POSTS } from '@/lib/constant';
 import { supabase } from '@/lib/supabase';
 import { CreatePost } from '@/schema/posts/post';
 import { toast } from 'sonner';
@@ -34,7 +34,7 @@ export const createNewPost = async ({ dataPost }: { dataPost: CreatePost }) => {
   const responseCreatePost = data[0];
   const { error: errorPostDetail } = await supabase
     .from('post_details')
-    .insert({ content: '', post_id: responseCreatePost.id });
+    .insert({ content: DETAULT_DETAIL_POST, post_id: responseCreatePost.id });
 
   if (errorPostDetail) {
     toast.error(errorPostDetail.message);
@@ -42,4 +42,13 @@ export const createNewPost = async ({ dataPost }: { dataPost: CreatePost }) => {
   }
 
   return responseCreatePost;
+};
+
+export const getPostDetail = async ({ postId }: { postId: string }) => {
+  const { data, error } = await supabase.from('post_details').select('*').eq('post_id', postId);
+  if (error) {
+    toast.error(error.message);
+    return null;
+  }
+  return data[0];
 };

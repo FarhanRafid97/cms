@@ -6,14 +6,16 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { CompletePost, Tag } from '@/schema/posts/post';
+import { CompletePost } from '@/schema/posts/post';
 
 import { Edit, MoreHorizontal, Trash } from 'lucide-react';
 
 import { useState } from 'react';
+import DetailPostData from './detail-post/DetailPostData';
+import WrapperModalDetailPost from './detail-post/WrapperDetailPost';
 
 export function DataTableRowActionsReport({ row }: { row: CompletePost }) {
-  const [openEdit, setOpenEdit] = useState(false);
+  const [openDetailArticle, setOpenDetailArticle] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
   return (
     <>
@@ -27,11 +29,11 @@ export function DataTableRowActionsReport({ row }: { row: CompletePost }) {
           <DropdownMenuItem
             className="flex gap-2 items-center"
             onClick={() => {
-              setOpenEdit(true);
+              setOpenDetailArticle(true);
             }}
           >
             <Edit size={16} />
-            Edit
+            Edit Detail Artikel
           </DropdownMenuItem>
           <DropdownMenuItem
             className="flex gap-2 items-center"
@@ -44,6 +46,9 @@ export function DataTableRowActionsReport({ row }: { row: CompletePost }) {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
+      <WrapperModalDetailPost open={openDetailArticle} setOpen={setOpenDetailArticle}>
+        <DetailPostData row={row} />
+      </WrapperModalDetailPost>
     </>
   );
 }

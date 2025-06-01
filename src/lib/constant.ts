@@ -13,3 +13,13 @@ export const MESSAGE_MUST_NUMBER = 'Field harus di isi dengan angka';
 export const MESSAGE_NOT_FOUND = 'Tidak Ditemukan';
 export const MESSAGE_DELETE_DATA = 'Apakah anda yakin menghapus';
 export const MESSAGE_MAXIMUM_CHARACTER = 'Maksimal Karakter';
+export const DETAULT_DETAIL_POST = `
+      <h1>Welcome to your Notion-like Editor</h1>
+      <p>This is a Tiptap editor that looks like Notion. You can:</p>
+      <ul>
+        <li>Format text with the toolbar</li>
+        <li>Upload images</li>
+        <li>Create headings, lists, and more</li>
+      </ul>
+      <p>Try it out!</p>
+    `;

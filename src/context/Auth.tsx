@@ -41,24 +41,29 @@ function useProvideAuth(): AuthContextType {
         return;
       }
 
-      const {
-        data: { session },
-        error,
-      } = await supabase.auth.getSession();
+      try {
+        const {
+          data: { session },
+          error,
+        } = await supabase.auth.getSession();
+        console.log('errorr', error);
+        if (error) {
+          setUser(undefined);
+          return;
+        }
 
-      if (error) {
+        const detailMySelf = await getMyself({ user_id: session?.user.id || '' });
+        if (!detailMySelf) {
+          setUser(undefined);
+          return;
+        }
+        setSession(session);
+        setUser(detailMySelf);
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
         setUser(undefined);
-        return;
       }
-
-      const detailMySelf = await getMyself({ user_id: session?.user.id || '' });
-      if (!detailMySelf) {
-        setUser(undefined);
-        return;
-      }
-      setSession(session);
-      setUser(detailMySelf);
-      setLoading(false);
     };
 
     getInitialSession();
