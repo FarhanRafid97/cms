@@ -1,4 +1,4 @@
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Dialog, DialogContent } from '@/components/ui/dialog';
 
 const WrapperModalDetailPost = ({
   children,
@@ -12,7 +12,7 @@ const WrapperModalDetailPost = ({
 }) => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent className="w-screen max-w-[95%] h-screen max-h-[95%] overflow-hidden">
+      <DialogContent className="w-screen max-w-[95%] h-screen max-h-[95%] ">
         {children}
       </DialogContent>
     </Dialog>

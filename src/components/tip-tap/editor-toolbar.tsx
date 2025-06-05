@@ -34,6 +34,7 @@ import TextAlignButton from './text-align';
 
 interface EditorToolbarProps {
   editor: Editor;
+  // eslint-disable-next-line no-unused-vars
   onImageUpload: (e: React.ChangeEvent<HTMLInputElement>) => void;
   isUploading: boolean;
 }
@@ -151,9 +152,9 @@ export function EditorToolbar({ editor, onImageUpload, isUploading }: EditorTool
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={() =>
-                      editor.chain().focus().toggleHeading({ level: currentHeading }).run()
-                    }
+                    onClick={() => {
+                      editor.chain().focus().toggleHeading({ level: currentHeading }).run();
+                    }}
                     className={cn(
                       editor.isActive('heading', { level: currentHeading }) ? 'bg-accent' : '',
                     )}

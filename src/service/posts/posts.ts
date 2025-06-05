@@ -52,3 +52,19 @@ export const getPostDetail = async ({ postId }: { postId: string }) => {
   }
   return data[0];
 };
+
+export const updatePostDetail = async ({
+  payload,
+}: {
+  payload: { postId: string; content: string; detail_post_id: string };
+}) => {
+  const { error } = await supabase
+    .from('post_details')
+    .update({ content: payload.content })
+    .eq('id', payload.detail_post_id);
+  if (error) {
+    toast.error(error.message);
+    return false;
+  }
+  return true;
+};

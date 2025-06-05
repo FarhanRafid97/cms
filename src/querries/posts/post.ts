@@ -1,6 +1,11 @@
 import { useGetFilterSearchparams } from '@/hooks/useGetSearchParams';
-import { CompletePost, CreatePost } from '@/schema/posts/post';
-import { createNewPost, getListCompletePosts, getPostDetail } from '@/service/posts/posts';
+import { CompletePost, CreatePost, PostDetail } from '@/schema/posts/post';
+import {
+  createNewPost,
+  getListCompletePosts,
+  getPostDetail,
+  updatePostDetail,
+} from '@/service/posts/posts';
 import { AdditionalData } from '@/types/globals';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
@@ -110,6 +115,39 @@ export const useGetPostDetail = ({ postId }: { postId?: string }) => {
       }
       const result = await getPostDetail({ postId });
       return result;
+    },
+  });
+};
+
+export const useUpdatePostDetail = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({
+      payload,
+    }: {
+      payload: { postId: string; content: string; detail_post_id: string };
+    }) => {
+      const result = await updatePostDetail({ payload });
+      if (result) {
+        return { payload, result };
+      }
+      return { payload: null, result: null };
+    },
+    onSuccess: ({ payload }) => {
+      if (payload) {
+        toast.success('Sukses mengubah artikel');
+        const CURRENT_QUERRY = [UNIQUE_KEY, 'detail', payload.postId];
+        queryClient.setQueryData(CURRENT_QUERRY, (oldData: PostDetail | null) => {
+          if (!oldData) {
+            return null;
+          }
+          return {
+            ...oldData,
+            content: payload.content,
+          };
+        });
+      }
     },
   });
 };
