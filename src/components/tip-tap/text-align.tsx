@@ -1,40 +1,30 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { useTiptapEditor } from "@/hooks/use-tip-tap";
+import { useTiptapEditor } from '@/hooks/use-tip-tap';
 
-import { Button } from "@/components/ui/button";
-import { useTextAlign } from "@/hooks/use-text-align";
-import type { TextAlignButtonProps } from "@/types/align-text";
+import { Button } from '@/components/ui/button';
+import { useTextAlign } from '@/hooks/use-text-align';
+import type { TextAlignButtonProps } from '@/types/align-text';
 
-export const TextAlignButton = React.forwardRef<
-  HTMLButtonElement,
-  TextAlignButtonProps
->(
+export const TextAlignButton = React.forwardRef<HTMLButtonElement, TextAlignButtonProps>(
   (
     {
       editor: providedEditor,
       align,
       text,
       hideWhenUnavailable = false,
-      className = "",
+      className = '',
       disabled = false,
       onClick,
       children,
       ...buttonProps
     },
-    ref
+    ref,
   ) => {
     const editor = useTiptapEditor(providedEditor);
 
-    const {
-      isDisabled,
-      handleAlignment,
-      shouldShow,
-      Icon,
-      isActive,
-      shortcutKey,
-      label,
-    } = useTextAlign(editor, align, disabled, hideWhenUnavailable);
+    const { isDisabled, handleAlignment, shouldShow, Icon, isActive, shortcutKey, label } =
+      useTextAlign(editor, align, disabled, hideWhenUnavailable);
 
     const handleClick = React.useCallback(
       (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -44,7 +34,7 @@ export const TextAlignButton = React.forwardRef<
           handleAlignment();
         }
       },
-      [onClick, disabled, handleAlignment]
+      [onClick, disabled, handleAlignment],
     );
 
     if (!shouldShow || !editor || !editor.isEditable) {
@@ -56,7 +46,7 @@ export const TextAlignButton = React.forwardRef<
         className={className.trim()}
         disabled={isDisabled}
         tooltip={label}
-        variant={isActive ? "secondary" : "ghost"}
+        variant={isActive ? 'secondary' : 'ghost'}
         shortcutKeys={shortcutKey}
         onClick={handleClick}
         {...buttonProps}
@@ -64,15 +54,15 @@ export const TextAlignButton = React.forwardRef<
       >
         {children || (
           <>
-            <Icon className="tiptap-button-icon" />
+            <Icon size={16} className="tiptap-button-icon" />
             {text && <span className="tiptap-button-text">{text}</span>}
           </>
         )}
       </Button>
     );
-  }
+  },
 );
 
-TextAlignButton.displayName = "TextAlignButton";
+TextAlignButton.displayName = 'TextAlignButton';
 
 export default TextAlignButton;

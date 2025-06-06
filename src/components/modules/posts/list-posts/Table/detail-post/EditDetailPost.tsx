@@ -8,13 +8,15 @@ import { useUpdatePostDetail } from '@/querries/posts/post';
 import { CompletePost, PostDetail } from '@/schema/posts/post';
 import { useGetCloudinary } from '@/store/cloudinary';
 import { CloudinaryUploadResponse } from '@/types/cloudinary';
+import { TypeLevelHeader } from '@/types/globals';
 import { Color } from '@tiptap/extension-color';
+import Heading from '@tiptap/extension-heading';
 import { Highlight } from '@tiptap/extension-highlight';
 import Image from '@tiptap/extension-image';
 import Placeholder from '@tiptap/extension-placeholder';
 import { TextAlign } from '@tiptap/extension-text-align';
 import TextStyle from '@tiptap/extension-text-style';
-import { EditorContent, useEditor } from '@tiptap/react';
+import { EditorContent, mergeAttributes, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import { useMeasure } from '@uidotdev/usehooks';
 import axios from 'axios';
@@ -46,10 +48,26 @@ export function Editor({
       Color,
       ImageResize,
       Placeholder.configure({
-        placeholder: 'Type "/" for commands...',
+        // Use a placeholder:
+        placeholder: 'Tuilis Sesuatu…',
       }),
       TextStyle,
       Highlight.configure({ multicolor: true }),
+      Heading.configure({
+        levels: [1, 2, 3, 4, 5, 6],
+      }).extend({
+        renderHTML({ HTMLAttributes, node }) {
+          const hasLevel = this.options.levels.includes(node.attrs.level);
+
+          const level: TypeLevelHeader = hasLevel ? node.attrs.level : this.options.levels[0];
+          const uuid = crypto.randomUUID();
+          return [
+            `h${level}`,
+            mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, { id: uuid }),
+            0,
+          ];
+        },
+      }),
       TextAlign.configure({
         types: ['paragraph', 'heading'],
       }),
@@ -145,9 +163,9 @@ export function Editor({
           <Button
             disabled={isPending}
             className="gap-2"
-            onClick={() => {
+            onClick={async () => {
               if (row.id) {
-                updatePostDetail({
+                await updatePostDetail({
                   payload: {
                     postId: row.id || '',
                     content: editor.getHTML() || '',

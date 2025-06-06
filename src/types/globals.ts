@@ -9,6 +9,7 @@ export type PrettifyType<T> = {
   [K in keyof T]: T[K] extends object ? PrettifyType<T[K]> : T[K];
 } & unknown;
 
+export type TypeLevelHeader = 1 | 2 | 3 | 4 | 5 | 6;
 export interface FilterSearchParams {
   _offsetFrom?: string;
   _offsetTo: string;

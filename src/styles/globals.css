@@ -344,3 +344,17 @@ input[type='number'] {
     height: 0;
   }
 }
+
+.tiptap p.is-empty::before {
+  color: #adb5bd;
+  content: attr(data-placeholder);
+  background-color: red;
+
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+.tiptap p.is-empty:focus {
+  background-color: red;
+}

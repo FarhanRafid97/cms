@@ -43,7 +43,7 @@ const DetailPostData = ({ row }: { row: CompletePost }) => {
     <div className="flex-grow h-[90vh]">
       <ScrollArea className="h-full rounded-lg ">
         <div key="view-post" className="flex flex-col gap-4    items-center ">
-          <div className="flex flex-col gap-4  w-8/12  p-4">
+          <div className="flex flex-col gap-4  w-8/12  ">
             <div className="flex flex-col gap-2 border-b pb-4 mb-4 ">
               <div className="flex ">
                 <h1 className="text-2xl font-bold capitalize w-3/4">{row.title}</h1>

@@ -14,6 +14,9 @@ import {
   Heading1,
   Heading2,
   Heading3,
+  Heading4,
+  Heading5,
+  Heading6,
   Highlighter,
   ImageIcon,
   Italic,
@@ -43,11 +46,18 @@ const heading_list = [
   { label: 'heading', level: 1 as const },
   { label: 'heading', level: 2 as const },
   { label: 'heading', level: 3 as const },
+  { label: 'heading', level: 4 as const },
+  { label: 'heading', level: 5 as const },
+  { label: 'heading', level: 6 as const },
 ];
+
 const mapping_icon_heading: { [key: string]: LucideIcon } = {
   'heading-1': Heading1,
   'heading-2': Heading2,
   'heading-3': Heading3,
+  'heading-4': Heading4,
+  'heading-5': Heading5,
+  'heading-6': Heading6,
 };
 
 export function EditorToolbar({ editor, onImageUpload, isUploading }: EditorToolbarProps) {
@@ -90,6 +100,11 @@ export function EditorToolbar({ editor, onImageUpload, isUploading }: EditorTool
     'transparent', // Transparent
   ];
 
+  const headingActive = heading_list.filter((heading) => {
+    return editor.isActive('heading', { level: heading.level });
+  });
+  const IconSelectedHeading =
+    mapping_icon_heading[`heading-${headingActive.length > 0 ? headingActive[0].level : 1}`];
   return (
     <div className=" p-4  w-full">
       <div className="flex w-fit  rounded shadow border-lg gap-2 mx-auto bg-background border-[#dbdbdb] p-2">
@@ -142,31 +157,34 @@ export function EditorToolbar({ editor, onImageUpload, isUploading }: EditorTool
           <div className="p-0 py-1 ">
             <Separator orientation="vertical" className="mx-1 h-6 " />
           </div>
-          {/* Headings */}
-          {heading_list.map((datalist_heading) => {
-            const currentHeading: 1 | 2 | 3 | 4 | 5 = datalist_heading.level;
-            const IconHeading = mapping_icon_heading[`heading-${currentHeading}`] || Heading1;
-            return (
-              <Tooltip key={`heading-${currentHeading}`}>
-                <TooltipTrigger asChild>
+          {/* Headings Popover */}
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button variant="ghost" size="sm">
+                <IconSelectedHeading size={16} />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="flex gap-2 p-1 w-fit" isContentWidthAuto={false}>
+              {heading_list.map((heading) => {
+                const IconHeading = mapping_icon_heading[`heading-${heading.level}`] || Heading1;
+                return (
                   <Button
+                    key={heading.level}
                     variant="ghost"
-                    size="sm"
-                    onClick={() => {
-                      editor.chain().focus().toggleHeading({ level: currentHeading }).run();
-                    }}
+                    size="icon"
                     className={cn(
-                      editor.isActive('heading', { level: currentHeading }) ? 'bg-accent' : '',
+                      editor.isActive('heading', { level: heading.level }) ? 'bg-accent' : '',
                     )}
-                    aria-label={`Heading ${currentHeading}`}
+                    onClick={() =>
+                      editor.chain().focus().toggleHeading({ level: heading.level }).run()
+                    }
                   >
-                    <IconHeading className="h-4 w-4" />
+                    <IconHeading size={16} />
                   </Button>
-                </TooltipTrigger>
-                <TooltipContent>Heading {currentHeading} </TooltipContent>
-              </Tooltip>
-            );
-          })}
+                );
+              })}
+            </PopoverContent>
+          </Popover>
 
           {/* Lists */}
           <Tooltip>
