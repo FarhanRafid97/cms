@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
+import { motion } from 'motion/react';
 
 interface Header {
   id: string;
@@ -69,25 +70,28 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ content, className })
   return (
     <nav className={cn('w-64 p-4 space-y-2 sticky top-4 right-0 ', className)}>
       <h2 className="text-lg font-semibold mb-4">Table of Contents</h2>
-      <ul className="space-y-2">
+      <ul className="space-y-2 flex flex-col">
         {headers.map((header) => (
-          <li
+          <motion.li
             key={header.id}
+            layout
             className={cn(
-              'cursor-pointer hover:text-primary transition-colors underline',
-              'text-sm',
+              'relative cursor-pointer hover:text-primary transition-colors underline',
+              'text-sm p-1',
               header.level === 1 && 'font-semibold text-sm',
               header.level === 2 && 'ml-4 text-xs',
               header.level === 3 && 'ml-8 text-xs',
               header.level === 4 && 'ml-12 text-xs',
               header.level === 5 && 'ml-16 text-xs',
               header.level === 6 && 'ml-20',
-              activeId === header.id && 'text-primary font-medium',
             )}
             onClick={() => scrollToHeader(header.id)}
           >
-            {header.text}
-          </li>
+            {activeId === header.id ? (
+              <motion.div layoutId="tab" className="absolute inset-0 rounded-lg bg-black/5" />
+            ) : null}
+            <span className="relative text-inherit">{header.text}</span>
+          </motion.li>
         ))}
       </ul>
     </nav>
