@@ -22,7 +22,7 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ content, className })
     tempDiv.innerHTML = content;
 
     // Extract all headers (h1, h2, h3)
-    const headerElements = tempDiv.querySelectorAll('h1, h2, h3');
+    const headerElements = tempDiv.querySelectorAll('h1, h2, h3, h4, h5, h6');
     const extractedHeaders: Header[] = Array.from(headerElements).map((element) => {
       const id = element.id || element.textContent?.toLowerCase().replace(/\s+/g, '-') || '';
       element.id = id; // Set the id if it doesn't exist
@@ -54,8 +54,9 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ content, className })
     });
 
     return () => observer.disconnect();
-  }, [headers]);
+  }, [activeId, headers]);
 
+  console.log('extractedHeaders', activeId);
   const scrollToHeader = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -66,18 +67,21 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ content, className })
   if (headers.length === 0) return null;
 
   return (
-    <nav className={cn('w-64 p-4 space-y-2', className)}>
+    <nav className={cn('w-64 p-4 space-y-2 sticky top-4 right-0 ', className)}>
       <h2 className="text-lg font-semibold mb-4">Table of Contents</h2>
       <ul className="space-y-2">
         {headers.map((header) => (
           <li
             key={header.id}
             className={cn(
-              'cursor-pointer hover:text-primary transition-colors',
+              'cursor-pointer hover:text-primary transition-colors underline',
               'text-sm',
-              header.level === 1 && 'font-semibold',
-              header.level === 2 && 'ml-4',
-              header.level === 3 && 'ml-8',
+              header.level === 1 && 'font-semibold text-sm',
+              header.level === 2 && 'ml-4 text-xs',
+              header.level === 3 && 'ml-8 text-xs',
+              header.level === 4 && 'ml-12 text-xs',
+              header.level === 5 && 'ml-16 text-xs',
+              header.level === 6 && 'ml-20',
               activeId === header.id && 'text-primary font-medium',
             )}
             onClick={() => scrollToHeader(header.id)}

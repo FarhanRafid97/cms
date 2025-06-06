@@ -18,14 +18,13 @@ import { TextAlign } from '@tiptap/extension-text-align';
 import TextStyle from '@tiptap/extension-text-style';
 import { EditorContent, mergeAttributes, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
-import { useMeasure } from '@uidotdev/usehooks';
 import axios from 'axios';
-import { Loader2, Save, Undo } from 'lucide-react';
-import { motion } from 'motion/react';
+import { Loader2, Save, X } from 'lucide-react';
 import type React from 'react';
 import { SetStateAction, useRef, useState } from 'react';
 import { toast } from 'sonner';
 import ImageResize from 'tiptap-extension-resize-image';
+import { match } from 'ts-pattern';
 
 export function Editor({
   row,
@@ -36,7 +35,6 @@ export function Editor({
   detaiil_content: PostDetail;
   setEdit: React.Dispatch<SetStateAction<boolean>>;
 }) {
-  const [ref] = useMeasure();
   const [isUploading, setIsUploading] = useState(false);
   const { cloudinary: cloudinarySign } = useGetCloudinary();
 
@@ -61,9 +59,12 @@ export function Editor({
 
           const level: TypeLevelHeader = hasLevel ? node.attrs.level : this.options.levels[0];
           const uuid = crypto.randomUUID();
+
           return [
             `h${level}`,
-            mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, { id: uuid }),
+            mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, {
+              id: uuid,
+            }),
             0,
           ];
         },
@@ -83,7 +84,7 @@ export function Editor({
         autocorrect: 'off',
         autocapitalize: 'off',
         'aria-label': 'Main content area, start typing to enter text.',
-        class: 'prose prose-sm  focus:outline-none max-w-full p-1',
+        class: 'prose prose-sm dark:prose-invert focus:outline-none max-w-full min-h-[400px] p-4',
       },
       handleKeyDown: (view, event) => {
         // Handle Tab key to create indentation
@@ -135,83 +136,102 @@ export function Editor({
 
   const refEditor = useRef<HTMLDivElement>(null);
   if (!editor) {
-    return null;
+    return (
+      <div className="flex items-center justify-center h-64">
+        <Loader2 className="h-6 w-6 animate-spin" />
+      </div>
+    );
   }
 
   return (
-    <div
-      ref={ref}
-      className="relative flex flex-col w-full h-full max-h-[90vh] gap-4 p-4 overflow-hidden"
-    >
-      <div className="flex justify-between gap-2">
-        <h1 className="text-2xl font-bold capitalize underline">{row.title}</h1>
-        <div className="flex gap-2">
-          {!isPending && (
-            <Button
-              disabled={isPending}
-              variant="outline"
-              className="gap-2"
-              onClick={() => {
-                setEdit(false);
-              }}
-            >
-              <Undo size={14} />
+    <>
+      <div className="flex flex-col h-full max-h-[90vh] border">
+        {/* Header */}
+        <div className="flex items-center justify-between p-6">
+          <div className="flex-1 min-w-0">
+            <h2 className="text-lg font-semibold text-foreground truncate">Editing: {row.title}</h2>
+            <p className="text-sm text-muted-foreground">Make changes to your post content</p>
+          </div>
+          <div className="flex items-center gap-2 ml-4">
+            <Button variant="outline" size="sm" onClick={() => setEdit(false)} disabled={isPending}>
+              <X className="h-4 w-4 mr-1" />
               Cancel
             </Button>
-          )}
+            <Button
+              size="sm"
+              onClick={async () => {
+                const new_content = editor.getHTML();
+                const is_no_changes = match(new_content.replace(/\s*id="[^"]*"/g, ''))
+                  .with(detaiil_content.content.replace(/\s*id="[^"]*"/g, ''), () => {
+                    toast.info('Tidak Ada Perubahan');
+                    return true;
+                  })
+                  .otherwise(() => {
+                    return false;
+                  });
 
-          <Button
-            disabled={isPending}
-            className="gap-2"
-            onClick={async () => {
-              if (row.id) {
-                await updatePostDetail({
-                  payload: {
-                    postId: row.id || '',
-                    content: editor.getHTML() || '',
-                    detail_post_id: detaiil_content.id || '',
-                  },
-                });
-                setEdit(false);
-              }
-            }}
-          >
-            <Save size={14} /> Save
-          </Button>
-        </div>
-      </div>
-
-      <div className="flex-grow h-[75vh]">
-        <ScrollArea className="h-full rounded-lg border">
-          <div className="p-4">
-            <EditorContent ref={refEditor} editor={editor} className="min-h-full" />
+                if (is_no_changes) {
+                  setEdit(false);
+                  return;
+                }
+                if (row.id) {
+                  await updatePostDetail({
+                    payload: {
+                      postId: row.id || '',
+                      content: editor.getHTML() || '',
+                      detail_post_id: detaiil_content.id || '',
+                    },
+                  });
+                  setEdit(false);
+                }
+              }}
+              disabled={isPending}
+            >
+              {isPending ? (
+                <Loader2 className="h-4 w-4 mr-1 animate-spin" />
+              ) : (
+                <Save className="h-4 w-4 mr-1" />
+              )}
+              Save Changes
+            </Button>
           </div>
-        </ScrollArea>
-      </div>
+        </div>
 
-      <div className="fixed -bottom-2 left-1/2 transform -translate-x-1/2 z-50">
-        {!isPending ? (
-          <motion.div
-            initial={{ y: 40, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 40, opacity: 0 }}
-            transition={{ type: 'spring', bounce: 0.1, duration: 0.3 }}
-          >
+        {/* Toolbar */}
+
+        <div className="flex items-center justify-center ">
+          <div className="flex items-center space-x-1 rounded-md border bg-background p-1 shadow-sm w-full">
             <EditorToolbar
               editor={editor}
               onImageUpload={handleImageUpload}
               isUploading={isUploading}
             />
-          </motion.div>
-        ) : (
-          <div className="flex justify-center items-center h-full p-4">
-            <div className="flex gap-2 items-center  border bg-background p-2 rounded-lg">
-              <Loader2 className="animate-spin" />
-              <span>Saving...</span>
-            </div>
           </div>
-        )}
+        </div>
+
+        {/* Editor Content */}
+        <div className="flex-1 overflow-hidden">
+          <ScrollArea className="h-full">
+            <div className="p-6">
+              <EditorContent
+                ref={refEditor}
+                editor={editor}
+                className="min-h-[400px] focus-within:outline-none"
+              />
+            </div>
+          </ScrollArea>
+        </div>
+
+        {/* Status Bar */}
       </div>
-    </div>
+      {isPending && (
+        <div className="border-t bg-muted/40 px-6 py-3  fixed inset-0 grid place-items-center place-content-center ">
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <Loader2 className="h-4 w-4 animate-spin" />
+            <span>Saving changes...</span>
+          </div>
+        </div>
+      )}
+    </>
   );
 }

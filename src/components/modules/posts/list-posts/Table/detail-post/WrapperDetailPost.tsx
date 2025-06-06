@@ -12,7 +12,7 @@ const WrapperModalDetailPost = ({
 }) => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogContent className="w-screen max-w-[95%] h-screen max-h-[95%] ">
+      <DialogContent className="w-full h-full max-w-[95vw] max-h-[95vh] overflow-auto">
         {children}
       </DialogContent>
     </Dialog>
