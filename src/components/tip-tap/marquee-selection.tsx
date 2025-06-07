@@ -66,7 +66,7 @@ export function MarqueeSelection({ children, editor }: MarqueeSelectionProps) {
         const rects = range.getClientRects();
         for (let i = 0; i < rects.length; i++) {
           const rect = rects[i];
-          const containerRect = containerRef.current!.getBoundingClientRect();
+          const containerRect = containerRef.current.getBoundingClientRect();
           const relativeTop = rect.top - containerRect.top;
           const relativeBottom = rect.bottom - containerRect.top;
 
@@ -224,8 +224,9 @@ export function MarqueeSelection({ children, editor }: MarqueeSelectionProps) {
       element.classList.add('marquee-selected');
     });
 
+    const container = containerRef.current;
     return () => {
-      const selected = containerRef.current?.querySelectorAll('.marquee-selected');
+      const selected = container?.querySelectorAll('.marquee-selected');
       selected?.forEach((el) => el.classList.remove('marquee-selected'));
     };
   }, [selectedElements]);

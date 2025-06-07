@@ -46,7 +46,6 @@ const Login = () => {
       setIsSuccessSend(true);
     } catch (error) {
       toast.error('Something went wrong. Please try again.');
-      console.error('Login error:', error);
     } finally {
       setIsLoading(false);
     }

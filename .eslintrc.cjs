@@ -4,7 +4,7 @@ module.exports = {
   rules: {
     'prefer-const': 'error',
     'no-unused-vars': 'error',
-    'no-console': 'warn',
+
     'no-empty-pattern': 'error',
 
     'react/jsx-curly-brace-presence': ['warn', { props: 'never', children: 'never' }],

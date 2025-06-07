@@ -35,5 +35,5 @@ export const useDetectUserAFK = () => {
       document.removeEventListener('mousemove', handleMouseActivity);
       document.removeEventListener('keydown', handleKeyboardActivity);
     };
-  }, []);
+  }, [router]);
 };

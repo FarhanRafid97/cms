@@ -57,7 +57,6 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ content, className })
     return () => observer.disconnect();
   }, [activeId, headers]);
 
-  console.log('extractedHeaders', activeId);
   const scrollToHeader = (id: string) => {
     const element = document.getElementById(id);
     if (element) {

@@ -55,12 +55,12 @@ export const useCreateNewPost = () => {
     },
     onSuccess: ({ response }) => {
       const CURRENT_QUERRY = [UNIQUE_KEY, search._offsetFrom, search._offsetTo];
-      console.log(CURRENT_QUERRY);
+
       const { data: previousData, totalData } = queryClient.getQueryData(CURRENT_QUERRY) as {
         data: CompletePost[];
         totalData: number;
       };
-      console.log('previousData', previousData);
+
       if (!response) {
         return;
       }

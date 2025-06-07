@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import type React from "react";
+import type React from 'react';
 
-import { useEditor, EditorContent } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
-import Image from "@tiptap/extension-image";
-import { TextAlign } from "@tiptap/extension-text-align";
-import Placeholder from "@tiptap/extension-placeholder";
-import { useRef, useState } from "react";
-import { EditorToolbar } from "./editor-toolbar";
-import TextStyle from "@tiptap/extension-text-style";
-import { Color } from "@tiptap/extension-color";
-import { Highlight } from "@tiptap/extension-highlight";
-import ImageResize from "tiptap-extension-resize-image";
-import Link from "./extension/link-extension";
+import { useEditor, EditorContent } from '@tiptap/react';
+import StarterKit from '@tiptap/starter-kit';
+import Image from '@tiptap/extension-image';
+import { TextAlign } from '@tiptap/extension-text-align';
+import Placeholder from '@tiptap/extension-placeholder';
+import { useRef, useState } from 'react';
+import { EditorToolbar } from './editor-toolbar';
+import TextStyle from '@tiptap/extension-text-style';
+import { Color } from '@tiptap/extension-color';
+import { Highlight } from '@tiptap/extension-highlight';
+import ImageResize from 'tiptap-extension-resize-image';
+import Link from './extension/link-extension';
 
 export function Editor() {
   const [isUploading, setIsUploading] = useState(false);
@@ -30,7 +30,7 @@ export function Editor() {
       TextStyle,
       Highlight.configure({ multicolor: true }),
       TextAlign.configure({
-        types: ["paragraph", "heading"],
+        types: ['paragraph', 'heading'],
       }),
       Link.configure({ openOnClick: false }),
     ],
@@ -49,12 +49,11 @@ export function Editor() {
 
     editorProps: {
       attributes: {
-        autocomplete: "off",
-        autocorrect: "off",
-        autocapitalize: "off",
-        "aria-label": "Main content area, start typing to enter text.",
-        class:
-          "prose prose-sm sm:pros lg:prose-sm focus:outline-none max-w-full",
+        autocomplete: 'off',
+        autocorrect: 'off',
+        autocapitalize: 'off',
+        'aria-label': 'Main content area, start typing to enter text.',
+        class: 'prose prose-sm sm:pros lg:prose-sm focus:outline-none max-w-full',
       },
     },
   });
@@ -64,7 +63,7 @@ export function Editor() {
 
     const file = e.target.files[0];
     const formData = new FormData();
-    formData.append("image", file);
+    formData.append('image', file);
 
     try {
       setIsUploading(true);
@@ -86,7 +85,8 @@ export function Editor() {
       // }
       setIsUploading(false);
     } catch (error) {
-      console.error("Error uploading image:", error);
+      // eslint-disable-next-line no-console
+      console.error('Error uploading image:', error);
     }
   };
 
@@ -97,11 +97,7 @@ export function Editor() {
 
   return (
     <div className="relative h-screen">
-      <EditorToolbar
-        editor={editor}
-        onImageUpload={handleImageUpload}
-        isUploading={isUploading}
-      />
+      <EditorToolbar editor={editor} onImageUpload={handleImageUpload} isUploading={isUploading} />
 
       <div
         className="py-2 flex justify-center "

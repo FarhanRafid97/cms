@@ -1,6 +1,6 @@
 'use server';
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
 export async function uploadImage(formData: FormData): Promise<string> {
   try {
     // In a real application, you would upload the image to a storage service
