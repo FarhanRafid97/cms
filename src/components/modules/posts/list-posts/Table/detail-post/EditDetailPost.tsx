@@ -135,6 +135,7 @@ export function Editor({
   };
 
   const refEditor = useRef<HTMLDivElement>(null);
+
   if (!editor) {
     return (
       <div className="flex items-center justify-center h-64">
@@ -142,6 +143,33 @@ export function Editor({
       </div>
     );
   }
+
+  const handleSave = async () => {
+    const new_content = editor.getHTML();
+    const is_no_changes = match(new_content.replace(/\s*id="[^"]*"/g, ''))
+      .with(detaiil_content.content.replace(/\s*id="[^"]*"/g, ''), () => {
+        toast.info('Tidak Ada Perubahan');
+        return true;
+      })
+      .otherwise(() => {
+        return false;
+      });
+
+    if (is_no_changes) {
+      setEdit(false);
+      return;
+    }
+    if (row.id) {
+      await updatePostDetail({
+        payload: {
+          postId: row.id || '',
+          content: editor.getHTML() || '',
+          detail_post_id: detaiil_content.id || '',
+        },
+      });
+      setEdit(false);
+    }
+  };
 
   return (
     <>
@@ -159,31 +187,8 @@ export function Editor({
             </Button>
             <Button
               size="sm"
-              onClick={async () => {
-                const new_content = editor.getHTML();
-                const is_no_changes = match(new_content.replace(/\s*id="[^"]*"/g, ''))
-                  .with(detaiil_content.content.replace(/\s*id="[^"]*"/g, ''), () => {
-                    toast.info('Tidak Ada Perubahan');
-                    return true;
-                  })
-                  .otherwise(() => {
-                    return false;
-                  });
-
-                if (is_no_changes) {
-                  setEdit(false);
-                  return;
-                }
-                if (row.id) {
-                  await updatePostDetail({
-                    payload: {
-                      postId: row.id || '',
-                      content: editor.getHTML() || '',
-                      detail_post_id: detaiil_content.id || '',
-                    },
-                  });
-                  setEdit(false);
-                }
+              onClick={() => {
+                handleSave();
               }}
               disabled={isPending}
             >
@@ -200,7 +205,7 @@ export function Editor({
         {/* Toolbar */}
 
         <div className="flex items-center justify-center ">
-          <div className="flex items-center space-x-1 rounded-md border bg-background p-1 shadow-sm w-full">
+          <div className="flex items-center space-x-1 border-t botder-b bg-background p-1 shadow-sm w-full">
             <EditorToolbar
               editor={editor}
               onImageUpload={handleImageUpload}
@@ -224,11 +229,11 @@ export function Editor({
 
         {/* Status Bar */}
       </div>
-      {isPending && (
+      {(isPending || isUploading) && (
         <div className="border-t bg-muted/40 px-6 py-3  fixed inset-0 grid place-items-center place-content-center ">
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <Loader2 className="h-4 w-4 animate-spin" />
-            <span>Saving changes...</span>
+            <span>{isUploading ? 'Uploading image...' : 'Saving changes...'}</span>
           </div>
         </div>
       )}
