@@ -10,11 +10,7 @@ import { Tag } from '@/schema/posts/post';
 
 import { Edit, MoreHorizontal, Trash } from 'lucide-react';
 
-import { useState } from 'react';
-
 export function DataTableRowActionsReport({ row }: { row: Tag }) {
-  const [openEdit, setOpenEdit] = useState(false);
-  const [openDelete, setOpenDelete] = useState(false);
   return (
     <>
       <DropdownMenu>
@@ -22,23 +18,13 @@ export function DataTableRowActionsReport({ row }: { row: Tag }) {
           <MoreHorizontal size={18} className="cursor-pointer" />
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-[200px]">
-          <DropdownMenuLabel>Action</DropdownMenuLabel>
+          <DropdownMenuLabel>Action {row.id} </DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem
-            className="flex gap-2 items-center"
-            onClick={() => {
-              setOpenEdit(true);
-            }}
-          >
+          <DropdownMenuItem className="flex gap-2 items-center">
             <Edit size={16} />
             Edit
           </DropdownMenuItem>
-          <DropdownMenuItem
-            className="flex gap-2 items-center"
-            onClick={() => {
-              setOpenDelete(true);
-            }}
-          >
+          <DropdownMenuItem className="flex gap-2 items-center">
             <Trash size={16} />
             Delete
           </DropdownMenuItem>

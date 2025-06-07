@@ -1,5 +1,6 @@
-"use server";
+'use server';
 
+// eslint-disable-next-line no-unused-vars
 export async function uploadImage(formData: FormData): Promise<string> {
   try {
     // In a real application, you would upload the image to a storage service
@@ -18,7 +19,7 @@ export async function uploadImage(formData: FormData): Promise<string> {
 
     return `/placeholder.svg?height=${height}&width=${width}`;
   } catch (error) {
-    console.error("Error uploading image:", error);
-    throw new Error("Failed to upload image");
+    console.error('Error uploading image:', error);
+    throw new Error('Failed to upload image');
   }
 }

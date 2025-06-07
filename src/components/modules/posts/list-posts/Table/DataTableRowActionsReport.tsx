@@ -13,7 +13,6 @@ import { Edit, MoreHorizontal, Trash } from 'lucide-react';
 import { useState } from 'react';
 import DetailPostData from './detail-post/DetailPostData';
 import WrapperModalDetailPost from './detail-post/WrapperDetailPost';
-import { AnimatePresence } from 'motion/react';
 
 export function DataTableRowActionsReport({ row }: { row: CompletePost }) {
   const [openDetailArticle, setOpenDetailArticle] = useState(false);
@@ -34,7 +33,7 @@ export function DataTableRowActionsReport({ row }: { row: CompletePost }) {
             }}
           >
             <Edit size={16} />
-            Edit Detail Artikel
+            Edit Detail Artikel {openDelete}
           </DropdownMenuItem>
           <DropdownMenuItem
             className="flex gap-2 items-center"

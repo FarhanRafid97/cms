@@ -83,7 +83,6 @@
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.3.8",
     "react-hook-form": "^7.56.4",
-    "react-quill": "^2.0.0",
     "react-use-measure": "^2.1.7",
     "recharts": "^2.12.7",
     "sonner": "^1.7.4",

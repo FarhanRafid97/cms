@@ -16,8 +16,8 @@ import React from 'react';
 export function useTextAlign(
   editor: Editor | null,
   align: TextAlign,
-  disabled: boolean = false,
-  hideWhenUnavailable: boolean = false,
+  disabled: boolean,
+  hideWhenUnavailable: boolean,
 ) {
   const alignAvailable = React.useMemo(() => checkTextAlignExtension(editor), [editor]);
 

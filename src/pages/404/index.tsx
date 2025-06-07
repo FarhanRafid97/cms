@@ -1,10 +1,9 @@
 import ContainerContent from '@/components/Layouts/ContainerContent';
 import ContainerSection from '@/components/Layouts/ContainerSection';
 import NotFound from '@/components/NotFound';
-import TitlePage from '@/components/TitlePage';
 import { Button } from '@/components/ui/button';
 
-import { ValueNoneIcon, HomeIcon } from '@radix-ui/react-icons';
+import { HomeIcon } from '@radix-ui/react-icons';
 import Link from 'next/link';
 
 const PageNoFound = () => {

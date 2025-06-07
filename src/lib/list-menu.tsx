@@ -1,6 +1,7 @@
 import { Album, Settings2 } from 'lucide-react';
 import { ReactNode } from 'react';
 const ICON_SIZE = 16;
+
 export const listMenu: {
   groupMenu: 'Parameter' | 'Post';
   icon: ReactNode;
@@ -31,4 +32,4 @@ export const listMenu: {
       },
     ],
   },
-] as const;
+];
