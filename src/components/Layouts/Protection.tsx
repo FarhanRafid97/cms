@@ -11,12 +11,13 @@ interface ProtectedRouteProps {
 
 function ProtectedRoute({ children }: ProtectedRouteProps) {
   const { user, loading } = useAuth();
+
   const { search } = useGetFilterSearchparams();
   useEffect(() => {
     setSearchParamsClient({ searchParams: search });
   }, [search]);
 
-  if (loading) {
+  if (loading && user !== undefined) {
     return <LoadingPage />;
   }
 

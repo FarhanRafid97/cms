@@ -44,10 +44,9 @@ function useProvideAuth(): AuthContextType {
       try {
         const {
           data: { session },
-          error,
         } = await supabase.auth.getSession();
-        console.log('errorr', error);
-        if (error) {
+        console.log('session', !session);
+        if (!session) {
           setUser(undefined);
           return;
         }
