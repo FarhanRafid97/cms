@@ -1,5 +1,5 @@
-import { CreateTag, Tag } from '@/schema/paramter/tag';
-import { createNewTag, getListTags } from '@/service/parameter/tag';
+import { CreateTag, Tag, UpdateTag } from '@/schema/paramter/tag';
+import { createNewTag, getListTags, updateTag } from '@/service/parameter/tag';
 import { AdditionalData } from '@/types/globals';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
@@ -46,6 +46,42 @@ export const useCreateNewTag = () => {
     },
     onError: () => {
       toast.error('Kategori gagal ditambahkan');
+    },
+  });
+};
+
+export const useUpdateTag = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (payload: UpdateTag) => {
+      const response = await updateTag(payload);
+      if (!response) {
+        toast.error('Tipe post gagal diubah');
+        return { payload: null };
+      }
+      toast.success('Tipe post berhasil diubah');
+      return { payload };
+    },
+    onSuccess: ({ payload }) => {
+      const CURRENT_QUERRY = [UNIQUE_KEY];
+      const previousData = queryClient.getQueryData(CURRENT_QUERRY) as Tag[];
+      if (!payload) {
+        return;
+      }
+
+      const updatedData = previousData.map((item) => {
+        if (item.id === payload.id) {
+          const newData: Tag & AdditionalData = {
+            ...item,
+            name: payload.name || '',
+            slug: payload.slug || '',
+            isUpdate: true,
+          };
+          return newData;
+        }
+        return item;
+      });
+      queryClient.setQueryData(CURRENT_QUERRY, updatedData);
     },
   });
 };

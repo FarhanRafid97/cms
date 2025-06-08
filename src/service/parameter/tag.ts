@@ -1,5 +1,5 @@
 import { supabase } from '@/lib/supabase';
-import { CreateTag } from '@/schema/paramter/tag';
+import { CreateTag, UpdateTag } from '@/schema/paramter/tag';
 import { toast } from 'sonner';
 
 export const getListTags = async () => {
@@ -22,4 +22,13 @@ export const createNewTag = async (payload: CreateTag) => {
     return false;
   }
   return data;
+};
+
+export const updateTag = async (payload: UpdateTag) => {
+  const { error } = await supabase.from('tags').update(payload).eq('id', payload.id);
+  if (error) {
+    toast.error(`Error updating tag: ${error.message}`);
+    return false;
+  }
+  return true;
 };
