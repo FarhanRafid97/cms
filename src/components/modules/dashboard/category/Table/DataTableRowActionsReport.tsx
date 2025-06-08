@@ -25,18 +25,26 @@ export function DataTableRowActionsReport({ row }: { row: Category }) {
         <DropdownMenuContent align="end" className="w-[200px]">
           <DropdownMenuLabel>Action </DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem className="flex gap-2 items-center" onClick={() => setOpen(true)}>
+          <DropdownMenuItem
+            key={row.id}
+            className="flex gap-2 items-center"
+            onClick={() => setOpen(true)}
+          >
             <Edit size={16} />
             Edit
           </DropdownMenuItem>
-          <DropdownMenuItem className="flex gap-2 items-center" onClick={() => setOpenDelete(true)}>
+          <DropdownMenuItem
+            key={row.id}
+            className="flex gap-2 items-center"
+            onClick={() => setOpenDelete(true)}
+          >
             <Trash size={16} />
             Delete
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <EditCategory row={row} open={open} setOpen={setOpen} />
-      <DeleteCategory row={row} isOpen={openDelete} setIsOpen={setOpenDelete} />
+      <EditCategory key={row.id} row={row} open={open} setOpen={setOpen} />
+      <DeleteCategory key={row.id} row={row} isOpen={openDelete} setIsOpen={setOpenDelete} />
     </>
   );
 }

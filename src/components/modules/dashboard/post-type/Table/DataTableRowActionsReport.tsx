@@ -25,11 +25,16 @@ export function DataTableRowActionsReport({ row }: { row: PostType }) {
         <DropdownMenuContent align="end" className="w-[200px]">
           <DropdownMenuLabel>Action</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem className="flex gap-2 items-center" onClick={() => setOpen(true)}>
+          <DropdownMenuItem
+            key={row.id}
+            className="flex gap-2 items-center"
+            onClick={() => setOpen(true)}
+          >
             <Edit size={16} />
             Edit
           </DropdownMenuItem>
           <DropdownMenuItem
+            key={row.id}
             className="flex gap-2 items-center"
             onClick={() => setIsOpenDelete(true)}
           >
@@ -38,8 +43,8 @@ export function DataTableRowActionsReport({ row }: { row: PostType }) {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <EditPostType row={row} open={open} setOpen={setOpen} />
-      <DeletePostType isOpen={isOpenDelete} setIsOpen={setIsOpenDelete} row={row} />
+      <EditPostType key={row.id} row={row} open={open} setOpen={setOpen} />
+      <DeletePostType key={row.id} isOpen={isOpenDelete} setIsOpen={setIsOpenDelete} row={row} />
     </>
   );
 }
