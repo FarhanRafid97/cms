@@ -1,5 +1,5 @@
 import { supabase } from '@/lib/supabase';
-import { CreatePostType } from '@/schema/posts/post';
+import { CreatePostType, UpdatePostType } from '@/schema/paramter/post-type';
 import { toast } from 'sonner';
 
 export const getListPostType = async () => {
@@ -32,4 +32,17 @@ export const createNewPostType = async (payload: CreatePostType) => {
     return false;
   }
   return data;
+};
+
+export const updatePostType = async (payload: UpdatePostType) => {
+  const { error } = await supabase
+    .from('post_type')
+    .update({ description: payload.description, name: payload.name })
+    .eq('id', payload.id);
+
+  if (error) {
+    toast.error(`Error updating post type: ${error.message}`);
+    return false;
+  }
+  return true;
 };

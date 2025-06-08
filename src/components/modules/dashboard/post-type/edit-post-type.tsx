@@ -7,29 +7,41 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from '@/components/ui/dialog';
-import { useCreateNewPostType } from '@/querries/parameter/post-type';
-import { CreatePostType, PostTypeSchema } from '@/schema/paramter/post-type';
+import { useUpdatePostType } from '@/querries/parameter/post-type';
+import { PostType, UpdatePostType, UpdatePostTypeSchema } from '@/schema/paramter/post-type';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Loader2, Plus } from 'lucide-react';
-import { useState } from 'react';
+import { Loader2 } from 'lucide-react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 
-const CreateNewPostType = () => {
-  const [open, setOpen] = useState(false);
+const EditPostType = ({
+  row,
+  open,
+  setOpen,
+}: {
+  row: PostType;
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<CreatePostType>({
-    resolver: zodResolver(PostTypeSchema),
+  } = useForm<UpdatePostType>({
+    resolver: zodResolver(UpdatePostTypeSchema),
+    defaultValues: {
+      id: row.id,
+      created_at: row.created_at,
+      name: row.name || '',
+      description: row.description || '',
+    },
   });
-  const { mutateAsync: createNewPostType, isPending } = useCreateNewPostType();
+  const { mutateAsync: updatePostType, isPending } = useUpdatePostType();
 
-  const onSubmit = async (data: CreatePostType) => {
-    const response = await createNewPostType(data);
+  const onSubmit = async (data: UpdatePostType) => {
+    const response = await updatePostType(data);
     if (response) {
       setOpen(false);
       reset();
@@ -39,21 +51,20 @@ const CreateNewPostType = () => {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button variant="outline" className="flex items-center gap-2 text-xs">
-          <Plus size={14} />
-          <span>Tipe Post</span>
-        </Button>
-      </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Tambahkan Tipe Post</DialogTitle>
-          <DialogDescription>
-            Tambahkan tipe post baru untuk kategori artikel Anda.
-          </DialogDescription>
+          <DialogTitle>Edit Tipe Post</DialogTitle>
+          <DialogDescription>Edit tipe post untuk kategori artikel Anda.</DialogDescription>
         </DialogHeader>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          <CompleteInput
+            label="id Post Type"
+            isRequired
+            disabled={true}
+            error={errors.name?.message}
+            {...register('id')}
+          />
           <CompleteInput
             label="Nama Tipe Post"
             isRequired
@@ -87,4 +98,4 @@ const CreateNewPostType = () => {
   );
 };
 
-export default CreateNewPostType;
+export default EditPostType;

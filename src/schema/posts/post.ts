@@ -8,7 +8,6 @@ import { z } from 'zod';
 
 export type Author = Database['public']['Tables']['authors']['Row'];
 export type Category = Database['public']['Tables']['categories']['Row'];
-export type PostType = Database['public']['Tables']['post_type']['Row'];
 export type Tag = Database['public']['Tables']['tags']['Row'];
 export type Post = Database['public']['Tables']['posts']['Row'];
 export type PostDetail = Database['public']['Tables']['post_details']['Row'];
@@ -355,7 +354,7 @@ export type CreateNewsletterSubscriber = z.infer<typeof CreateNewsletterSubscrib
 export type CreateSiteSetting = z.infer<typeof CreateSiteSettingSchema>;
 export type CreateCompletePost = z.infer<typeof CreateCompletePostSchema>;
 export type PostQuery = z.infer<typeof PostQuerySchema>;
-export type CreatePostType = z.infer<typeof PostTypeSchema>;
+
 // ===============================
 // UTILITY FUNCTIONS
 // ===============================
