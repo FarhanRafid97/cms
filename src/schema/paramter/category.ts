@@ -1,8 +1,9 @@
 import { MESSAGE_FIELD_REQUIRED, MESSAGE_MAXIMUM_CHARACTER } from '@/lib/constant';
+import { AdditionalData } from '@/types/globals';
 import { Database } from 'database.types';
 import { z } from 'zod';
 
-export type Category = Database['public']['Tables']['categories']['Row'];
+export type Category = Database['public']['Tables']['categories']['Row'] & AdditionalData;
 
 export const CreateCategorySchema = z.object({
   name: z

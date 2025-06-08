@@ -27,6 +27,7 @@ export function DataTableRowActionsReport({ row }: { row: Category }) {
           <DropdownMenuSeparator />
           <DropdownMenuItem
             key={row.id}
+            disabled={!!row.isError}
             className="flex gap-2 items-center"
             onClick={() => setOpen(true)}
           >
@@ -35,6 +36,7 @@ export function DataTableRowActionsReport({ row }: { row: Category }) {
           </DropdownMenuItem>
           <DropdownMenuItem
             key={row.id}
+            disabled={!!row.isError}
             className="flex gap-2 items-center"
             onClick={() => setOpenDelete(true)}
           >

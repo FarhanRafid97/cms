@@ -1,8 +1,9 @@
 import { MESSAGE_FIELD_REQUIRED, MESSAGE_MAXIMUM_CHARACTER } from '@/lib/constant';
+import { AdditionalData } from '@/types/globals';
 import { Database } from 'database.types';
 import { z } from 'zod';
 
-export type PostType = Database['public']['Tables']['post_type']['Row'];
+export type PostType = Database['public']['Tables']['post_type']['Row'] & AdditionalData;
 
 export const PostTypeSchema = z.object({
   name: z.string().min(1, { message: MESSAGE_FIELD_REQUIRED }).max(100),
