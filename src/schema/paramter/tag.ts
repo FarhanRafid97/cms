@@ -1,7 +1,8 @@
 import { MESSAGE_FIELD_REQUIRED, MESSAGE_MAXIMUM_CHARACTER } from '@/lib/constant';
+import { AdditionalData } from '@/types/globals';
 import { Database } from 'database.types';
 import { z } from 'zod';
-export type Tag = Database['public']['Tables']['tags']['Row'];
+export type Tag = Database['public']['Tables']['tags']['Row'] & AdditionalData;
 
 // Tag schemas
 export const TagSchema = z.object({

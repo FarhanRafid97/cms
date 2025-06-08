@@ -15,36 +15,39 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { CompleteInput } from '@/components/common/complete-input';
 import { Button } from '@/components/ui/button';
 import { MESSAGE_FIELD_REQUIRED } from '@/lib/constant';
+import { Tag } from '@/schema/paramter/tag';
 
-import { useDeleteCategory } from '@/querries/parameter/category';
-import { Category } from '@/schema/paramter/category';
 import { Loader2 } from 'lucide-react';
+import { useDeleteTag } from '@/querries/parameter/tags';
 
-const VERIFY_DELETE_CATEGORY = 'Delete Kategori';
-const DeleteCategory = ({
+const VERIFY_DELETE_TAG = 'Delete Tag';
+const DeleteTag = ({
   isOpen,
   setIsOpen,
   row,
 }: {
-  row: Category;
+  row: Tag;
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const [error, setErrror] = useState('');
   const [value, setValue] = useState('');
 
-  const { mutateAsync: deleteCategory, isPending } = useDeleteCategory();
+  const { mutateAsync: deleteTag, isPending } = useDeleteTag();
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (value.length === 0) {
       setErrror(MESSAGE_FIELD_REQUIRED);
       return;
     }
-    if (value !== VERIFY_DELETE_CATEGORY) {
+    if (value !== VERIFY_DELETE_TAG) {
       setErrror('Input tidak sesuai dengan verifikasi');
       return;
     }
-    deleteCategory(row.id.toString());
+    const response = await deleteTag(row.id);
+    if (!response) {
+      return;
+    }
     setIsOpen(false);
     setValue('');
   };
@@ -60,9 +63,8 @@ const DeleteCategory = ({
             <AlertDialogTitle>Apakah Anda yakin?</AlertDialogTitle>
             <AlertDialogDescription>
               <span>
-                Kategori <span className="font-bold text-destructive"> {`"${row.name}"`}</span> akan
-                dihapus secara permanen dari database. pastikan anda yakin untuk menghapus tipe post
-                ini.
+                Tag <span className="font-bold text-destructive"> {`"${row.name}"`}</span> akan
+                dihapus secara permanen dari database. pastikan anda yakin untuk menghapus tag ini.
               </span>
             </AlertDialogDescription>
 
@@ -89,7 +91,7 @@ const DeleteCategory = ({
               label={
                 <span className="font-[300]">
                   Untuk Verifikasi, Masukan{' '}
-                  <span className="font-semibold">{VERIFY_DELETE_CATEGORY}</span> di bawah
+                  <span className="font-semibold">{VERIFY_DELETE_TAG}</span> di bawah
                 </span>
               }
             />
@@ -115,4 +117,4 @@ const DeleteCategory = ({
   );
 };
 
-export default DeleteCategory;
+export default DeleteTag;

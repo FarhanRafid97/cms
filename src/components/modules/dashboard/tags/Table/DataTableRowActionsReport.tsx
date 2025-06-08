@@ -12,8 +12,10 @@ import { Edit, MoreHorizontal, Trash } from 'lucide-react';
 
 import { useState } from 'react';
 import EditTag from '../edit-tag';
+import DeleteTag from '../deete-tag';
 export function DataTableRowActionsReport({ row }: { row: Tag }) {
   const [open, setOpen] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
   return (
     <>
       <DropdownMenu>
@@ -24,6 +26,8 @@ export function DataTableRowActionsReport({ row }: { row: Tag }) {
           <DropdownMenuLabel>Action </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem
+            key={row.id}
+            disabled={!!row.isError}
             className="flex gap-2 items-center"
             onClick={() => {
               setOpen(true);
@@ -32,13 +36,22 @@ export function DataTableRowActionsReport({ row }: { row: Tag }) {
             <Edit size={16} />
             Edit
           </DropdownMenuItem>
-          <DropdownMenuItem className="flex gap-2 items-center">
+          <DropdownMenuItem
+            key={row.id}
+            disabled={!!row.isError}
+            className="flex gap-2 items-center"
+            onClick={() => {
+              setOpenDelete(true);
+            }}
+          >
             <Trash size={16} />
             Delete
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <EditTag row={row} open={open} setOpen={setOpen} />
+      <EditTag key={row.id} row={row} open={open} setOpen={setOpen} />
+
+      <DeleteTag key={row.id} row={row} isOpen={openDelete} setIsOpen={setOpenDelete} />
     </>
   );
 }

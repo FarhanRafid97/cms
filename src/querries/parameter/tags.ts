@@ -1,5 +1,5 @@
 import { CreateTag, Tag, UpdateTag } from '@/schema/paramter/tag';
-import { createNewTag, getListTags, updateTag } from '@/service/parameter/tag';
+import { createNewTag, deleteTag, getListTags, updateTag } from '@/service/parameter/tag';
 import { AdditionalData } from '@/types/globals';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
@@ -82,6 +82,42 @@ export const useUpdateTag = () => {
         return item;
       });
       queryClient.setQueryData(CURRENT_QUERRY, updatedData);
+    },
+  });
+};
+
+export const useDeleteTag = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (id: string) => {
+      const response = await deleteTag(id);
+      if (!response) {
+        return { payload: null };
+      }
+      toast.success('Kategori berhasil dihapus');
+      return { payload: id };
+    },
+    onSuccess: ({ payload }) => {
+      const CURRENT_QUERRY = [UNIQUE_KEY];
+      const previousData = queryClient.getQueryData(CURRENT_QUERRY) as Tag[];
+      if (!payload) {
+        return;
+      }
+
+      const updatedData = previousData.map((item) => {
+        if (item.id === payload) {
+          const newData: Tag & AdditionalData = {
+            ...item,
+            isError: true,
+          };
+          return newData;
+        }
+        return item;
+      });
+      queryClient.setQueryData(CURRENT_QUERRY, updatedData);
+    },
+    onError: () => {
+      toast.error('Kategori gagal dihapus');
     },
   });
 };
