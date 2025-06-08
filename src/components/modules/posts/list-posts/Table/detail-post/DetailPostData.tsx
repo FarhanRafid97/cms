@@ -26,7 +26,7 @@ const DetailPostData = ({ row }: { row: CompletePost }) => {
   }
   if (edit) {
     return (
-      <div key="editor-post" className="flex gap-4  w-full justify-center ">
+      <div key="editor-post" className="flex gap-4  w-full justify-center  ">
         <div className="flex  pb-4 mb-4 w-8/12 ">
           <Editor
             key={edit ? 'edited' : 'notEdited'}

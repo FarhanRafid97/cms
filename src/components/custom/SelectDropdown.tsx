@@ -25,7 +25,6 @@ interface SelectDropdownProps {
   error?: string;
   label: string;
   isPending?: boolean;
-  isRequired?: boolean;
 }
 
 const defaultValue: DefaultOptionSelectDropDown = {
@@ -42,7 +41,6 @@ const SelectDropdown: FC<SelectDropdownProps> = ({
   selectedVal,
   disabled,
   isPending,
-  isRequired,
 }) => {
   const [valueState, setValueState] = useState<DefaultOptionSelectDropDown>(() => defaultValue);
 
@@ -57,12 +55,7 @@ const SelectDropdown: FC<SelectDropdownProps> = ({
   }
   return (
     <div className="grid grid-cols-1 items-center gap-2">
-      <Label
-        className={cn('inline gap-2 font-medium ', error ? 'text-destructive' : '')}
-        isRequired={isRequired}
-      >
-        {label}
-      </Label>
+      <Label className={cn('inline gap-2 font-medium ')}>{label}:</Label>
       <Popover>
         <PopoverTrigger asChild>
           <div>

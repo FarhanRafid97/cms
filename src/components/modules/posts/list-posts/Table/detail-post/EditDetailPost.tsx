@@ -173,7 +173,7 @@ export function Editor({
 
   return (
     <>
-      <div className="flex flex-col h-full max-h-[90vh] border">
+      <div className="flex flex-col h-full  w-full max-h-[90vh] border ">
         {/* Header */}
         <div className="flex items-center justify-between p-6">
           <div className="flex-1 min-w-0">

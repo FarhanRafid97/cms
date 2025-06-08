@@ -8,7 +8,7 @@ import { useGetCloudinary } from '@/store/cloudinary';
 import { CloudinaryUploadResponse } from '@/types/cloudinary';
 
 import axios from 'axios';
-import { ImageOff, UploadCloud } from 'lucide-react';
+import { UploadCloud, X } from 'lucide-react';
 import Image from 'next/image';
 import React, { useRef, useState } from 'react';
 import {
@@ -131,12 +131,7 @@ const UploadThumbnail = ({
   return (
     <div>
       <div className="grid grid-cols-1 items-center gap-2">
-        <Label
-          className={cn('inline gap-2 font-medium ', error ? 'text-destructive' : '')}
-          isRequired
-        >
-          Upload Thumbnail
-        </Label>
+        <Label className={cn('inline gap-2 font-medium ')}>Upload Thumbnail:</Label>
         <input
           disabled={isDisabled || loading}
           className="hidden"
@@ -168,26 +163,27 @@ const UploadThumbnail = ({
               .with(true, () => {
                 return (
                   <div>
-                    <AspectRatio ratio={16 / 8} className="bg-muted">
-                      <Image
-                        src={watchImageThumbanil}
-                        alt="Photo by Drew Beamer"
-                        fill
-                        className="h-full w-full rounded-md object-contain"
-                      />
-                    </AspectRatio>
-                    <Button
-                      disabled={isDisabled}
-                      type="button"
-                      className="w-full mt-2 gap-2"
-                      variant="destructive"
-                      onClick={() => {
-                        setValue('featured_image_url', '');
-                      }}
-                    >
-                      <ImageOff size={15} />
-                      Ganti Foto
-                    </Button>
+                    <div className="relative">
+                      <AspectRatio ratio={16 / 8} className="bg-muted">
+                        <Image
+                          src={watchImageThumbanil}
+                          alt="Photo by Drew Beamer"
+                          fill
+                          className="h-full w-full rounded-md object-contain"
+                        />
+                      </AspectRatio>
+                      <Button
+                        disabled={isDisabled}
+                        type="button"
+                        className="absolute -right-2 -top-2  p-2  h-fit rounded-full"
+                        variant="destructive"
+                        onClick={() => {
+                          setValue('featured_image_url', '');
+                        }}
+                      >
+                        <X size={14} color="white" />
+                      </Button>
+                    </div>
                   </div>
                 );
               })

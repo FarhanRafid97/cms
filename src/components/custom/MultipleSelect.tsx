@@ -27,7 +27,6 @@ export function MultipleSelectDropdown({
   handleChange,
   error,
   isDisabled,
-  isRequired,
 }: {
   label: string;
   options: DefaultOptionSelectDropDown[];
@@ -36,7 +35,6 @@ export function MultipleSelectDropdown({
   isPending?: boolean;
   selectedData: string;
   error?: string;
-  isRequired?: boolean;
   isDisabled?: boolean;
 }) {
   const [valueSelected, setValueSelected] = useState<Map<string, string>>(() => {
@@ -80,12 +78,7 @@ export function MultipleSelectDropdown({
 
   return (
     <div className="grid grid-cols-1 items-center gap-2">
-      <Label
-        className={cn('inline gap-2 font-medium ', error ? 'text-destructive' : '')}
-        isRequired={isRequired}
-      >
-        {label}
-      </Label>
+      <Label className={cn('inline gap-2 font-medium ')}>{label}:</Label>
       <Popover>
         <PopoverTrigger asChild disabled={isPending} className="col-span-4">
           <Button
