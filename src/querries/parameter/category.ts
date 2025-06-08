@@ -1,5 +1,10 @@
 import { Category, CreateCategory, UpdateCategory } from '@/schema/paramter/category';
-import { createNewCategory, getListCategory, updateCategory } from '@/service/parameter/category';
+import {
+  createNewCategory,
+  deleteCategory,
+  getListCategory,
+  updateCategory,
+} from '@/service/parameter/category';
 import { AdditionalData } from '@/types/globals';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
@@ -83,6 +88,42 @@ export const useUpdateCategory = () => {
         return item;
       });
       queryClient.setQueryData(CURRENT_QUERRY, updatedData);
+    },
+  });
+};
+
+export const useDeleteCategory = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (id: string) => {
+      const response = await deleteCategory(id);
+      if (!response) {
+        return { payload: null };
+      }
+      toast.success('Kategori berhasil dihapus');
+      return { payload: id };
+    },
+    onSuccess: ({ payload }) => {
+      const CURRENT_QUERRY = [UNIQUE_KEY];
+      const previousData = queryClient.getQueryData(CURRENT_QUERRY) as Category[];
+      if (!payload) {
+        return;
+      }
+
+      const updatedData = previousData.map((item) => {
+        if (item.id === payload) {
+          const newData: Category & AdditionalData = {
+            ...item,
+            isError: true,
+          };
+          return newData;
+        }
+        return item;
+      });
+      queryClient.setQueryData(CURRENT_QUERRY, updatedData);
+    },
+    onError: () => {
+      toast.error('Kategori gagal dihapus');
     },
   });
 };

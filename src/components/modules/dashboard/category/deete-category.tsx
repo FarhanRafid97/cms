@@ -11,41 +11,42 @@ import {
 import React, { useState } from 'react';
 
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { PostType } from '@/schema/paramter/post-type';
 
 import { CompleteInput } from '@/components/common/complete-input';
 import { Button } from '@/components/ui/button';
 import { MESSAGE_FIELD_REQUIRED } from '@/lib/constant';
 
-import { useDeletePostType } from '@/querries/parameter/post-type';
+import { useDeleteCategory } from '@/querries/parameter/category';
+import { Category } from '@/schema/paramter/category';
 import { Loader2 } from 'lucide-react';
 
-const VERIFY_DELETE_POST_TYPE = 'Delete Tipe Post';
-const DeletePostType = ({
+const VERIFY_DELETE_CATEGORY = 'Delete Kategori';
+const DeleteCategory = ({
   isOpen,
   setIsOpen,
   row,
 }: {
-  row: PostType;
+  row: Category;
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const [error, setErrror] = useState('');
   const [value, setValue] = useState('');
 
-  const { mutateAsync: deletePostType, isPending } = useDeletePostType();
+  const { mutateAsync: deleteCategory, isPending } = useDeleteCategory();
 
   const handleDelete = () => {
     if (value.length === 0) {
       setErrror(MESSAGE_FIELD_REQUIRED);
       return;
     }
-    if (value !== VERIFY_DELETE_POST_TYPE) {
+    if (value !== VERIFY_DELETE_CATEGORY) {
       setErrror('Input tidak sesuai dengan verifikasi');
       return;
     }
-    deletePostType(row.id);
+    deleteCategory(row.id.toString());
     setIsOpen(false);
+    setValue('');
   };
   return (
     <div>
@@ -59,9 +60,9 @@ const DeletePostType = ({
             <AlertDialogTitle>Apakah Anda yakin?</AlertDialogTitle>
             <AlertDialogDescription>
               <span>
-                Tipe post ini <span className="font-bold text-destructive"> {`"${row.name}"`}</span>{' '}
-                akan dihapus secara permanen dari database. pastikan anda yakin untuk menghapus tipe
-                post ini.
+                Kategori <span className="font-bold text-destructive"> {`"${row.name}"`}</span> akan
+                dihapus secara permanen dari database. pastikan anda yakin untuk menghapus tipe post
+                ini.
               </span>
             </AlertDialogDescription>
 
@@ -88,7 +89,7 @@ const DeletePostType = ({
               label={
                 <span className="font-[300]">
                   Untuk Verifikasi, Masukan{' '}
-                  <span className="font-semibold">{VERIFY_DELETE_POST_TYPE}</span> di bawah
+                  <span className="font-semibold">{VERIFY_DELETE_CATEGORY}</span> di bawah
                 </span>
               }
             />
@@ -114,4 +115,4 @@ const DeletePostType = ({
   );
 };
 
-export default DeletePostType;
+export default DeleteCategory;

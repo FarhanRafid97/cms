@@ -29,3 +29,12 @@ export const updateCategory = async (payload: UpdateCategory) => {
   }
   return true;
 };
+
+export const deleteCategory = async (id: string) => {
+  const { error } = await supabase.from('categories').delete().eq('id', id);
+  if (error) {
+    toast.error(`Error deleting category: ${error.message}`);
+    return false;
+  }
+  return true;
+};

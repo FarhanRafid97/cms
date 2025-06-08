@@ -11,6 +11,7 @@ import { Category } from '@/schema/paramter/category';
 import { Edit, MoreHorizontal, Trash } from 'lucide-react';
 import EditCategory from '../edit-category';
 import { useState } from 'react';
+import DeleteCategory from '../deete-category';
 
 export function DataTableRowActionsReport({ row }: { row: Category }) {
   const [open, setOpen] = useState(false);
@@ -22,19 +23,20 @@ export function DataTableRowActionsReport({ row }: { row: Category }) {
           <MoreHorizontal size={18} className="cursor-pointer" />
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-[200px]">
-          <DropdownMenuLabel>Action {row.id}</DropdownMenuLabel>
+          <DropdownMenuLabel>Action </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem className="flex gap-2 items-center" onClick={() => setOpen(true)}>
             <Edit size={16} />
             Edit
           </DropdownMenuItem>
-          <DropdownMenuItem className="flex gap-2 items-center">
+          <DropdownMenuItem className="flex gap-2 items-center" onClick={() => setOpenDelete(true)}>
             <Trash size={16} />
             Delete
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
       <EditCategory row={row} open={open} setOpen={setOpen} />
+      <DeleteCategory row={row} isOpen={openDelete} setIsOpen={setOpenDelete} />
     </>
   );
 }
