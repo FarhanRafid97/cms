@@ -22,7 +22,7 @@ export const columns: ColumnDef<Category>[] = [
   {
     accessorKey: 'name',
     header: ({ column, header }) => (
-      <DataTableColumnHeaderComplete header={header} column={column} title="Name" />
+      <DataTableColumnHeaderComplete header={header} column={column} title="Nama Kategori" />
     ),
     cell: ({ row, column }) => (
       <TableCellCostume id={column.id}>{row.original.name}</TableCellCostume>
@@ -31,19 +31,33 @@ export const columns: ColumnDef<Category>[] = [
   {
     accessorKey: 'description',
     header: ({ column, header }) => (
-      <DataTableColumnHeaderComplete header={header} column={column} title="Description" />
+      <DataTableColumnHeaderComplete header={header} column={column} title="Deskripsi" />
     ),
     cell: ({ row, column }) => (
       <TableCellCostume id={column.id}>{row.original.description}</TableCellCostume>
     ),
   },
   {
-    accessorKey: 'flag',
+    accessorKey: 'slug',
     header: ({ column, header }) => (
-      <DataTableColumnHeaderComplete header={header} column={column} title="Flag" />
+      <DataTableColumnHeaderComplete header={header} column={column} title="Slug" />
     ),
     cell: ({ row, column }) => (
       <TableCellCostume id={column.id}>{row.original.slug}</TableCellCostume>
+    ),
+  },
+  {
+    accessorKey: 'color',
+    header: ({ column, header }) => (
+      <DataTableColumnHeaderComplete header={header} column={column} title="Warna" />
+    ),
+    cell: ({ row, column }) => (
+      <TableCellCostume id={column.id}>
+        <div
+          className="w-6 h-6 rounded border border-border"
+          style={{ backgroundColor: row.original.color || '' }}
+        />
+      </TableCellCostume>
     ),
   },
   {

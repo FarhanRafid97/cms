@@ -1,5 +1,5 @@
-import { Category, CreateCategory } from '@/schema/paramter/category';
-import { createNewCategory, getListCategory } from '@/service/parameter/category';
+import { Category, CreateCategory, UpdateCategory } from '@/schema/paramter/category';
+import { createNewCategory, getListCategory, updateCategory } from '@/service/parameter/category';
 import { AdditionalData } from '@/types/globals';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
@@ -46,6 +46,43 @@ export const useCreateNewCategory = () => {
     },
     onError: () => {
       toast.error('Kategori gagal ditambahkan');
+    },
+  });
+};
+
+export const useUpdateCategory = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (payload: UpdateCategory) => {
+      const response = await updateCategory(payload);
+      if (!response) {
+        toast.error('Tipe post gagal diubah');
+        return { payload: null };
+      }
+      toast.success('Tipe post berhasil diubah');
+      return { payload };
+    },
+    onSuccess: ({ payload }) => {
+      const CURRENT_QUERRY = [UNIQUE_KEY];
+      const previousData = queryClient.getQueryData(CURRENT_QUERRY) as Category[];
+      if (!payload) {
+        return;
+      }
+
+      const updatedData = previousData.map((item) => {
+        if (item.id === payload.id) {
+          const newData: Category & AdditionalData = {
+            ...item,
+            description: payload.description || null,
+            name: payload.name || '',
+            color: payload.color || '',
+            isUpdate: true,
+          };
+          return newData;
+        }
+        return item;
+      });
+      queryClient.setQueryData(CURRENT_QUERRY, updatedData);
     },
   });
 };

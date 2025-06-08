@@ -1,5 +1,5 @@
 import { supabase } from '@/lib/supabase';
-import { CreateCategory } from '@/schema/paramter/category';
+import { CreateCategory, UpdateCategory } from '@/schema/paramter/category';
 import { toast } from 'sonner';
 
 export const getListCategory = async () => {
@@ -18,4 +18,14 @@ export const createNewCategory = async (payload: CreateCategory) => {
     return false;
   }
   return data;
+};
+
+export const updateCategory = async (payload: UpdateCategory) => {
+  const { error } = await supabase.from('categories').update(payload).eq('id', payload.id);
+
+  if (error) {
+    toast.error(`Error updating category: ${error.message}`);
+    return false;
+  }
+  return true;
 };

@@ -1,6 +1,7 @@
 import { CompleteInput } from '@/components/common/complete-input';
 import { CompleteTextArea } from '@/components/common/complete-text-area';
 import { Button } from '@/components/ui/button';
+import ColorPicker from '@/components/ui/color-picker';
 import {
   Dialog,
   DialogContent,
@@ -10,8 +11,9 @@ import {
   DialogTitle,
   DialogWrapperContent,
 } from '@/components/ui/dialog';
-import { useUpdatePostType } from '@/querries/parameter/post-type';
-import { PostType, UpdatePostType, UpdatePostTypeSchema } from '@/schema/paramter/post-type';
+import { Label } from '@/components/ui/label';
+import { useUpdateCategory } from '@/querries/parameter/category';
+import { Category, UpdateCategory, UpdateCategorySchema } from '@/schema/paramter/category';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader2 } from 'lucide-react';
 import React from 'react';
@@ -19,12 +21,12 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { match, P } from 'ts-pattern';
 
-const EditPostType = ({
+const EditCategory = ({
   row,
   open,
   setOpen,
 }: {
-  row: PostType;
+  row: Category;
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
@@ -32,25 +34,29 @@ const EditPostType = ({
     register,
     handleSubmit,
     reset,
+    getValues,
+    setValue,
     formState: { errors },
-  } = useForm<UpdatePostType>({
-    resolver: zodResolver(UpdatePostTypeSchema),
+  } = useForm<UpdateCategory>({
+    resolver: zodResolver(UpdateCategorySchema),
     defaultValues: {
-      id: row.id,
-      created_at: row.created_at,
+      id: row.id.toString(),
       name: row.name || '',
       description: row.description || '',
+      color: row.color || '',
+      slug: row.slug || '',
     },
   });
-  const { mutateAsync: updatePostType, isPending } = useUpdatePostType();
+  const { mutateAsync: updateCategory, isPending } = useUpdateCategory();
 
-  const onSubmit = async (data: UpdatePostType) => {
+  const onSubmit = async (data: UpdateCategory) => {
     const isNothingDifferent = match(data)
       .with(
         {
           id: P.when((id) => id === row.id),
           name: P.when((name) => name === row.name),
           description: P.when((desc) => desc === row.description),
+          color: P.when((color) => color === row.color),
         },
         () => true,
       )
@@ -61,7 +67,10 @@ const EditPostType = ({
       setOpen(false);
       return;
     }
-    const response = await updatePostType(data);
+    const response = await updateCategory({
+      ...data,
+      slug: data.name?.toLowerCase().replace(/ /g, '-') || '',
+    });
     if (response) {
       setOpen(false);
       reset();
@@ -99,6 +108,17 @@ const EditPostType = ({
               error={errors.description?.message}
               {...register('description')}
             />
+            <div className="grid grid-cols-1 items-center gap-2">
+              <Label>Warna Kategori</Label>{' '}
+              <ColorPicker
+                value={getValues('color')}
+                error={errors.color?.message}
+                handleColorChange={(value) => {
+                  console.log(value);
+                  setValue('color', value);
+                }}
+              />{' '}
+            </div>
           </form>
         </DialogWrapperContent>
         <DialogFooter className="sm:justify-between">
@@ -119,4 +139,4 @@ const EditPostType = ({
   );
 };
 
-export default EditPostType;
+export default EditCategory;

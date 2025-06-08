@@ -9,8 +9,12 @@ import {
 import { Category } from '@/schema/paramter/category';
 
 import { Edit, MoreHorizontal, Trash } from 'lucide-react';
+import EditCategory from '../edit-category';
+import { useState } from 'react';
 
 export function DataTableRowActionsReport({ row }: { row: Category }) {
+  const [open, setOpen] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
   return (
     <>
       <DropdownMenu>
@@ -20,7 +24,7 @@ export function DataTableRowActionsReport({ row }: { row: Category }) {
         <DropdownMenuContent align="end" className="w-[200px]">
           <DropdownMenuLabel>Action {row.id}</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem className="flex gap-2 items-center">
+          <DropdownMenuItem className="flex gap-2 items-center" onClick={() => setOpen(true)}>
             <Edit size={16} />
             Edit
           </DropdownMenuItem>
@@ -30,6 +34,7 @@ export function DataTableRowActionsReport({ row }: { row: Category }) {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
+      <EditCategory row={row} open={open} setOpen={setOpen} />
     </>
   );
 }

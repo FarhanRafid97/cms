@@ -27,10 +27,12 @@ const CreateNewCategory = () => {
     handleSubmit,
     reset,
     setValue,
+    getValues,
     formState: { errors },
   } = useForm<CreateCategory>({
     resolver: zodResolver(CreateCategorySchema),
   });
+  console.log(getValues());
   console.log(errors);
   const { mutateAsync: createNewCategory, isPending } = useCreateNewCategory();
 
@@ -82,10 +84,12 @@ const CreateNewCategory = () => {
             <div className="grid grid-cols-1 items-center gap-2">
               <Label>Warna Kategori</Label>{' '}
               <ColorPicker
+                value={getValues('color')}
+                error={errors.color?.message}
                 handleColorChange={(value) => {
                   setValue('color', value);
                 }}
-              />
+              />{' '}
             </div>
           </form>{' '}
         </DialogWrapperContent>
