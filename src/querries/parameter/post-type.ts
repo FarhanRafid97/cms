@@ -1,5 +1,10 @@
 import { CreatePostType, PostType, UpdatePostType } from '@/schema/paramter/post-type';
-import { createNewPostType, getListPostType, updatePostType } from '@/service/parameter/post-type';
+import {
+  createNewPostType,
+  deletePostType,
+  getListPostType,
+  updatePostType,
+} from '@/service/parameter/post-type';
 import { AdditionalData } from '@/types/globals';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
@@ -85,6 +90,42 @@ export const useUpdatePostType = () => {
         return item;
       });
       queryClient.setQueryData(CURRENT_QUERRY, updatedData);
+    },
+  });
+};
+
+export const useDeletePostType = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (id: number) => {
+      const response = await deletePostType(id);
+      if (!response) {
+        return { payload: null };
+      }
+      toast.success('Tipe post berhasil dihapus');
+      return { payload: id };
+    },
+    onSuccess: ({ payload }) => {
+      const CURRENT_QUERRY = [UNIQUE_KEY];
+      const previousData = queryClient.getQueryData(CURRENT_QUERRY) as PostType[];
+      if (!payload) {
+        return;
+      }
+
+      const updatedData = previousData.map((item) => {
+        if (item.id === payload) {
+          const newData: PostType & AdditionalData = {
+            ...item,
+            isError: true,
+          };
+          return newData;
+        }
+        return item;
+      });
+      queryClient.setQueryData(CURRENT_QUERRY, updatedData);
+    },
+    onError: () => {
+      toast.error('Tipe post gagal dihapus');
     },
   });
 };

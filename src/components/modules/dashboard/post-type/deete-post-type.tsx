@@ -17,7 +17,10 @@ import { CompleteInput } from '@/components/common/complete-input';
 import { Button } from '@/components/ui/button';
 import { MESSAGE_FIELD_REQUIRED } from '@/lib/constant';
 
-const VERIFY_DELETE_POST_TYPE = 'Delete My Project';
+import { useDeletePostType } from '@/querries/parameter/post-type';
+import { Loader2 } from 'lucide-react';
+
+const VERIFY_DELETE_POST_TYPE = 'Delete Tipe Post';
 const DeletePostType = ({
   isOpen,
   setIsOpen,
@@ -29,6 +32,21 @@ const DeletePostType = ({
 }) => {
   const [error, setErrror] = useState('');
   const [value, setValue] = useState('');
+
+  const { mutateAsync: deletePostType, isPending } = useDeletePostType();
+
+  const handleDelete = () => {
+    if (value.length === 0) {
+      setErrror(MESSAGE_FIELD_REQUIRED);
+      return;
+    }
+    if (value !== VERIFY_DELETE_POST_TYPE) {
+      setErrror('Input tidak sesuai dengan verifikasi');
+      return;
+    }
+    deletePostType(row.id);
+    setIsOpen(false);
+  };
   return (
     <div>
       <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
@@ -41,8 +59,9 @@ const DeletePostType = ({
             <AlertDialogTitle>Apakah Anda yakin?</AlertDialogTitle>
             <AlertDialogDescription>
               <span>
-                Tipe post ini akan dihapus secara permanen dari database. Semua artikel yang
-                menggunakan tipe post ini juga akan terhapus.
+                Tipe post ini <span className="font-bold text-destructive"> {`"${row.name}"`}</span>{' '}
+                akan dihapus secara permanen dari database. pastikan anda yakin untuk menghapus tipe
+                post ini.
               </span>
             </AlertDialogDescription>
 
@@ -57,6 +76,11 @@ const DeletePostType = ({
             <CompleteInput
               error={error}
               value={value}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  handleDelete();
+                }
+              }}
               onChange={(e) => {
                 setErrror('');
                 setValue(e.target.value);
@@ -73,20 +97,15 @@ const DeletePostType = ({
             <AlertDialogCancel>Cancel</AlertDialogCancel>
 
             <Button
+              disabled={isPending}
               type="submit"
+              className="gap-2"
               variant="destructive"
               onClick={() => {
-                if (value.length === 0) {
-                  setErrror(MESSAGE_FIELD_REQUIRED);
-                  return;
-                }
-                if (value !== VERIFY_DELETE_POST_TYPE) {
-                  setErrror('Input tidak sesuai dengan verifikasi');
-                  return;
-                }
+                handleDelete();
               }}
             >
-              Hapus
+              Hapus {isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
             </Button>
           </AlertDialogFooter>
         </AlertDialogContent>

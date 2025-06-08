@@ -85,7 +85,7 @@ const CreateNewPostType = () => {
           >
             Cancel
           </Button>
-          <Button type="submit" form="form-create-post-type" disabled={isPending}>
+          <Button type="submit" form="form-create-post-type" disabled={isPending} className="gap-2">
             {isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : null} Simpan
           </Button>
         </DialogFooter>
