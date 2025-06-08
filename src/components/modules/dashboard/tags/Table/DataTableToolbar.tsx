@@ -4,6 +4,7 @@ import { Input } from '@/components/ui/input';
 import { DataTableViewOptions } from '@/components/DataTable/data-table-view-options';
 import { MagnifyingGlassIcon, Cross2Icon } from '@radix-ui/react-icons';
 import { FormEvent, SetStateAction, useRef, useState } from 'react';
+import CreateNewTag from '../create-tag';
 
 export interface DataTableToolbarProps<TData> {
   table: Table<TData>;
@@ -127,7 +128,8 @@ export function DataTableToolbar<TData>({ table, setSearch }: DataTableToolbarPr
       </div>
 
       {/* Right section - View options */}
-      <div className="flex items-center">
+      <div className="flex items-center gap-2">
+        <CreateNewTag />
         <DataTableViewOptions table={table} />
       </div>
     </div>

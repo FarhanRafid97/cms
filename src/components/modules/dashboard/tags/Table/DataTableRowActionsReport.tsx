@@ -6,7 +6,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Tag } from '@/schema/posts/post';
+import { Tag } from '@/schema/paramter/tag';
 
 import { Edit, MoreHorizontal, Trash } from 'lucide-react';
 

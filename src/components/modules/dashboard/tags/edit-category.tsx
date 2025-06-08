@@ -82,8 +82,8 @@ const EditCategory = ({
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Edit Kategori</DialogTitle>
-          <DialogDescription>Edit kategori untuk kategori artikel Anda.</DialogDescription>
+          <DialogTitle>Edit Tipe Post</DialogTitle>
+          <DialogDescription>Edit tipe post untuk kategori artikel Anda.</DialogDescription>
         </DialogHeader>
         <DialogWrapperContent>
           <form id="form-edit-post-type" onSubmit={handleSubmit(onSubmit)} className="space-y-4">

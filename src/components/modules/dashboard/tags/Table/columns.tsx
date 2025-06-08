@@ -5,7 +5,7 @@ import { DataTableColumnHeaderComplete } from '@/components/DataTableComplete/Co
 
 import { DataTableRowActionsReport } from './DataTableRowActionsReport';
 
-import { Tag } from '@/schema/posts/post';
+import { Tag } from '@/schema/paramter/tag';
 import { formatedDateDDMMYYY } from '@/lib/utils';
 
 export const columns: ColumnDef<Tag>[] = [

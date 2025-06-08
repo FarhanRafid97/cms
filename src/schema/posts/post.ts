@@ -1,6 +1,7 @@
 import { MESSAGE_FIELD_REQUIRED, MESSAGE_MAXIMUM_CHARACTER } from '@/lib/constant';
 import { Database } from 'database.types';
 import { z } from 'zod';
+import { Tag } from '../paramter/tag';
 
 // ===============================
 // TYPESCRIPT INTERFACES
@@ -8,7 +9,6 @@ import { z } from 'zod';
 
 export type Author = Database['public']['Tables']['authors']['Row'];
 
-export type Tag = Database['public']['Tables']['tags']['Row'];
 export type Post = Database['public']['Tables']['posts']['Row'];
 export type PostDetail = Database['public']['Tables']['post_details']['Row'];
 export type PostTag = Database['public']['Tables']['post_tags']['Row'];
@@ -82,27 +82,6 @@ export const CreateAuthorSchema = z.object({
 });
 
 export const UpdateAuthorSchema = CreateAuthorSchema.partial();
-
-// Tag schemas
-export const TagSchema = z.object({
-  id: z.string().uuid(),
-  name: z.string().min(1).max(50),
-  slug: z
-    .string()
-    .min(1)
-    .max(50)
-    .regex(/^[a-z0-9-]+$/),
-  created_at: z.string().datetime(),
-});
-
-export const CreateTagSchema = z.object({
-  name: z.string().min(1).max(50),
-  slug: z
-    .string()
-    .min(1)
-    .max(50)
-    .regex(/^[a-z0-9-]+$/),
-});
 
 // Post schemas
 export const PostSchema = z.object({
@@ -309,7 +288,6 @@ export const PostQuerySchema = z.object({
 export type CreateAuthor = z.infer<typeof CreateAuthorSchema>;
 export type UpdateAuthor = z.infer<typeof UpdateAuthorSchema>;
 
-export type CreateTag = z.infer<typeof CreateTagSchema>;
 export type CreatePost = z.infer<typeof CreatePostSchema>;
 export type UpdatePost = z.infer<typeof UpdatePostSchema>;
 export type CreatePostDetail = z.infer<typeof CreatePostDetailSchema>;
