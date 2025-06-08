@@ -67,7 +67,6 @@ const EditPostType = ({
       reset();
     }
   };
-  console.log(errors);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>

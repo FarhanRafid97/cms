@@ -76,7 +76,6 @@ const EditCategory = ({
       reset();
     }
   };
-  console.log(errors);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -114,7 +113,6 @@ const EditCategory = ({
                 value={getValues('color')}
                 error={errors.color?.message}
                 handleColorChange={(value) => {
-                  console.log(value);
                   setValue('color', value);
                 }}
               />{' '}

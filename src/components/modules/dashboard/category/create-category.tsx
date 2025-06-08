@@ -32,8 +32,7 @@ const CreateNewCategory = () => {
   } = useForm<CreateCategory>({
     resolver: zodResolver(CreateCategorySchema),
   });
-  console.log(getValues());
-  console.log(errors);
+
   const { mutateAsync: createNewCategory, isPending } = useCreateNewCategory();
 
   const onSubmit = async (data: CreateCategory) => {
@@ -46,7 +45,6 @@ const CreateNewCategory = () => {
       reset();
     }
   };
-  console.log(errors);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>

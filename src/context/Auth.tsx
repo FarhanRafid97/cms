@@ -45,11 +45,6 @@ function useProvideAuth(): AuthContextType {
         const {
           data: { session },
         } = await supabase.auth.getSession();
-        supabase.auth.onAuthStateChange(async (event, session) => {
-          console.log('event', event);
-          console.log('session', session);
-          console.log('session.user', session?.user);
-        });
 
         console.log('session', !session);
         if (!session) {

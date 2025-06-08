@@ -23,13 +23,12 @@ const CreateNewTag = () => {
     register,
     handleSubmit,
     reset,
-    getValues,
+
     formState: { errors },
   } = useForm<CreateTag>({
     resolver: zodResolver(CreateTagSchema),
   });
-  console.log(getValues());
-  console.log(errors);
+
   const { mutateAsync: createNewTag, isPending } = useCreateNewTag();
 
   const onSubmit = async (data: CreateTag) => {
@@ -42,7 +41,6 @@ const CreateNewTag = () => {
       reset();
     }
   };
-  console.log(errors);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>

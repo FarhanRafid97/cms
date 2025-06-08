@@ -57,7 +57,7 @@ export function AddNewPosts() {
 
     return;
   };
-  console.log(formState.errors);
+
   return (
     <Dialog open={isOpenModal} onOpenChange={setIsOpenModal}>
       <DialogTrigger asChild>

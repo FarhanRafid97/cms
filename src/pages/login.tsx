@@ -13,7 +13,7 @@ const Login = () => {
   const [userEmail, setUserEmail] = useState('');
   const [isSuccessSend, setIsSuccessSend] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  console.log('userEmail', process.env.NEXT_PUBLIC_SUPABASE_URL || '');
+
   async function signInWithEmail() {
     if (!userEmail.trim()) {
       toast.error('Email is required');
