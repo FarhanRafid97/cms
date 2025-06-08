@@ -49,7 +49,9 @@ export function DataTableColumnHeaderComplete<TData, TValue>({
               className="truncate overflow-hidden text-start"
               style={{ width: `calc(var(--header-${header.id}-size) * 1px - 16px` }}
             >
-              <span className="text-[12px] font-[300]  text-start text-black-shadow ">{title}</span>
+              <span className="text-[12px] font-[700]  text-start text-black-shadow/80 ">
+                {title}
+              </span>
             </div>
             {match(column.getIsSorted())
               .with('desc', () => (
@@ -65,28 +67,28 @@ export function DataTableColumnHeaderComplete<TData, TValue>({
         </DropdownMenuTrigger>
         <DropdownMenuContent
           align="start"
-          className="bg-white rounded-md shadow-lg border border-gray-200 py-1.5 w-44"
+          className="bg-white rounded-md shadow-lg border border-gray-200 py-1.5 "
         >
           <DropdownMenuItem
             onClick={() => column.toggleSorting(false)}
-            className="flex items-center px-3 py-1.5 hover:bg-gray-50 text-sm text-gray-700 cursor-pointer"
+            className="flex items-center px-3 py-1.5 hover:bg-gray-50 text-xs text-gray-700 cursor-pointer"
           >
             <ArrowUpIcon className="mr-2.5 h-3.5 w-3.5 text-gray-500" />
-            Sort ASC
+            ASC
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => column.toggleSorting(true)}
-            className="flex items-center px-3 py-1.5 hover:bg-gray-50 text-sm text-gray-700 cursor-pointer"
+            className="flex items-center px-3 py-1.5 hover:bg-gray-50 text-xs text-gray-700 cursor-pointer"
           >
             <ArrowDownIcon className="mr-2.5 h-3.5 w-3.5 text-gray-500" />
-            Sort DESC
+            DESC
           </DropdownMenuItem>
           <DropdownMenuSeparator className="h-px bg-gray-200 my-1" />
           {!header.isPlaceholder && header.column.getCanPin() && (
             <>
               {header.column.getIsPinned() ? (
                 <DropdownMenuItem
-                  className="flex items-center px-3 py-1.5 hover:bg-gray-50 text-sm text-gray-700 cursor-pointer"
+                  className="flex items-center px-3 py-1.5 hover:bg-gray-50 text-xs text-gray-700 cursor-pointer"
                   onClick={() => {
                     header.column.pin(false);
                   }}
@@ -100,7 +102,7 @@ export function DataTableColumnHeaderComplete<TData, TValue>({
                   onClick={() => {
                     header.column.pin('right');
                   }}
-                  className="flex items-center px-3 py-1.5 hover:bg-gray-50 text-sm text-gray-700 cursor-pointer"
+                  className="flex items-center px-3 py-1.5 hover:bg-gray-50 text-xs text-gray-700 cursor-pointer"
                 >
                   <DrawingPinFilledIcon className="mr-2.5 h-3.5 w-3.5 text-gray-500" />
                   Pin to Right
@@ -111,7 +113,7 @@ export function DataTableColumnHeaderComplete<TData, TValue>({
           )}
           <DropdownMenuItem
             onClick={() => column.toggleVisibility(false)}
-            className="flex items-center px-3 py-1.5 hover:bg-gray-50 text-sm text-gray-700 cursor-pointer"
+            className="flex items-center px-3 py-1.5 hover:bg-gray-50 text-xs text-gray-700 cursor-pointer"
           >
             <EyeNoneIcon className="mr-2.5 h-3.5 w-3.5 text-gray-500" />
             Hide Column

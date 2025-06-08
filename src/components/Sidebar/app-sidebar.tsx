@@ -25,7 +25,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <SidebarMenuButton size="lg" asChild>
               <Link href="/">
                 <div className="flex aspect-square size-8 items-center justify-center rounded-lg  text-sidebar-primary-foreground">
-                  <div className="bg-background p-1 rounded-xl">
+                  <div className="  rounded-xl">
                     <Image
                       src="/book-logo.png"
                       width={40}
