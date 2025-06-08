@@ -5,9 +5,11 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogWrapperContent,
 } from '@/components/ui/dialog';
 import { useCreateNewPostType } from '@/querries/parameter/post-type';
 import { CreatePostType, PostTypeSchema } from '@/schema/paramter/post-type';
@@ -45,43 +47,48 @@ const CreateNewPostType = () => {
           <span>Tipe Post</span>
         </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent
+        onCloseAutoFocus={() => {
+          reset();
+        }}
+      >
         <DialogHeader>
           <DialogTitle>Tambahkan Tipe Post</DialogTitle>
           <DialogDescription>
             Tambahkan tipe post baru untuk kategori artikel Anda.
           </DialogDescription>
         </DialogHeader>
-
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          <CompleteInput
-            label="Nama Tipe Post"
-            isRequired
-            disabled={isPending}
-            error={errors.name?.message}
-            {...register('name')}
-          />
-          <CompleteTextArea
-            label="Deskripsi Tipe Post"
-            isRequired
-            disabled={isPending}
-            error={errors.description?.message}
-            {...register('description')}
-          />
-          <div className="flex gap-2 justify-end mt-8">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => setOpen(false)}
+        <DialogWrapperContent>
+          <form id="form-create-post-type" onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <CompleteInput
+              label="Nama Tipe Post"
+              isRequired
               disabled={isPending}
-            >
-              Cancel
-            </Button>
-            <Button type="submit" disabled={isPending}>
-              {isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : null} Simpan
-            </Button>
-          </div>
-        </form>
+              error={errors.name?.message}
+              {...register('name')}
+            />
+            <CompleteTextArea
+              label="Deskripsi Tipe Post"
+              isRequired
+              disabled={isPending}
+              error={errors.description?.message}
+              {...register('description')}
+            />
+          </form>{' '}
+        </DialogWrapperContent>
+        <DialogFooter className="sm:justify-between">
+          <Button
+            type="button"
+            variant="outline"
+            onClick={() => setOpen(false)}
+            disabled={isPending}
+          >
+            Cancel
+          </Button>
+          <Button type="submit" form="form-create-post-type" disabled={isPending}>
+            {isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : null} Simpan
+          </Button>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   );

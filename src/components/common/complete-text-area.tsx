@@ -3,6 +3,7 @@ import * as React from 'react';
 import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 import { Textarea } from '../ui/textarea';
+import { AlertCircle } from 'lucide-react';
 
 export type InputProps = React.InputHTMLAttributes<HTMLTextAreaElement> & {
   label: string;
@@ -20,14 +21,19 @@ const CompleteTextArea = React.forwardRef<HTMLTextAreaElement, InputProps>(
           ref={ref}
           type={type}
           className={cn(
-            'col-span-3',
+            'col-span-3 bg-background',
 
             error ? 'border-red-400  focus-visible:ring-red-200' : null,
             className,
           )}
         />
 
-        {error ? <Label className="text-red-400">{error}</Label> : null}
+        {error ? (
+          <div className="flex items-center gap-2">
+            <AlertCircle size={14} className="text-red-400" />
+            <Label className="text-red-400">{error}</Label>
+          </div>
+        ) : null}
       </div>
     );
   },
