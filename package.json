@@ -13,7 +13,7 @@
     "lint:strict": "eslint --max-warnings=0 src",
     "format:check": "prettier -c .",
     "pre-commit": "next lint --fix",
-    "pull-supabase": "npx supabase gen types typescript --project-id adxihqnrjhcaorovsiug  > database.types.ts",
+    "pull-supabase": "supabase gen types typescript --project-id adxihqnrjhcaorovsiug  > database.types.ts",
     "push": "./script.sh push",
     "cypress": "cypress open",
     "cypress:headless": "cypress run",

@@ -1,6 +1,6 @@
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 
-const WrapperModalDetailPost = ({
+const WrapperModalBase = ({
   children,
   open,
   setOpen,
@@ -19,4 +19,4 @@ const WrapperModalDetailPost = ({
   );
 };
 
-export default WrapperModalDetailPost;
+export default WrapperModalBase;

@@ -26,7 +26,7 @@ export const createNewPost = async ({ dataPost }: { dataPost: CreatePost }) => {
   const { data, error } = await supabase
     .from('posts')
     .insert(dataPost)
-    .select('*,authors(*),categories(*)');
+    .select('*,authors(*),categories(*),post_type(*)');
   if (error) {
     toast.error(error.message);
     return null;

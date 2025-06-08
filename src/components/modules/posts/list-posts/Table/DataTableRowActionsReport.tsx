@@ -12,7 +12,7 @@ import { Edit, MoreHorizontal, Trash } from 'lucide-react';
 
 import { useState } from 'react';
 import DetailPostData from './detail-post/DetailPostData';
-import WrapperModalDetailPost from './detail-post/WrapperDetailPost';
+import WrapperModalBase from '@/components/common/warpped-modal-create';
 
 export function DataTableRowActionsReport({ row }: { row: CompletePost }) {
   const [openDetailArticle, setOpenDetailArticle] = useState(false);
@@ -46,9 +46,9 @@ export function DataTableRowActionsReport({ row }: { row: CompletePost }) {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <WrapperModalDetailPost open={openDetailArticle} setOpen={setOpenDetailArticle}>
+      <WrapperModalBase open={openDetailArticle} setOpen={setOpenDetailArticle}>
         <DetailPostData row={row} />
-      </WrapperModalDetailPost>
+      </WrapperModalBase>
     </>
   );
 }

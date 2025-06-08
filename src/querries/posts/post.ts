@@ -90,6 +90,8 @@ export const useCreateNewPost = () => {
         updated_at: response.updated_at,
         view_count: 0,
         isNew: true,
+        post_type: response.post_type?.name || null,
+        post_type_id: response.post_type?.id || null,
       };
 
       queryClient.setQueryData(CURRENT_QUERRY, {

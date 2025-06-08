@@ -334,6 +334,27 @@ export type Database = {
           },
         ]
       }
+      post_type: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: number
+          name: string | null
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: number
+          name?: string | null
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: number
+          name?: string | null
+        }
+        Relationships: []
+      }
       posts: {
         Row: {
           author_id: string
@@ -345,6 +366,7 @@ export type Database = {
           is_featured: boolean | null
           meta_description: string | null
           meta_title: string | null
+          post_type_id: number | null
           published_at: string | null
           reading_time: number | null
           slug: string
@@ -363,6 +385,7 @@ export type Database = {
           is_featured?: boolean | null
           meta_description?: string | null
           meta_title?: string | null
+          post_type_id?: number | null
           published_at?: string | null
           reading_time?: number | null
           slug: string
@@ -381,6 +404,7 @@ export type Database = {
           is_featured?: boolean | null
           meta_description?: string | null
           meta_title?: string | null
+          post_type_id?: number | null
           published_at?: string | null
           reading_time?: number | null
           slug?: string
@@ -402,6 +426,20 @@ export type Database = {
             columns: ["category_id"]
             isOneToOne: false
             referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "posts_post_type_id_fkey"
+            columns: ["post_type_id"]
+            isOneToOne: false
+            referencedRelation: "complete_posts"
+            referencedColumns: ["post_type_id"]
+          },
+          {
+            foreignKeyName: "posts_post_type_id_fkey"
+            columns: ["post_type_id"]
+            isOneToOne: false
+            referencedRelation: "post_type"
             referencedColumns: ["id"]
           },
         ]
@@ -467,6 +505,8 @@ export type Database = {
           last_name: string | null
           meta_description: string | null
           meta_title: string | null
+          post_type: string | null
+          post_type_id: number | null
           published_at: string | null
           reading_time: number | null
           slug: string | null
@@ -520,6 +560,8 @@ export type Database = {
           last_name: string | null
           meta_description: string | null
           meta_title: string | null
+          post_type: string | null
+          post_type_id: number | null
           published_at: string | null
           reading_time: number | null
           slug: string | null
@@ -542,6 +584,20 @@ export type Database = {
             columns: ["category_id"]
             isOneToOne: false
             referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "posts_post_type_id_fkey"
+            columns: ["post_type_id"]
+            isOneToOne: false
+            referencedRelation: "complete_posts"
+            referencedColumns: ["post_type_id"]
+          },
+          {
+            foreignKeyName: "posts_post_type_id_fkey"
+            columns: ["post_type_id"]
+            isOneToOne: false
+            referencedRelation: "post_type"
             referencedColumns: ["id"]
           },
         ]

@@ -12,13 +12,16 @@ export const listMenu: {
     icon: <Settings2 size={ICON_SIZE} />,
     menus: [
       {
-        title: 'Category',
+        title: 'Kategori',
         href: '/dashboard/category',
       },
       {
         title: 'Tag',
-
         href: '/dashboard/tags',
+      },
+      {
+        title: 'Tipe Post',
+        href: '/dashboard/post-type',
       },
     ],
   },

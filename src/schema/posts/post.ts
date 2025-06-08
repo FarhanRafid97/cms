@@ -7,22 +7,15 @@ import { z } from 'zod';
 // ===============================
 
 export type Author = Database['public']['Tables']['authors']['Row'];
-
 export type Category = Database['public']['Tables']['categories']['Row'];
-
+export type PostType = Database['public']['Tables']['post_type']['Row'];
 export type Tag = Database['public']['Tables']['tags']['Row'];
-
 export type Post = Database['public']['Tables']['posts']['Row'];
-
 export type PostDetail = Database['public']['Tables']['post_details']['Row'];
-
 export type PostTag = Database['public']['Tables']['post_tags']['Row'];
 export type Comment = Database['public']['Tables']['comments']['Row'];
-
 export type Media = Database['public']['Tables']['media']['Row'];
-
 export type NewsletterSubscriber = Database['public']['Tables']['newsletter_subscribers']['Row'];
-
 export type SiteSetting = Database['public']['Tables']['site_settings']['Row'];
 
 // Extended interfaces for joined data
@@ -48,6 +41,14 @@ export interface PostWithStats extends Post {
 // ZOD VALIDATION SCHEMAS
 // ===============================
 
+export const PostTypeSchema = z.object({
+  name: z.string().min(1, { message: MESSAGE_FIELD_REQUIRED }).max(100),
+  description: z
+    .string()
+    .min(1, { message: MESSAGE_FIELD_REQUIRED })
+    .max(500, { message: MESSAGE_MAXIMUM_CHARACTER })
+    .optional(),
+});
 // Author schemas
 export const AuthorSchema = z.object({
   id: z.string().uuid(),
@@ -114,7 +115,6 @@ export const CreateCategorySchema = z.object({
     .regex(/^#[0-9A-Fa-f]{6}$/)
     .optional(),
 });
-
 export const UpdateCategorySchema = CreateCategorySchema.partial();
 
 // Tag schemas
@@ -342,30 +342,20 @@ export const PostQuerySchema = z.object({
 
 export type CreateAuthor = z.infer<typeof CreateAuthorSchema>;
 export type UpdateAuthor = z.infer<typeof UpdateAuthorSchema>;
-
 export type CreateCategory = z.infer<typeof CreateCategorySchema>;
 export type UpdateCategory = z.infer<typeof UpdateCategorySchema>;
-
 export type CreateTag = z.infer<typeof CreateTagSchema>;
-
 export type CreatePost = z.infer<typeof CreatePostSchema>;
 export type UpdatePost = z.infer<typeof UpdatePostSchema>;
-
 export type CreatePostDetail = z.infer<typeof CreatePostDetailSchema>;
 export type UpdatePostDetail = z.infer<typeof UpdatePostDetailSchema>;
-
 export type CreateComment = z.infer<typeof CreateCommentSchema>;
-
 export type CreateMedia = z.infer<typeof CreateMediaSchema>;
-
 export type CreateNewsletterSubscriber = z.infer<typeof CreateNewsletterSubscriberSchema>;
-
 export type CreateSiteSetting = z.infer<typeof CreateSiteSettingSchema>;
-
 export type CreateCompletePost = z.infer<typeof CreateCompletePostSchema>;
-
 export type PostQuery = z.infer<typeof PostQuerySchema>;
-
+export type CreatePostType = z.infer<typeof PostTypeSchema>;
 // ===============================
 // UTILITY FUNCTIONS
 // ===============================
