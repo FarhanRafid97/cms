@@ -6,7 +6,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Category } from '@/schema/posts/post';
+import { Category } from '@/schema/paramter/category';
 
 import { Edit, MoreHorizontal, Trash } from 'lucide-react';
 

@@ -12,10 +12,10 @@ export type InputProps = React.InputHTMLAttributes<HTMLTextAreaElement> & {
 };
 
 const CompleteTextArea = React.forwardRef<HTMLTextAreaElement, InputProps>(
-  ({ className, label, error, type, isRequired, ...props }, ref) => {
+  ({ className, label, error, type, ...props }, ref) => {
     return (
       <div className="grid grid-cols-1 items-center gap-2">
-        <Label isRequired={isRequired}>{label}</Label>
+        <Label>{label}:</Label>
         <Textarea
           {...props}
           ref={ref}

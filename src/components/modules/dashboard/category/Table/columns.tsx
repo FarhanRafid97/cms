@@ -5,7 +5,7 @@ import { DataTableColumnHeaderComplete } from '@/components/DataTableComplete/Co
 
 import { DataTableRowActionsReport } from './DataTableRowActionsReport';
 
-import { Category } from '@/schema/posts/post';
+import { Category } from '@/schema/paramter/category';
 
 export const columns: ColumnDef<Category>[] = [
   {

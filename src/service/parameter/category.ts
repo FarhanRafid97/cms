@@ -1,4 +1,5 @@
 import { supabase } from '@/lib/supabase';
+import { CreateCategory } from '@/schema/paramter/category';
 import { toast } from 'sonner';
 
 export const getListCategory = async () => {
@@ -8,4 +9,13 @@ export const getListCategory = async () => {
     return [];
   }
   return categories;
+};
+
+export const createNewCategory = async (payload: CreateCategory) => {
+  const { data, error } = await supabase.from('categories').insert(payload).select().single();
+  if (error) {
+    toast.error(`Error creating category: ${error.message}`);
+    return false;
+  }
+  return data;
 };

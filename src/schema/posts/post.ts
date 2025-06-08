@@ -7,7 +7,7 @@ import { z } from 'zod';
 // ===============================
 
 export type Author = Database['public']['Tables']['authors']['Row'];
-export type Category = Database['public']['Tables']['categories']['Row'];
+
 export type Tag = Database['public']['Tables']['tags']['Row'];
 export type Post = Database['public']['Tables']['posts']['Row'];
 export type PostDetail = Database['public']['Tables']['post_details']['Row'];
@@ -82,39 +82,6 @@ export const CreateAuthorSchema = z.object({
 });
 
 export const UpdateAuthorSchema = CreateAuthorSchema.partial();
-
-// Category schemas
-export const CategorySchema = z.object({
-  id: z.string().uuid(),
-  name: z.string().min(1).max(100),
-  slug: z
-    .string()
-    .min(1)
-    .max(100)
-    .regex(/^[a-z0-9-]+$/),
-  description: z.string().max(500).optional(),
-  color: z
-    .string()
-    .regex(/^#[0-9A-Fa-f]{6}$/)
-    .optional(),
-  is_active: z.boolean(),
-  created_at: z.string().datetime(),
-});
-
-export const CreateCategorySchema = z.object({
-  name: z.string().min(1).max(100),
-  slug: z
-    .string()
-    .min(1)
-    .max(100)
-    .regex(/^[a-z0-9-]+$/),
-  description: z.string().max(500).optional(),
-  color: z
-    .string()
-    .regex(/^#[0-9A-Fa-f]{6}$/)
-    .optional(),
-});
-export const UpdateCategorySchema = CreateCategorySchema.partial();
 
 // Tag schemas
 export const TagSchema = z.object({
@@ -341,8 +308,7 @@ export const PostQuerySchema = z.object({
 
 export type CreateAuthor = z.infer<typeof CreateAuthorSchema>;
 export type UpdateAuthor = z.infer<typeof UpdateAuthorSchema>;
-export type CreateCategory = z.infer<typeof CreateCategorySchema>;
-export type UpdateCategory = z.infer<typeof UpdateCategorySchema>;
+
 export type CreateTag = z.infer<typeof CreateTagSchema>;
 export type CreatePost = z.infer<typeof CreatePostSchema>;
 export type UpdatePost = z.infer<typeof UpdatePostSchema>;
