@@ -25,7 +25,7 @@ const UserLogged = () => {
         <DropdownMenuTrigger className="focus:outline-none">
           <div className="flex gap-2 items-center focus:outline-none">
             <Avatar>
-              <AvatarImage alt="@shadcn" />
+              <AvatarImage alt="@shadcn" src={user?.detail_user?.avatar_url || ''} />
               <AvatarFallback>user</AvatarFallback>
             </Avatar>
           </div>
@@ -33,7 +33,9 @@ const UserLogged = () => {
         <DropdownMenuContent className="z-[9999] w-[220px] mr-2">
           <DropdownMenuLabel>
             <DropdownMenuArrow />
-            <p className="text-xs">{user?.detail_user?.email}</p>
+            <p className="text-xs">
+              Welcome, <span className="font-bold">{user?.detail_user?.username}</span>
+            </p>
           </DropdownMenuLabel>
 
           <DropdownMenuSeparator />
