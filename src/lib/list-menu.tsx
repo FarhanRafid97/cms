@@ -1,9 +1,9 @@
-import { Rss, Settings2 } from 'lucide-react';
+import { Rss, Settings2, Users } from 'lucide-react';
 import { ReactNode } from 'react';
 const ICON_SIZE = 16;
 
 export const listMenu: {
-  groupMenu: 'Parameter' | 'Post';
+  groupMenu: 'Parameter' | 'Post' | 'Users';
   icon: ReactNode;
   menus: { title: string; href: string }[];
 }[] = [
@@ -22,6 +22,20 @@ export const listMenu: {
       {
         title: 'Tipe Post',
         href: '/dashboard/post-type',
+      },
+    ],
+  },
+  {
+    groupMenu: 'Users',
+    icon: <Users size={ICON_SIZE} />,
+    menus: [
+      {
+        title: 'User',
+        href: '/dashboard/user',
+      },
+      {
+        title: 'Role',
+        href: '/dashboard/role',
       },
     ],
   },
