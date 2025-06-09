@@ -46,3 +46,10 @@ export const insertBiodataUser = async ({ payload }: { payload: CreateAuthor }) 
     toast.error('Gagal Pembaruan data');
   }
 };
+export const getUserByEmail = async (email: string) => {
+  const { data, error } = await supabase.auth.getUser(email);
+  if (error) {
+    throw error;
+  }
+  return data;
+};

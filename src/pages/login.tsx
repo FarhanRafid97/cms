@@ -32,7 +32,7 @@ const Login = () => {
       const { error } = await supabase.auth.signInWithOtp({
         email: userEmail,
         options: {
-          shouldCreateUser: true,
+          shouldCreateUser: false,
           emailRedirectTo: `${BASE_URL}/dashboard`,
         },
       });
