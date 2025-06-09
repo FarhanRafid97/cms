@@ -85,7 +85,7 @@ export function MultipleSelectDropdown({
             disabled={isDisabled}
             variant="ghost"
             size="sm"
-            className="h-8 rounded-none border-l-0 border-t-0 border-r-0 border-b flex justify-between shadow-none px-1"
+            className="h-8 rounded-none border-l-0 border-t-0 border-r-0 border-b flex justify-between shadow-none px-1 bg-background"
           >
             {valueSelected?.size > 0 ? (
               <div className="overflow-auto ">

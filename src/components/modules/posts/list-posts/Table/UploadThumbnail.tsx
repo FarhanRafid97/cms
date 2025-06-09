@@ -164,7 +164,7 @@ const UploadThumbnail = ({
                 return (
                   <div>
                     <div className="relative">
-                      <AspectRatio ratio={16 / 8} className="bg-muted">
+                      <AspectRatio ratio={16 / 8} className="bg-background">
                         <Image
                           src={watchImageThumbanil}
                           alt="Photo by Drew Beamer"
@@ -199,7 +199,7 @@ const UploadThumbnail = ({
                       onDrop={handleDrop}
                       onClick={() => inputFileRef.current?.click()}
                       className={cn(
-                        `w-full mx-auto border-[2px]  rounded-md hover:border-gray-400 transition duration-200 border-dashed flex flex-col justify-center items-center py-[30px] ${
+                        `w-full mx-auto border-[2px]  rounded-md bg-background hover:border-gray-400 transition duration-200 border-dashed flex flex-col justify-center items-center py-[30px] ${
                           dragging && 'border-gray-400 bg-blue-100'
                         }`,
                         !!error ? 'border-red-400 hover:border-red-500' : null,

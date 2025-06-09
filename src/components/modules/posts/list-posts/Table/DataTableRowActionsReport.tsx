@@ -8,11 +8,11 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { CompletePost } from '@/schema/posts/post';
 
-import { Edit, MoreHorizontal, Trash } from 'lucide-react';
+import { MoreHorizontal, Search, Trash } from 'lucide-react';
 
+import WrapperModalBase from '@/components/common/warpped-modal-create';
 import { useState } from 'react';
 import DetailPostData from './detail-post/DetailPostData';
-import WrapperModalBase from '@/components/common/warpped-modal-create';
 
 export function DataTableRowActionsReport({ row }: { row: CompletePost }) {
   const [openDetailArticle, setOpenDetailArticle] = useState(false);
@@ -32,8 +32,8 @@ export function DataTableRowActionsReport({ row }: { row: CompletePost }) {
               setOpenDetailArticle(true);
             }}
           >
-            <Edit size={16} />
-            Edit Detail Artikel {openDelete}
+            <Search size={16} />
+            Detail Artikel {openDelete}
           </DropdownMenuItem>
           <DropdownMenuItem
             className="flex gap-2 items-center"
