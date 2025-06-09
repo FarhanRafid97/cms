@@ -35,7 +35,7 @@ export const listMenu: {
       },
       {
         title: 'Role',
-        href: '/dashboard/role',
+        href: '/dashboard/user/role',
       },
     ],
   },
