@@ -61,6 +61,12 @@ const SelectDropdown: FC<SelectDropdownProps> = ({
                 data-test="transaction-type"
                 className={cn('cursor-pointer focus-visible:ring-0 bg-background')}
                 readOnly
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault();
+                    e.stopPropagation();
+                  }
+                }}
               />
               <ChevronsUpDown className="absolute right-3 top-1/2 transform -translate-y-1/2 ml-2 h-4 w-4 shrink-0 opacity-50" />
             </div>

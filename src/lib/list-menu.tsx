@@ -30,8 +30,16 @@ export const listMenu: {
     icon: <Album size={ICON_SIZE} />,
     menus: [
       {
-        title: 'Posts',
-        href: '/dashboard/posts/list-post',
+        title: 'Artikel',
+        href: '/dashboard/posts/artikel',
+      },
+      {
+        title: 'Cerita',
+        href: '/dashboard/posts/cerita',
+      },
+      {
+        title: 'Berita',
+        href: '/dashboard/posts/berita',
       },
     ],
   },

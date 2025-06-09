@@ -22,6 +22,7 @@ import { Loader2, Plus } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import UploadThumbnail from './UploadThumbnail';
+import { useGetPostTypeId } from '@/hooks/use-get-lastpath';
 
 export function AddNewPosts() {
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -31,6 +32,7 @@ export function AddNewPosts() {
   const { data: dataTags, isFetching: isFetchingTags } = useGetListTag();
   const { mutateAsync, isPending } = useCreateNewPost();
   const [randomNumb, setRandomNumb] = useState(1);
+  const postTypeSelected = useGetPostTypeId();
 
   const { handleSubmit, formState, watch, register, setValue, setError, clearErrors, reset } =
     useForm<CreatePost>({
@@ -49,7 +51,7 @@ export function AddNewPosts() {
 
   const onSubmit = async (payload: CreatePost) => {
     await mutateAsync({
-      payload,
+      payload: { ...payload, post_type_id: postTypeSelected.id },
     });
     reset();
     setIsOpenModal(false);
@@ -63,7 +65,7 @@ export function AddNewPosts() {
       <DialogTrigger asChild>
         <Button variant="outline" className="text-xs font-normal gap-2">
           <Plus size={14} />
-          Article Baru
+          {postTypeSelected.name} Baru
         </Button>
       </DialogTrigger>
       <DialogContent
@@ -75,17 +77,17 @@ export function AddNewPosts() {
         }}
       >
         <DialogHeader>
-          <DialogTitle>Tambahkan Artikel Baru</DialogTitle>
+          <DialogTitle>Tambahkan {postTypeSelected.name} Baru</DialogTitle>
           <DialogDescription>
-            Silakan isi form dibawah untuk menambahkan artikel baru. Pastikan untuk memilih kategori
-            dan hashtag yang sesuai.
+            Silakan isi form dibawah untuk menambahkan {postTypeSelected.name} baru. Pastikan untuk
+            memilih kategori dan hashtag yang sesuai.
           </DialogDescription>
         </DialogHeader>
         <DialogWrapperContent>
           <form id="form-add-new-post" onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <CompleteInput
               {...register('title')}
-              label="Judul Artikel"
+              label={`Judul ${postTypeSelected.name}`}
               error={formState.errors.title?.message}
             />
             <SelectDropdown

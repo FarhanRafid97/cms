@@ -6,14 +6,17 @@ import { toast } from 'sonner';
 export const getListCompletePosts = async ({
   offsetFrom = 0,
   offsetTo = LIMIT_GET_POSTS,
+  post_type_id,
 }: {
   offsetFrom: number;
   offsetTo: number;
+  post_type_id: number;
 }) => {
   const { data, error } = await supabase
     .from('complete_posts')
     .select('*')
-    .range(offsetFrom, offsetTo);
+    .range(offsetFrom, offsetTo)
+    .eq('post_type_id', post_type_id);
 
   if (error) {
     toast.error(`Error fetching categories: ${error.message}`);

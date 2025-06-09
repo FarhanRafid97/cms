@@ -136,6 +136,7 @@ export const CreatePostSchema = z.object({
   status: z.enum(['draft', 'published', 'archived']).default('draft'),
   is_featured: z.boolean().default(false),
   reading_time: z.number().int().min(1).optional().default(0),
+  post_type_id: z.number().int().min(1).optional().default(1),
 });
 
 export const UpdatePostSchema = CreatePostSchema.partial();

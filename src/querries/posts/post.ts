@@ -15,18 +15,21 @@ const UNIQUE_KEY = 'post';
 export const useGetCompletePosts = ({
   offsetFrom,
   offsetTo,
+  post_type_id,
 }: {
+  post_type_id: number;
   offsetFrom: number;
   offsetTo: number;
 }) => {
   return useQuery({
-    queryKey: [UNIQUE_KEY, offsetFrom + '', offsetTo + ''],
+    queryKey: [UNIQUE_KEY, offsetFrom + '', offsetTo + '', post_type_id],
     refetchOnWindowFocus: false,
+    enabled: !!post_type_id,
     refetchOnReconnect: false,
     staleTime: 1000 * 60 * 5, // 5 minutes.
     retry: false,
     queryFn: async () => {
-      const result = await getListCompletePosts({ offsetFrom, offsetTo });
+      const result = await getListCompletePosts({ offsetFrom, offsetTo, post_type_id });
       return {
         data: result,
         totalData: result.length,
@@ -44,17 +47,23 @@ export const useCreateNewPost = () => {
       try {
         const response = await createNewPost({ dataPost: payload });
 
-        if (response) {
-          toast.success('Sukses menambahkan artikel baru');
-          return { payload, response };
+        if (!response) {
+          toast.error('Gagal menambahkan artikel baru');
+          return { payload: null, response: null };
         }
-        return { payload: null, response: null };
+        toast.success('Sukses menambahkan artikel baru');
+        return { payload, response };
       } catch (error) {
         return { payload: null, response: null };
       }
     },
-    onSuccess: ({ response }) => {
-      const CURRENT_QUERRY = [UNIQUE_KEY, search._offsetFrom, search._offsetTo];
+    onSuccess: ({ response, payload }) => {
+      const CURRENT_QUERRY = [
+        UNIQUE_KEY,
+        search._offsetFrom,
+        search._offsetTo,
+        payload?.post_type_id || 1,
+      ];
 
       const { data: previousData, totalData } = queryClient.getQueryData(CURRENT_QUERRY) as {
         data: CompletePost[];
