@@ -1,8 +1,8 @@
-import { Table } from '@tanstack/react-table';
+import { DataTableViewOptions } from '@/components/DataTable/data-table-view-options';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { DataTableViewOptions } from '@/components/DataTable/data-table-view-options';
-import { MagnifyingGlassIcon, Cross2Icon } from '@radix-ui/react-icons';
+import { Cross2Icon, MagnifyingGlassIcon } from '@radix-ui/react-icons';
+import { Table } from '@tanstack/react-table';
 import { FormEvent, SetStateAction, useRef, useState } from 'react';
 
 export interface DataTableToolbarProps<TData> {

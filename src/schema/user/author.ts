@@ -35,7 +35,12 @@ export const CreateAuthorSchema = z.object({
   social_links: z.record(z.string().url()).optional(),
 });
 
+export const InviteAuthorSchema = z.object({
+  email: z.string().email({ message: 'Email harus menggunakan format yang valid' }),
+});
+
 export const UpdateAuthorSchema = CreateAuthorSchema.partial();
 
 export type CreateAuthor = z.infer<typeof CreateAuthorSchema>;
 export type UpdateAuthor = z.infer<typeof UpdateAuthorSchema>;
+export type InviteAuthor = z.infer<typeof InviteAuthorSchema>;

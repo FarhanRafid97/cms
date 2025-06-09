@@ -9,13 +9,13 @@ export const getListUser = async () => {
 };
 
 export const inviteUser = async (email: string) => {
-  const { data, error } = await supabase.auth.admin.generateLink({
-    type: 'signup',
-    email: email,
-    password: 'secret',
-  });
-  if (error) {
+  try {
+    const { data, error } = await supabase.auth.admin.inviteUserByEmail(email);
+    if (error) {
+      throw error;
+    }
+    return data;
+  } catch (error) {
     throw error;
   }
-  return data;
 };

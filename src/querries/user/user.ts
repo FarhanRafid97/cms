@@ -17,12 +17,13 @@ export const useGetListUser = () => {
 
 export const useInviteUser = () => {
   return useMutation({
-    mutationFn: async (email: string) => inviteUser(email),
-    onSuccess: () => {
-      toast.success('User berhasil diundang, silahkan cek email untuk melanjutkan');
-    },
-    onError: () => {
-      toast.error('User gagal diundang');
+    mutationFn: async (email: string) => {
+      try {
+        const response = await inviteUser(email);
+        return response;
+      } catch (error) {
+        toast.error(error instanceof Error ? error.message : 'Terjadi kesalahan');
+      }
     },
   });
 };

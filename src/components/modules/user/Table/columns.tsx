@@ -3,12 +3,9 @@ import { ColumnDef } from '@tanstack/react-table';
 import { TableCellCostume } from '@/components/DataTableComplete/CellBaseComp';
 import { DataTableColumnHeaderComplete } from '@/components/DataTableComplete/ColumnHeaderComplete';
 
-import { DataTableRowActionsReport } from './DataTableRowActionsReport';
-
-import { Author } from '@/schema/user/author';
 import { formatedDateDDMMYYY } from '@/lib/utils';
-import { X } from 'lucide-react';
-import { Check } from 'lucide-react';
+import { Author } from '@/schema/user/author';
+import { Check, X } from 'lucide-react';
 
 export const columns: ColumnDef<Author>[] = [
   {
@@ -90,10 +87,5 @@ export const columns: ColumnDef<Author>[] = [
         {formatedDateDDMMYYY(row.original.created_at || '', true)}
       </TableCellCostume>
     ),
-  },
-
-  {
-    id: 'actions',
-    cell: ({ row }) => <DataTableRowActionsReport row={row.original} />,
   },
 ];
