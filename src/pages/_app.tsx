@@ -16,7 +16,7 @@ import { useRouter } from 'next/router';
 import nProgress from 'nprogress';
 import { useEffect } from 'react';
 import { Toaster } from 'sonner';
-import { match } from 'ts-pattern';
+import { match, P } from 'ts-pattern';
 
 const progress = nProgress.configure({ showSpinner: false });
 
@@ -55,16 +55,16 @@ export default function App({ Component, pageProps: { ...pageProps } }: AppProps
             </div>
           )}
           {match(router.pathname)
-            .with('/atmind666', '/login', '/atmind666/bristar', '/update-biodata', () => (
-              <Component {...pageProps} />
-            ))
-            .otherwise(() => (
+            .with(P.string.includes('/dashboard'), () => (
               <Layout id={data?.batch || ''}>
                 <Component {...pageProps} />
                 <div className="print:hidden">
                   <ReactQueryDevtools initialIsOpen={false} />
                 </div>
               </Layout>
+            ))
+            .otherwise(() => (
+              <Component {...pageProps} />
             ))}
           <ListMenuSearch />
           <Toaster richColors visibleToasts={3} duration={3000} closeButton position="top-right" />
