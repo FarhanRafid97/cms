@@ -52,7 +52,7 @@ export const columns: ColumnDef<CompletePost>[] = [
   {
     accessorKey: 'title',
     header: ({ column, header }) => (
-      <DataTableColumnHeaderComplete header={header} column={column} title="Judul Artikel" />
+      <DataTableColumnHeaderComplete header={header} column={column} title="Judul" />
     ),
     cell: ({ row, column }) => (
       <TableCellCostume id={column.id}>{row.original.title}</TableCellCostume>
