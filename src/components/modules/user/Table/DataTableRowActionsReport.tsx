@@ -6,7 +6,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Author } from '@/schema/posts/post';
+import { Author } from '@/schema/user/author';
 
 import { Edit, MoreHorizontal, Trash } from 'lucide-react';
 import { useState } from 'react';

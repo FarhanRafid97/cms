@@ -7,8 +7,6 @@ import { Tag } from '../paramter/tag';
 // TYPESCRIPT INTERFACES
 // ===============================
 
-export type Author = Database['public']['Tables']['authors']['Row'];
-
 export type Post = Database['public']['Tables']['posts']['Row'];
 export type PostDetail = Database['public']['Tables']['post_details']['Row'];
 export type PostTag = Database['public']['Tables']['post_tags']['Row'];
@@ -48,40 +46,6 @@ export const PostTypeSchema = z.object({
     .max(500, { message: MESSAGE_MAXIMUM_CHARACTER })
     .optional(),
 });
-// Author schemas
-export const AuthorSchema = z.object({
-  id: z.string().uuid(),
-  email: z.string().email(),
-  username: z
-    .string()
-    .min(3)
-    .max(50)
-    .regex(/^[a-zA-Z0-9_-]+$/),
-  first_name: z.string().min(1).max(100),
-  last_name: z.string().min(1).max(100),
-  bio: z.string().max(1000).optional(),
-  avatar_url: z.string().url().optional(),
-  social_links: z.record(z.string().url()).optional(),
-  is_active: z.boolean(),
-  created_at: z.string().datetime(),
-  updated_at: z.string().datetime(),
-});
-
-export const CreateAuthorSchema = z.object({
-  email: z.string().email(),
-  username: z
-    .string()
-    .min(3)
-    .max(50)
-    .regex(/^[a-zA-Z0-9_-]+$/),
-  first_name: z.string().min(1).max(100),
-  last_name: z.string().min(1).max(100),
-  bio: z.string().max(1000).optional(),
-  avatar_url: z.string().url().optional(),
-  social_links: z.record(z.string().url()).optional(),
-});
-
-export const UpdateAuthorSchema = CreateAuthorSchema.partial();
 
 // Post schemas
 export const PostSchema = z.object({
@@ -285,9 +249,6 @@ export const PostQuerySchema = z.object({
 // ===============================
 // TYPE INFERENCE HELPERS
 // ===============================
-
-export type CreateAuthor = z.infer<typeof CreateAuthorSchema>;
-export type UpdateAuthor = z.infer<typeof UpdateAuthorSchema>;
 
 export type CreatePost = z.infer<typeof CreatePostSchema>;
 export type UpdatePost = z.infer<typeof UpdatePostSchema>;

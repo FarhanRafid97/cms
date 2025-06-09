@@ -5,7 +5,7 @@ import { DataTableColumnHeaderComplete } from '@/components/DataTableComplete/Co
 
 import { DataTableRowActionsReport } from './DataTableRowActionsReport';
 
-import { Author } from '@/schema/posts/post';
+import { Author } from '@/schema/user/author';
 import { formatedDateDDMMYYY } from '@/lib/utils';
 import { X } from 'lucide-react';
 import { Check } from 'lucide-react';

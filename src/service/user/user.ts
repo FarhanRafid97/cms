@@ -7,3 +7,15 @@ export const getListUser = async () => {
   }
   return data;
 };
+
+export const inviteUser = async (email: string) => {
+  const { data, error } = await supabase.auth.admin.generateLink({
+    type: 'signup',
+    email: email,
+    password: 'secret',
+  });
+  if (error) {
+    throw error;
+  }
+  return data;
+};

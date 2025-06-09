@@ -1,5 +1,5 @@
 import { supabase } from '@/lib/supabase';
-import { Author } from '@/schema/posts/post';
+import { Author } from '@/schema/user/author';
 import { getMyself } from '@/service/auth';
 import { Session } from '@supabase/supabase-js';
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
