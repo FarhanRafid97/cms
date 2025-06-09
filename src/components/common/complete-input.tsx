@@ -17,7 +17,7 @@ export type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
 const CompleteInput = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, label, error, info, type, ...props }, ref) => {
     return (
-      <div className="grid grid-cols-1 items-center gap-2">
+      <div className="flex flex-col gap-2">
         <Label className="inline gap-2 ">{label}:</Label>
         <div className="relative">
           <Input

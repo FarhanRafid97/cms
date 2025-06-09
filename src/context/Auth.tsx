@@ -1,11 +1,11 @@
 import { supabase } from '@/lib/supabase';
-import { Author } from '@/schema/user/author';
+import { NoUser, UserSession } from '@/schema/user/author';
 import { getMyself } from '@/service/auth';
 import { Session } from '@supabase/supabase-js';
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 
 interface AuthContextType {
-  user: Author | null | undefined;
+  user: UserSession | NoUser;
   session: Session | null;
   loading: boolean;
 }
@@ -30,14 +30,17 @@ export function ProvideAuth({ children }: ProvideAuthProps) {
 }
 
 function useProvideAuth(): AuthContextType {
-  const [user, setUser] = useState<Author | null | undefined>(null);
+  const [user, setUser] = useState<UserSession | NoUser>({
+    detail_user: null,
+    session: null,
+  });
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     // Get initial session
     const getInitialSession = async () => {
-      if (user) {
+      if (user.session && user.detail_user) {
         return;
       }
 
@@ -48,21 +51,21 @@ function useProvideAuth(): AuthContextType {
 
         console.log('session', !session);
         if (!session) {
-          setUser(undefined);
+          setUser({ detail_user: undefined, session: undefined });
           return;
         }
 
         const detailMySelf = await getMyself({ user_id: session?.user.id || '' });
         if (!detailMySelf) {
-          setUser(undefined);
+          setUser({ detail_user: undefined, session });
           return;
         }
         setSession(session);
-        setUser(detailMySelf);
+        setUser({ detail_user: detailMySelf, session });
         setLoading(false);
       } catch (error) {
         setLoading(false);
-        setUser(undefined);
+        setUser({ detail_user: undefined, session: undefined });
       }
     };
 

@@ -40,7 +40,7 @@ export function AddNewPosts() {
       defaultValues: {
         status: 'draft',
         category_id: '',
-        author_id: user?.id || '',
+        author_id: user?.detail_user?.id || '',
         reading_time: 1,
         title: '',
       },

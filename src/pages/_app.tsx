@@ -55,7 +55,9 @@ export default function App({ Component, pageProps: { ...pageProps } }: AppProps
             </div>
           )}
           {match(router.pathname)
-            .with('/atmind666', '/login', '/atmind666/bristar', () => <Component {...pageProps} />)
+            .with('/atmind666', '/login', '/atmind666/bristar', '/update-biodata', () => (
+              <Component {...pageProps} />
+            ))
             .otherwise(() => (
               <Layout id={data?.batch || ''}>
                 <Component {...pageProps} />

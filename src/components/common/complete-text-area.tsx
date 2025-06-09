@@ -14,7 +14,7 @@ export type InputProps = React.InputHTMLAttributes<HTMLTextAreaElement> & {
 const CompleteTextArea = React.forwardRef<HTMLTextAreaElement, InputProps>(
   ({ className, label, error, type, ...props }, ref) => {
     return (
-      <div className="grid grid-cols-1 items-center gap-2">
+      <div className="flex flex-col gap-2">
         <Label>{label}:</Label>
         <Textarea
           {...props}

@@ -17,12 +17,16 @@ function ProtectedRoute({ children }: ProtectedRouteProps) {
     setSearchParamsClient({ searchParams: search });
   }, [search]);
 
-  if (loading && user !== undefined) {
+  if (loading && user.session === null) {
     return <LoadingPage />;
   }
 
-  if (user === undefined) {
+  if (user.session === undefined) {
     return <Navigate to="/login" replace />;
+  }
+
+  if (user.detail_user === undefined) {
+    return <Navigate to="/update-biodata" replace />;
   }
 
   return <>{children}</>;

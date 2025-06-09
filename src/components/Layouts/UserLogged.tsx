@@ -33,7 +33,7 @@ const UserLogged = () => {
         <DropdownMenuContent className="z-[9999] w-[220px] mr-2">
           <DropdownMenuLabel>
             <DropdownMenuArrow />
-            <p className="text-xs">{user?.email}</p>
+            <p className="text-xs">{user?.detail_user?.email}</p>
           </DropdownMenuLabel>
 
           <DropdownMenuSeparator />

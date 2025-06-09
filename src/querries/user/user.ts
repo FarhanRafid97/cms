@@ -1,4 +1,5 @@
-import { getListUser, inviteUser } from '@/service/user/user';
+import { CreateAuthor } from '@/schema/user/author';
+import { getListUser, insertBiodataUser, inviteUser } from '@/service/user/user';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
@@ -24,6 +25,15 @@ export const useInviteUser = () => {
       } catch (error) {
         toast.error(error instanceof Error ? error.message : 'Terjadi kesalahan');
       }
+    },
+  });
+};
+
+export const useInsertBiodataUser = () => {
+  return useMutation({
+    mutationFn: async (payload: CreateAuthor) => {
+      const response = await insertBiodataUser({ payload });
+      return response;
     },
   });
 };

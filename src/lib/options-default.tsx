@@ -33,3 +33,41 @@ export const predefinedColors = [
   '#94a3b8',
   '#cbd5e1',
 ];
+
+export const defaultAvatarSelect: { id: string; name: string; path: string }[] = [
+  {
+    id: '1',
+    name: 'Avatar 1',
+    path: '/default-avatar/notion-avatar-1.png',
+  },
+  {
+    id: '2',
+    name: 'Avatar 2',
+    path: '/default-avatar/notion-avatar-2.png',
+  },
+  {
+    id: '3',
+    name: 'Avatar 3',
+    path: '/default-avatar/notion-avatar-3.png',
+  },
+  {
+    id: '4',
+    name: 'Avatar 4',
+    path: '/default-avatar/notion-avatar-4.png',
+  },
+  {
+    id: '5',
+    name: 'Avatar 5',
+    path: '/default-avatar/notion-avatar-5.png',
+  },
+  {
+    id: '6',
+    name: 'Avatar 6',
+    path: '/default-avatar/notion-avatar-6.png',
+  },
+  {
+    id: '7',
+    name: 'Avatar 7',
+    path: '/default-avatar/notion-avatar-7.png',
+  },
+];
