@@ -1,4 +1,4 @@
-import { Album, Settings2 } from 'lucide-react';
+import { Rss, Settings2 } from 'lucide-react';
 import { ReactNode } from 'react';
 const ICON_SIZE = 16;
 
@@ -27,7 +27,7 @@ export const listMenu: {
   },
   {
     groupMenu: 'Post',
-    icon: <Album size={ICON_SIZE} />,
+    icon: <Rss size={ICON_SIZE} />,
     menus: [
       {
         title: 'Artikel',
