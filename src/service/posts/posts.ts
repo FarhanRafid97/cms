@@ -7,16 +7,19 @@ export const getListCompletePosts = async ({
   offsetFrom = 0,
   offsetTo = LIMIT_GET_POSTS,
   post_type_id,
+  author_id,
 }: {
   offsetFrom: number;
   offsetTo: number;
   post_type_id: number;
+  author_id: string;
 }) => {
   const { data, error } = await supabase
     .from('complete_posts')
     .select('*')
     .range(offsetFrom, offsetTo)
-    .eq('post_type_id', post_type_id);
+    .eq('post_type_id', post_type_id)
+    .eq('author_id', author_id);
 
   if (error) {
     toast.error(`Error fetching categories: ${error.message}`);

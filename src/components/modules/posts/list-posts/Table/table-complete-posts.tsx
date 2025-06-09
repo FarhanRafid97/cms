@@ -4,8 +4,10 @@ import { DataTableToolbar } from './DataTableToolbar';
 import { columns } from './columns';
 import { useSearchParamsClient } from '@/store/searchParams';
 import { useGetPostTypeId } from '@/hooks/use-get-lastpath';
+import { useAuth } from '@/context/Auth';
 
 export default function TableListPosts() {
+  const { user } = useAuth();
   const { searchParams } = useSearchParamsClient();
   const postTypeSelected = useGetPostTypeId();
 
@@ -13,6 +15,7 @@ export default function TableListPosts() {
     offsetFrom: Number(searchParams?._offsetFrom || 0),
     offsetTo: Number(searchParams?._offsetTo),
     post_type_id: postTypeSelected.id,
+    author_id: user?.detail_user?.id || '',
   });
 
   return (

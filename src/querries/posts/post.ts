@@ -16,20 +16,22 @@ export const useGetCompletePosts = ({
   offsetFrom,
   offsetTo,
   post_type_id,
+  author_id,
 }: {
   post_type_id: number;
   offsetFrom: number;
   offsetTo: number;
+  author_id: string;
 }) => {
   return useQuery({
-    queryKey: [UNIQUE_KEY, offsetFrom + '', offsetTo + '', post_type_id],
+    queryKey: [UNIQUE_KEY, offsetFrom + '', offsetTo + '', post_type_id, author_id],
     refetchOnWindowFocus: false,
-    enabled: !!post_type_id,
+    enabled: !!post_type_id && !!author_id,
     refetchOnReconnect: false,
     staleTime: 1000 * 60 * 5, // 5 minutes.
     retry: false,
     queryFn: async () => {
-      const result = await getListCompletePosts({ offsetFrom, offsetTo, post_type_id });
+      const result = await getListCompletePosts({ offsetFrom, offsetTo, post_type_id, author_id });
       return {
         data: result,
         totalData: result.length,
@@ -63,6 +65,7 @@ export const useCreateNewPost = () => {
         search._offsetFrom,
         search._offsetTo,
         payload?.post_type_id || 1,
+        payload?.author_id || '',
       ];
 
       const { data: previousData, totalData } = queryClient.getQueryData(CURRENT_QUERRY) as {
