@@ -7,6 +7,7 @@ import '@/styles/calendar.css';
 import '@/styles/globals.css';
 import '@/styles/nprogress.css';
 import '@/styles/quil.editor.css';
+import '@/styles/carousel.css';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Loader2 } from 'lucide-react';
 

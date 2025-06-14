@@ -2,11 +2,21 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Shield, Users } from 'lucide-react';
 import LayoutSection from './layout-section';
 import Image from 'next/image';
+import TextWrapedBorder from './text-wrapped';
 
 export default function BentoSection() {
   return (
     <LayoutSection>
       <div className="mx-auto max-w-3xl lg:max-w-5xl px-6">
+        <div className="text-center mb-16">
+          <h1 className="md:text-6xl text-3xl font-bold mb-6 to-secondary text-primary eading-tight">
+            <TextWrapedBorder className="text-emerald-500">Yang Kami Tawarkan</TextWrapedBorder>
+          </h1>
+          <p className="md:text-xl text-sm text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
+            Kami menawarkan berbagai fitur yang dapat membantu Anda dalam menjelajahi dunia buku dan
+            membangun literasi Anda.
+          </p>
+        </div>
         <div className="relative">
           <div className="relative z-10 grid grid-cols-6 gap-3">
             <Card className="relative col-span-full flex overflow-hidden lg:col-span-2">
@@ -23,9 +33,11 @@ export default function BentoSection() {
                       fill="currentColor"
                     />
                   </svg>
-                  <span className="mx-auto block w-fit text-5xl font-semibold">100%</span>
+                  <span className="mx-auto block w-fit md:text-5xl text-2xl font-semibold">
+                    100%
+                  </span>
                 </div>
-                <h2 className="mt-6 text-center text-3xl font-semibold">Customizable</h2>
+                <h2 className="mt-6 text-center md:text-3xl text-xl font-semibold">Customizable</h2>
               </CardContent>
             </Card>
             <Card className="relative col-span-full overflow-hidden sm:col-span-3 lg:col-span-2">

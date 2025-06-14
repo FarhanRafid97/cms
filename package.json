@@ -72,6 +72,7 @@
     "cmdk": "^0.2.1",
     "copy-to-clipboard": "^3.3.3",
     "date-fns": "^3.6.0",
+    "embla-carousel-react": "^8.6.0",
     "lottie-react": "^2.4.0",
     "lucide-react": "^0.320.0",
     "motion": "^12.12.1",

@@ -1,12 +1,21 @@
-import HeroSection from '@/components/modules/home-page/hero-section';
-
 import BentoSection from '@/components/modules/home-page/bento-section';
+import { Hero7 } from '@/components/modules/home-page/hero';
+import TentangKomunistas from '@/components/modules/home-page/tentang-komunitas';
+import LayoutWithNavbar from '@/components/Layouts/layout-with-navbar';
+import Faq from '@/components/modules/home-page/faq';
+import { ContactUs } from '@/components/modules/home-page/contact-us';
 
 export default function Home() {
   return (
-    <div className="grid grid-cols-1 gap-4">
-      <HeroSection />
-      <BentoSection />
-    </div>
+    <LayoutWithNavbar>
+      <div className="grid grid-cols-1 gap-4">
+        <Hero7 />
+        <TentangKomunistas />
+
+        <BentoSection />
+        <Faq />
+        <ContactUs />
+      </div>
+    </LayoutWithNavbar>
   );
 }

@@ -7,6 +7,7 @@ import { BookOpen, Users, MessageCircle, Star, TrendingUp, Calendar } from 'luci
 import Image from 'next/image';
 import { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
+import TextWraped from './text-wrapped';
 
 // Floating Card Component - Refined styling to align with Shadcn aesthetic
 function FloatingCard({
@@ -100,7 +101,9 @@ export default function HeroSection() {
                 <br />
                 <span className="text-primary">Melalui Buku</span>
                 <br />
-                <span className="text-foreground">Bersama Kami</span>
+                <span className="text-foreground">
+                  <TextWraped>Bersama Kami</TextWraped>
+                </span>
               </h1>
 
               <p className="max-w-[600px] text-lg text-muted-foreground leading-relaxed">
