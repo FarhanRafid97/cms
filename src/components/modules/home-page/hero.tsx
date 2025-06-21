@@ -211,8 +211,8 @@ const Hero7 = ({
               key={stat.label}
               className={` p-4 py-6 flex justify-center gap-2 items-center ${mappingBorder}`}
             >
-              <div className="flex items-center justify-center p-2 rounded bg-gray-300">
-                <stat.icon size={22} className="text-primary/80" />
+              <div className="flex items-center justify-center p-2 rounded bg-gray-200/80">
+                <stat.icon size={22} className="text-sky-500" />
               </div>
               <div className="flex gap-2 items-center">
                 <div className="text-sm font-bold text-foreground ">{stat.value}</div>
