@@ -9,6 +9,7 @@ import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { match } from 'ts-pattern';
 import LayoutSection from './layout-section';
 import TextWrapedBorder from './text-wrapped';
+import { FlipWords } from '@/components/common/flip-word';
 
 interface Hero7Props {
   heading?: string;
@@ -112,7 +113,7 @@ const Hero7 = ({
         transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
         className="relative l"
       >
-        <section className="py-32">
+        <section className="py-14 md:py-32">
           <div className="container text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -121,7 +122,10 @@ const Hero7 = ({
               className="mx-auto flex max-w-5xl flex-col gap-6"
             >
               <h1 className="text-3xl font-extrabold lg:text-6xl">
-                {heading} <TextWrapedBorder>Indonesia</TextWrapedBorder>
+                {heading}{' '}
+                <TextWrapedBorder>
+                  <FlipWords words={['Indonesia', 'kreatif', 'literasi']} duration={2000} />
+                </TextWrapedBorder>
               </h1>
               <p className="text-muted-foreground text-balance lg:text-lg">{description}</p>
             </motion.div>
@@ -207,7 +211,9 @@ const Hero7 = ({
               key={stat.label}
               className={` p-4 py-6 flex justify-center gap-2 items-center ${mappingBorder}`}
             >
-              <stat.icon size={22} className="text-primary/80" />
+              <div className="flex items-center justify-center p-2 rounded bg-gray-300">
+                <stat.icon size={22} className="text-primary/80" />
+              </div>
               <div className="flex gap-2 items-center">
                 <div className="text-sm font-bold text-foreground ">{stat.value}</div>
                 <div className="text-xs text-muted-foreground">{stat.label}</div>

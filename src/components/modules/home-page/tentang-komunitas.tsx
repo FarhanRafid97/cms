@@ -145,10 +145,10 @@ const TentangKomunistas = () => {
               Komunitas Literasi Terdepan
             </Badge>
           </motion.div>
-          <h1 className="md:text-6xl text-3xl font-bold mb-6 to-secondary text-primary eading-tight">
+          <h1 className="md:text-6xl text-2xl font-bold mb-6 to-secondary text-primary eading-tight">
             <TextWrapedBorder>Sekilas Komunitas ini</TextWrapedBorder>
           </h1>
-          <p className="md:text-xl text-sm text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
+          <p className="md:text-xl text-xs text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
             Tempat berkumpulnya para penggemar buku untuk berbagi pengetahuan, pengalaman, dan
             membangun masa depan literasi yang lebih baik
           </p>
@@ -181,7 +181,7 @@ const TentangKomunistas = () => {
                       Tentang Komunitas
                     </CardTitle>
                   </div>
-                  <CardDescription className="md:text-sm text-sm leading-relaxed space-y-4">
+                  <CardDescription className="md:text-sm text-xs leading-relaxed space-y-4">
                     <span className="text-foreground/80">
                       Komunitas ini adalah wadah berkumpulnya para penggemar buku yang bertujuan
                       untuk membantu para pengguna memahami lebih dalam tentang dunia literasi dan

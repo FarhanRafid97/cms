@@ -48,7 +48,7 @@ export const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4  grid grid-cols-5">
         <div className="flex items-center gap-2 col-span-2">
           <Link href="/">
-            <Image src="/main-logo.png" alt="Logo" width={70} height={70} />
+            <Image src="/main-logo.png" alt="Logo" width={60} height={60} />
           </Link>
         </div>
         <div className=" items-center gap-2 col-span-3 flex justify-end ">

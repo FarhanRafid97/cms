@@ -1,6 +1,5 @@
 import { cn } from '@/lib/tiptap-utils';
 import React from 'react';
-
 const defaulCssBorder =
   'pointer-events-none  group-hover/cover:opacity-100 group h-3 w-3 border-sky-600 border-2 bg-background dark:bg-white  group-hover/cover:bg-white absolute';
 const TextWrapedBorder = ({
