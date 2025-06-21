@@ -22,8 +22,8 @@ export const ContactUs = ({
   web = { label: 'shadcnblocks.com', url: 'https://shadcnblocks.com' },
 }: ContactUsProps) => {
   return (
-    <LayoutSection>
-      <div className="container">
+    <LayoutSection containerClassName="">
+      <div className="container py-8">
         <div className="mx-auto flex max-w-screen-xl flex-col justify-between gap-10 lg:flex-row lg:gap-20">
           <div className="mx-auto flex max-w-sm flex-col justify-between gap-10">
             <div className="text-center lg:text-left">
@@ -54,7 +54,7 @@ export const ContactUs = ({
               </ul>
             </div>
           </div>
-          <div className="mx-auto flex max-w-screen-md flex-col gap-6 rounded-lg border p-10">
+          <div className="mx-auto flex max-w-screen-md flex-col gap-6 rounded-lg border p-10 bg-background shadow">
             <div className="flex gap-4">
               <div className="grid w-full items-center gap-1.5">
                 <Label htmlFor="firstname">Nama Depan</Label>

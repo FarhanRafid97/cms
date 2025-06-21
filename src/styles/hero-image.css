@@ -39,8 +39,8 @@
 
 :root {
   --border-color: hsl(0, 0%, 79%, 0.7);
-  --border-length: 14px;
-  --width-border: 1.5px;
+  --border-length: 10px;
+  --width-border: 1px;
 }
 
 /* For top border only */

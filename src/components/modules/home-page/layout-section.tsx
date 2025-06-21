@@ -1,5 +1,4 @@
 import { cn } from '@/lib/utils';
-import { useMediaQuery } from '@uidotdev/usehooks';
 
 export default function LayoutSection({
   children,
@@ -10,14 +9,11 @@ export default function LayoutSection({
   className?: string;
   containerClassName?: string;
 }) {
-  const isMobile = useMediaQuery('(max-width: 768px)');
-  console.log(isMobile);
   return (
-    <section className={cn('w-full border-custome-bottom', className)}>
+    <section className={cn('w-full border-custome-bottom md:px-0 px-3', className)}>
       <div
         className={cn(
-          `container mx-auto lg:px-8 max-w-6xl py-8 ${containerClassName}`,
-          isMobile ? '' : 'border-custome-x',
+          `container mx-auto lg:px-8 border-custome-x max-w-6xl py-8 px-3 ${containerClassName}`,
         )}
       >
         {children}

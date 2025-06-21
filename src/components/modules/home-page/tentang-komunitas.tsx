@@ -198,7 +198,7 @@ const TentangKomunistas = () => {
                 transition: { type: 'spring', stiffness: 200, damping: 15 },
               }}
             >
-              <Card className="border-none bg-muted/20">
+              <Card className="border-none bg-background">
                 <CardHeader className="space-y-4">
                   <div className="flex items-center gap-3">
                     <div className="p-2 bg-white5 border rounded-lg">
@@ -208,7 +208,7 @@ const TentangKomunistas = () => {
                       Tentang Komunitas
                     </CardTitle>
                   </div>
-                  <CardDescription className="md:text-lg text-sm leading-relaxed space-y-4">
+                  <CardDescription className="md:text-sm text-sm leading-relaxed space-y-4">
                     <span className="text-foreground/80">
                       Komunitas ini adalah wadah berkumpulnya para penggemar buku yang bertujuan
                       untuk membantu para pengguna memahami lebih dalam tentang dunia literasi dan
@@ -241,10 +241,10 @@ const TentangKomunistas = () => {
                     transition: { type: 'spring', stiffness: 200, damping: 15 },
                   }}
                 >
-                  <Card className="border-none bg-white/60 backdrop-blur-sm hover:bg-white/80 transition-all duration-300 group">
+                  <Card className="border-none bg-background backdrop-blur-sm hover:bg-background/80 transition-all duration-300 group">
                     <CardContent className="p-6">
                       <div className="flex items-start gap-4">
-                        <div className="p-3 bg-white/10 border rounded-xl group-hover:bg-primary/5 transition-colors duration-300">
+                        <div className="p-3 bg-background-new/95 border rounded-xl group-hover:bg-primary/5 transition-colors duration-300">
                           <feature.icon className="md:w-6 md:h-6 w-4 h-4 text-rose-500 " />
                         </div>
                         <div className="flex-1">

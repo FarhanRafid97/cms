@@ -40,7 +40,7 @@ export const Navbar = () => {
   }, [getActivePath]);
 
   return (
-    <LayoutNavbar className="  sticky top-0 z-50 bg-[#f5f5f5]/95 md:py-0">
+    <LayoutNavbar className="  sticky top-0 z-50 bg-background-new/95 md:py-0">
       <div className="max-w-7xl mx-auto px-4  grid grid-cols-5">
         <div className="flex items-center gap-2 col-span-2">
           <Link href="/">

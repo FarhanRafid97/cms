@@ -4,7 +4,7 @@ import { Navbar } from './Navbar';
 
 const layoutWithNavbar = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="relative bg-[#f5f5f5]">
+    <div className="relative bg-background-new">
       <Navbar />
 
       {children}

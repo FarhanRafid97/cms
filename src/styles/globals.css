@@ -14,6 +14,7 @@
 
 @layer base {
   :root {
+    --background-new: 0 0% 96.1%;
     --scroll-shadow-size: 40px;
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
