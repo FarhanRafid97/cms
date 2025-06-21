@@ -7,99 +7,184 @@ import LayoutSection from './layout-section';
 import CarouselComunityPict from './list-pict-about-comunity';
 import TextWrapedBorder from './text-wrapped';
 
-// Animation variants for scroll-triggered animations
-const containerVariants = {
-  hidden: { opacity: 0 },
+// Natural spring presets for organic feel
+const naturalSpring = {
+  type: 'spring',
+  bounce: 0.3,
+};
+
+const softSpring = {
+  type: 'spring',
+  bounce: 0.3,
+};
+
+const bouncySpring = {
+  type: 'spring',
+  damping: 20,
+  stiffness: 140,
+  mass: 0.8,
+  restDelta: 0.001,
+  restSpeed: 0.001,
+};
+
+// Organic animation variants
+const organicContainerVariants = {
+  hidden: {
+    opacity: 0,
+  },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
+      staggerChildren: 0.15,
+      delayChildren: 0.1,
+      ...softSpring,
     },
   },
 };
 
-const itemVariants = {
+const flowingItemVariants = {
   hidden: {
     opacity: 0,
-    y: 20,
+    y: 30,
+    scale: 0.96,
+    rotateX: -10,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    rotateX: 0,
+    transition: {
+      ...naturalSpring,
+      duration: 0.8,
+    },
+  },
+};
+
+const gentleFadeVariants = {
+  hidden: {
+    opacity: 0,
+    y: 25,
+    filter: 'blur(4px)',
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: {
+      ...softSpring,
+      duration: 0.9,
+    },
+  },
+};
+
+const floatingSlideVariants = {
+  hidden: {
+    opacity: 0,
+
+    y: 15,
     scale: 0.95,
   },
   visible: {
     opacity: 1,
+
     y: 0,
     scale: 1,
     transition: {
-      type: 'spring',
-      stiffness: 100,
-      damping: 15,
-      duration: 0.6,
+      ...naturalSpring,
+      duration: 1,
     },
   },
 };
 
-const fadeInUpVariants = {
+const driftingSlideVariants = {
   hidden: {
     opacity: 0,
-    y: 30,
+
+    y: -10,
+    scale: 0.98,
   },
   visible: {
     opacity: 1,
+
     y: 0,
+    scale: 1,
     transition: {
-      type: 'spring',
+      ...naturalSpring,
+      duration: 1.1,
+    },
+  },
+};
+
+const breathingScaleVariants = {
+  hidden: {
+    opacity: 0,
+    scale: 0.92,
+    rotateY: -5,
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    rotateY: 0,
+    transition: {
+      ...bouncySpring,
+      duration: 0.7,
+    },
+  },
+};
+
+// Hover animations with natural feel
+const cardHoverVariants = {
+  hover: {
+    scale: 1.02,
+    y: -2,
+    rotateX: 2,
+    transition: {
+      ...naturalSpring,
+      duration: 0.4,
+    },
+  },
+  tap: {
+    scale: 0.98,
+    transition: {
+      ...naturalSpring,
+      duration: 0.2,
+    },
+  },
+};
+
+const featureHoverVariants = {
+  hover: {
+    x: 12,
+    scale: 1.01,
+    transition: {
+      ...softSpring,
+      duration: 0.5,
+    },
+  },
+  tap: {
+    scale: 0.98,
+    transition: {
+      ...naturalSpring,
+      duration: 0.2,
+    },
+  },
+};
+
+const buttonHoverVariants = {
+  hover: {
+    scale: 1.05,
+    y: -1,
+    transition: {
+      ...bouncySpring,
       duration: 0.3,
     },
   },
-};
-
-const slideInLeftVariants = {
-  hidden: {
-    opacity: 0,
-    x: -30,
-  },
-  visible: {
-    opacity: 1,
-    x: 0,
+  tap: {
+    scale: 0.95,
     transition: {
-      type: 'spring',
-      stiffness: 100,
-      damping: 20,
-      duration: 0.7,
-    },
-  },
-};
-
-const slideInRightVariants = {
-  hidden: {
-    opacity: 0,
-    x: 30,
-  },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      type: 'spring',
-      stiffness: 100,
-      damping: 20,
-      duration: 0.7,
-    },
-  },
-};
-
-const scaleInVariants = {
-  hidden: {
-    opacity: 0,
-    scale: 0.9,
-  },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      type: 'spring',
-      stiffness: 120,
-      damping: 15,
-      duration: 0.6,
+      ...naturalSpring,
+      duration: 0.15,
     },
   },
 };
@@ -129,29 +214,79 @@ const TentangKomunistas = () => {
         {/* Header Section */}
         <motion.div
           className="text-center mb-16"
-          variants={fadeInUpVariants}
+          variants={gentleFadeVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: '-50px' }}
+          viewport={{ once: true, margin: '-30px' }}
         >
           <motion.div
-            variants={scaleInVariants}
+            variants={breathingScaleVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: '-50px' }}
           >
             <Badge variant="secondary" className="mb-4 px-4 py-2 text-sm font-medium">
-              <Sparkles className="w-4 h-4 mr-2" />
+              <motion.div
+                animate={{
+                  rotate: [0, 5, -5, 0],
+                  scale: [1, 1.1, 1],
+                }}
+                transition={{
+                  duration: 2.5,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                  repeatDelay: 3,
+                }}
+              >
+                <Sparkles className="w-4 h-4 mr-2" />
+              </motion.div>
               Komunitas Literasi Terdepan
             </Badge>
           </motion.div>
-          <h1 className="md:text-6xl text-2xl font-bold mb-6 to-secondary text-primary eading-tight">
+
+          <motion.h1
+            className="md:text-6xl text-2xl font-bold mb-6 to-secondary text-primary leading-tight"
+            initial="hidden"
+            whileInView="visible"
+            variants={{
+              hidden: { opacity: 0, y: 30, scale: 0.95 },
+              visible: {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                transition: {
+                  ...naturalSpring,
+                  delay: 0.2,
+                  duration: 1,
+                },
+              },
+            }}
+            viewport={{ once: true }}
+          >
             <TextWrapedBorder>Sekilas Komunitas ini</TextWrapedBorder>
-          </h1>
-          <p className="md:text-xl text-xs text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
+          </motion.h1>
+
+          <motion.p
+            className="md:text-xl text-xs text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed"
+            initial="hidden"
+            whileInView="visible"
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: {
+                opacity: 1,
+                y: 0,
+                transition: {
+                  ...softSpring,
+                  delay: 0.4,
+                  duration: 0.8,
+                },
+              },
+            }}
+            viewport={{ once: true }}
+          >
             Tempat berkumpulnya para penggemar buku untuk berbagi pengetahuan, pengalaman, dan
             membangun masa depan literasi yang lebih baik
-          </p>
+          </motion.p>
         </motion.div>
 
         {/* Main Content */}
@@ -159,24 +294,29 @@ const TentangKomunistas = () => {
           {/* Text Content */}
           <motion.div
             className="space-y-8"
-            variants={slideInLeftVariants}
+            variants={floatingSlideVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: '-100px' }}
+            viewport={{ once: true, margin: '-80px' }}
           >
-            <motion.div
-              variants={scaleInVariants}
-              whileHover={{
-                scale: 1.02,
-                transition: { type: 'spring', stiffness: 200, damping: 15 },
-              }}
-            >
+            <motion.div variants={cardHoverVariants} whileHover="hover" whileTap="tap">
               <Card className="border-none bg-background">
                 <CardHeader className="space-y-4">
                   <div className="flex items-center gap-3">
-                    <div className="p-2 bg-white5 border rounded-lg">
-                      <Heart className="w-6 h-6 text-sky-500 " />
-                    </div>
+                    <motion.div
+                      className="p-2 bg-white5 border rounded-lg"
+                      animate={{
+                        rotate: [0, 2, -2, 0],
+                      }}
+                      transition={{
+                        duration: 4,
+                        repeat: Infinity,
+                        ease: 'easeInOut',
+                        repeatDelay: 2,
+                      }}
+                    >
+                      <Heart className="w-6 h-6 text-sky-500" />
+                    </motion.div>
                     <CardTitle className="md:text-3xl text-xl font-bold">
                       Tentang Komunitas
                     </CardTitle>
@@ -200,26 +340,33 @@ const TentangKomunistas = () => {
             {/* Features */}
             <motion.div
               className="space-y-4"
-              variants={containerVariants}
+              variants={organicContainerVariants}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: '-50px' }}
+              viewport={{ once: true, margin: '-40px' }}
             >
               {features.map((feature, index) => (
                 <motion.div
                   key={index}
-                  variants={itemVariants}
-                  whileHover={{
-                    x: 8,
-                    transition: { type: 'spring', stiffness: 200, damping: 15 },
-                  }}
+                  variants={flowingItemVariants}
+                  whileHover="hover"
+                  whileTap="tap"
+                  custom={index}
+                  {...featureHoverVariants}
                 >
-                  <Card className="border-none bg-background backdrop-blur-sm hover:bg-background/80 transition-all duration-300 group">
+                  <Card className="border-none bg-background backdrop-blur-sm hover:bg-background/80 transition-all duration-500 group">
                     <CardContent className="p-6">
                       <div className="flex items-start gap-4">
-                        <div className="p-3 bg-background-new/95 border rounded-xl group-hover:bg-primary/5 transition-colors duration-300">
-                          <feature.icon className="md:w-6 md:h-6 w-4 h-4 text-sky-500 " />
-                        </div>
+                        <motion.div
+                          className="p-3 bg-background-new/95 border rounded-xl group-hover:bg-primary/5 transition-colors duration-300"
+                          whileHover={{
+                            scale: 1.1,
+                            rotate: 5,
+                            transition: { ...softSpring, duration: 0.3 },
+                          }}
+                        >
+                          <feature.icon className="md:w-6 md:h-6 w-4 h-4 text-sky-500" />
+                        </motion.div>
                         <div className="flex-1">
                           <h3 className="md:text-lg text-sm font-semibold mb-2 text-foreground">
                             {feature.title}
@@ -228,7 +375,16 @@ const TentangKomunistas = () => {
                             {feature.description}
                           </p>
                         </div>
-                        <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all duration-300" />
+                        <motion.div
+                          whileHover={{
+                            x: 6,
+                            scale: 1.2,
+                            rotate: -10,
+                            transition: { ...bouncySpring, duration: 0.3 },
+                          }}
+                        >
+                          <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-all duration-300" />
+                        </motion.div>
                       </div>
                     </CardContent>
                   </Card>
@@ -240,62 +396,87 @@ const TentangKomunistas = () => {
           {/* Image Section */}
           <motion.div
             className="h-full my-auto relative"
-            variants={slideInRightVariants}
+            variants={driftingSlideVariants}
             initial="hidden"
             whileInView="visible"
-            transition={{ duration: 0.3, type: 'spring', stiffness: 100, damping: 15 }}
-            viewport={{ once: true, margin: '-100px' }}
+            viewport={{ once: true, margin: '-80px' }}
           >
-            <CarouselComunityPict />
+            <motion.div
+              animate={{
+                y: [0, -10, 0],
+                scale: [1, 1.02, 1],
+              }}
+              transition={{
+                duration: 6,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }}
+            >
+              <CarouselComunityPict />
+            </motion.div>
           </motion.div>
         </div>
 
         {/* Call to Action */}
         <motion.div
-          variants={fadeInUpVariants}
+          variants={gentleFadeVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: '-50px' }}
-          whileHover={{
-            scale: 1.02,
-            transition: { type: 'spring', stiffness: 150, damping: 15 },
-          }}
+          viewport={{ once: true, margin: '-40px' }}
         >
-          <Card className="border-none  bg-background border  border-[#dbdbdb] shadow">
-            <CardContent className="p-8 text-center">
-              <h3 className="md:text-2xl text-xl font-bold mb-4 ">
-                Siap Bergabung dengan Komunitas Kami?
-              </h3>
-              <span className="md:text-lg text-sm text-muted-foreground mb-6 max-w-2xl mx-auto">
-                Mulai perjalanan literasi Anda bersama ribuan pembaca lainnya. Dapatkan akses ke
-                diskusi eksklusif, rekomendasi buku, dan banyak lagi.
-              </span>
-              <motion.div
-                className="flex flex-col sm:flex-row gap-4 justify-center mt-6"
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-              >
-                <motion.div variants={itemVariants}>
-                  <Button size="lg" className="">
-                    <Users className="w-5 h-5 mr-2" />
-                    Bergabung Sekarang
-                  </Button>
+          <motion.div variants={cardHoverVariants} whileHover="hover" whileTap="tap">
+            <Card className="border-none bg-background border border-[#dbdbdb] shadow">
+              <CardContent className="p-8 text-center">
+                <motion.h3
+                  className="md:text-2xl text-xl font-bold mb-4"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ ...naturalSpring, delay: 0.2 }}
+                  viewport={{ once: true }}
+                >
+                  Siap Bergabung dengan Komunitas Kami?
+                </motion.h3>
+                <motion.span
+                  className="md:text-lg text-sm text-muted-foreground mb-6 max-w-2xl mx-auto"
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ ...softSpring, delay: 0.4 }}
+                  viewport={{ once: true }}
+                >
+                  Mulai perjalanan literasi Anda bersama ribuan pembaca lainnya. Dapatkan akses ke
+                  diskusi eksklusif, rekomendasi buku, dan banyak lagi.
+                </motion.span>
+                <motion.div
+                  className="flex flex-col sm:flex-row gap-4 justify-center mt-6"
+                  variants={organicContainerVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                >
+                  <motion.div variants={flowingItemVariants}>
+                    <motion.div variants={buttonHoverVariants} whileHover="hover" whileTap="tap">
+                      <Button size="lg" className="">
+                        <Users className="w-5 h-5 mr-2" />
+                        Bergabung Sekarang
+                      </Button>
+                    </motion.div>
+                  </motion.div>
+                  <motion.div variants={flowingItemVariants}>
+                    <motion.div variants={buttonHoverVariants} whileHover="hover" whileTap="tap">
+                      <Button
+                        variant="outline"
+                        size="lg"
+                        className="border-primary/20 hover:bg-primary/5 transition-all duration-300"
+                      >
+                        <BookOpen className="w-5 h-5 mr-2" />
+                        Jelajahi Buku
+                      </Button>
+                    </motion.div>
+                  </motion.div>
                 </motion.div>
-                <motion.div variants={itemVariants}>
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    className="border-primary/20 hover:bg-primary/5 transition-all duration-300"
-                  >
-                    <BookOpen className="w-5 h-5 mr-2" />
-                    Jelajahi Buku
-                  </Button>
-                </motion.div>
-              </motion.div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          </motion.div>
         </motion.div>
       </div>
     </LayoutSection>
