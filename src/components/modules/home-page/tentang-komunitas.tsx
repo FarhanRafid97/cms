@@ -1,7 +1,7 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowRight, BookOpen, Heart, MessageCircle, Sparkles, Star, Users } from 'lucide-react';
+import { ArrowRight, BookOpen, Heart, MessageCircle, Sparkles, Users } from 'lucide-react';
 import { motion } from 'framer-motion';
 import LayoutSection from './layout-section';
 import CarouselComunityPict from './list-pict-about-comunity';
@@ -105,13 +105,6 @@ const scaleInVariants = {
 };
 
 const TentangKomunistas = () => {
-  const stats = [
-    { icon: Users, label: 'Anggota Aktif', value: '2,500+' },
-    { icon: BookOpen, label: 'Buku Dibaca', value: '15,000+' },
-    { icon: MessageCircle, label: 'Diskusi', value: '500+' },
-    { icon: Star, label: 'Rating Rata-rata', value: '4.8/5' },
-  ];
-
   const features = [
     {
       icon: BookOpen,
@@ -132,26 +125,6 @@ const TentangKomunistas = () => {
 
   return (
     <LayoutSection className="relative overflow-hidden pt-0 md:py-0">
-      <motion.div
-        className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-24"
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: '-100px' }}
-      >
-        {stats.map((stat, index) => (
-          <motion.div key={index} variants={itemVariants}>
-            <Card className="border-none bg-white/90 backdrop-blur-sm hover:bg-white/70 transition-all duration-300">
-              <CardContent className="p-6 text-center">
-                <stat.icon className="w-8 h-8 mx-auto mb-3 text-primary" />
-                <div className="text-2xl font-bold text-foreground mb-1">{stat.value}</div>
-                <div className="text-sm text-muted-foreground">{stat.label}</div>
-              </CardContent>
-            </Card>
-          </motion.div>
-        ))}
-      </motion.div>
-
       <div className="w-full mx-auto relative z-10">
         {/* Header Section */}
         <motion.div

@@ -23,6 +23,10 @@ const ListNavbar = [
     label: 'Berita',
   },
 ];
+
+const defaulCssBorder =
+  'pointer-events-none rounded-full  group-hover/cover:opacity-100 group h-2 w-2 border-primary border-2 bg-background dark:bg-white  group-hover/cover:bg-white absolute';
+
 export const Navbar = () => {
   const [activeTab, setActiveTab] = useState({ path: '', label: '' });
   const router = useRouter();
@@ -61,20 +65,34 @@ export const Navbar = () => {
                   key={tab.path}
                   onFocus={() => setActiveTab(tab)}
                   onMouseOver={() => setActiveTab(tab)}
-                  onMouseLeave={() => setActiveTab(tab)}
                 >
+                  {' '}
                   {activeTab.path === tab.path ? (
                     <motion.div
                       layoutId="tab"
-                      className="absolute inset-0 rounded-lg bg-black/10"
+                      className={cn(
+                        '  absolute inset-0  inline-block border-2 border-primary  dark:bg-neutral-900 bg-background/80 px-2 py-2  ',
+                      )}
                       transition={{
                         duration: 0.3,
                         type: 'spring',
                         bounce: 0.1,
                       }}
-                    />
+                    >
+                      <div className={cn(defaulCssBorder, '-right-[4px] -top-[4px]')}></div>
+                      <div className={cn(defaulCssBorder, '-bottom-[4px] -right-[4px]')}></div>
+                      <div className={cn(defaulCssBorder, '-left-[4px] -top-[4px]')}></div>
+                      <div className={cn(defaulCssBorder, '-bottom-[4px] -left-[4px]')}></div>
+                    </motion.div>
                   ) : null}
-                  <span className="relative   font-[400] text-primary/40">{tab.label}</span>
+                  <span
+                    className={cn(
+                      'relative   font-[400] text-primary',
+                      activeTab.path === tab.path ? 'text-primary' : 'text-primary/40',
+                    )}
+                  >
+                    {tab.label}
+                  </span>
                 </motion.li>
               </Link>
             ))}

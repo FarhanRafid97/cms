@@ -1,12 +1,14 @@
 import { motion } from 'framer-motion';
-import { Send, Star } from 'lucide-react';
+import { BookOpen, MessageCircle, Send, Star, Users } from 'lucide-react';
 
 import { ButtonMovingBorder } from '@/components/common/moving-border';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Input } from '@/components/ui/input';
 
-import TextWrapedBorder from './text-wrapped';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
+import { match } from 'ts-pattern';
 import LayoutSection from './layout-section';
+import TextWrapedBorder from './text-wrapped';
 
 interface Hero7Props {
   heading?: string;
@@ -24,6 +26,41 @@ interface Hero7Props {
     }[];
   };
 }
+
+const stats = [
+  {
+    icon: Users,
+    label: 'Anggota Aktif',
+    value: '2,500+',
+    borderLarge: 'border-custome-right',
+    borderMedium: 'border-custome-bottom',
+    borderSmall: 'border-custome-bottom',
+  },
+  {
+    icon: BookOpen,
+    label: 'Buku Dibaca',
+    value: '15,000+',
+    borderLarge: 'border-custome-right',
+    borderMedium: 'border-custome-left',
+    borderSmall: 'border-custome-bottom',
+  },
+  {
+    icon: MessageCircle,
+    label: 'Diskusi',
+    value: '500+',
+    borderLarge: 'border-custome-right',
+    borderMedium: 'border-custome-right',
+    borderSmall: 'border-custome-bottom',
+  },
+  {
+    icon: Star,
+    label: 'Rating Rata-rata',
+    value: '4.8/5',
+    borderLarge: '',
+    borderMedium: 'border-custome-top',
+    borderSmall: '',
+  },
+];
 
 const Hero7 = ({
   heading = 'Komunitas Buku ',
@@ -55,8 +92,16 @@ const Hero7 = ({
     ],
   },
 }: Hero7Props) => {
+  const isLarge = useMediaQuery('(min-width: 1024px)');
+  console.log('isLarge', isLarge);
+  const isMedium = useMediaQuery('(min-width: 768px)');
+  console.log('isMedium', isMedium);
+
   return (
-    <LayoutSection className="relative flex h-full w-full items-center justify-center  dark:bg-black">
+    <LayoutSection
+      className="relative flex h-full w-full items-center justify-center  dark:bg-black "
+      containerClassName="lg:px-0 md:px-0 pb-0"
+    >
       {' '}
       <div className="wrapper-hero-image bg-red-400">
         <div className="hero-image"></div>
@@ -147,6 +192,30 @@ const Hero7 = ({
           </div>
         </section>
       </motion.div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-custome-top ">
+        {stats.map((stat) => {
+          const mappingBorder = match(isLarge)
+            .with(true, () => stat.borderLarge)
+            .otherwise(() =>
+              match(isMedium)
+                .with(true, () => stat.borderMedium)
+                .otherwise(() => stat.borderSmall),
+            );
+          console.log('mappingBorder', stat.label, mappingBorder);
+          return (
+            <div
+              key={stat.label}
+              className={` p-4 py-6 flex justify-center gap-2 items-center ${mappingBorder}`}
+            >
+              <stat.icon size={22} className="text-primary/80" />
+              <div className="flex gap-2 items-center">
+                <div className="text-sm font-bold text-foreground ">{stat.value}</div>
+                <div className="text-xs text-muted-foreground">{stat.label}</div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </LayoutSection>
   );
 };

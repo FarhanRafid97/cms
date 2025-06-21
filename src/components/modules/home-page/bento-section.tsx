@@ -7,7 +7,7 @@ import TextWrapedBorder from './text-wrapped';
 export default function BentoSection() {
   return (
     <LayoutSection>
-      <div className="mx-auto max-w-3xl lg:max-w-5xl px-6">
+      <div className="mx-auto w-full">
         <div className="text-center mb-16">
           <h1 className="md:text-6xl text-3xl font-bold mb-6 to-secondary text-primary eading-tight">
             <TextWrapedBorder className="text-emerald-500">Yang Kami Tawarkan</TextWrapedBorder>
@@ -19,7 +19,7 @@ export default function BentoSection() {
         </div>
         <div className="relative">
           <div className="relative z-10 grid grid-cols-6 gap-3">
-            <Card className="relative col-span-full flex overflow-hidden lg:col-span-2">
+            <Card className="relative col-span-full flex overflow-hidden lg:col-span-2 shadow ">
               <CardContent className="relative m-auto size-fit pt-6">
                 <div className="relative flex h-24 w-56 items-center">
                   <svg
@@ -40,7 +40,7 @@ export default function BentoSection() {
                 <h2 className="mt-6 text-center md:text-3xl text-xl font-semibold">Customizable</h2>
               </CardContent>
             </Card>
-            <Card className="relative col-span-full overflow-hidden sm:col-span-3 lg:col-span-2">
+            <Card className="relative col-span-full overflow-hidden sm:col-span-3 lg:col-span-2 shadow ">
               <CardContent className="pt-6">
                 <div className="relative mx-auto flex aspect-square size-32 rounded-full border before:absolute before:-inset-2 before:rounded-full before:border dark:border-white/10 dark:before:border-white/5">
                   <svg
@@ -100,7 +100,7 @@ export default function BentoSection() {
                 </div>
               </CardContent>
             </Card>
-            <Card className="relative col-span-full overflow-hidden sm:col-span-3 lg:col-span-2">
+            <Card className="relative col-span-full overflow-hidden sm:col-span-3 lg:col-span-2 shadow  ">
               <CardContent className="pt-6">
                 <div className="pt-6 lg:px-6">
                   <svg

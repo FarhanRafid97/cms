@@ -10,12 +10,12 @@
 }
 
 .wrapper-hero-image {
-  /* -webkit-mask: radial-gradient(
+  -webkit-mask: radial-gradient(
       50% 40% at 50% 46.400000000000006%,
       #000000 35.37612612612613%,
       rgba(0, 0, 0, 0) 100%
     )
-    add; */
+    add;
   flex: none;
   display: flex;
   align-items: center;
@@ -23,13 +23,13 @@
   height: 80vh;
   left: 0;
   width: 100%;
+  opacity: 0.08;
   mask: radial-gradient(
       50% 40% at 50% 46.400000000000006%,
       rgba(0, 0, 0, 1) 35.37612612612613%,
       rgba(0, 0, 0, 0) 100%
     )
     add;
-  opacity: 0.04;
   overflow: visible;
   position: absolute;
   right: 0;
@@ -39,11 +39,12 @@
 
 :root {
   --border-color: hsl(0, 0%, 79%, 0.7);
-  --border-length: 10px;
+  --border-length: 11px;
   --width-border: 1px;
 }
 
 /* For top border only */
+/* Start of Selection */
 .border-custome-top {
   background-image: repeating-linear-gradient(
     90deg,
@@ -56,6 +57,42 @@
   background-repeat: repeat-x;
   background-size: 100% var(--width-border);
 }
+
+.border-custome-all {
+  background-image: repeating-linear-gradient(
+      90deg,
+      var(--border-color),
+      var(--border-color) var(--border-length),
+      transparent var(--border-length),
+      transparent calc(var(--border-length) + 10px)
+    ),
+    repeating-linear-gradient(
+      90deg,
+      var(--border-color),
+      var(--border-color) var(--border-length),
+      transparent var(--border-length),
+      transparent calc(var(--border-length) + 10px)
+    ),
+    repeating-linear-gradient(
+      180deg,
+      var(--border-color),
+      var(--border-color) var(--border-length),
+      transparent var(--border-length),
+      transparent calc(var(--border-length) + 10px)
+    ),
+    repeating-linear-gradient(
+      180deg,
+      var(--border-color),
+      var(--border-color) var(--border-length),
+      transparent var(--border-length),
+      transparent calc(var(--border-length) + 10px)
+    );
+  background-position: left top, left bottom, left top, right top;
+  background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+  background-size: 100% var(--width-border), 100% var(--width-border), var(--width-border) 100%,
+    var(--width-border) 100%;
+}
+/* End of Selection */
 /* For top border only */
 .border-custome-bottom {
   background-image: repeating-linear-gradient(
