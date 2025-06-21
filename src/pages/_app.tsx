@@ -8,9 +8,11 @@ import '@/styles/globals.css';
 import '@/styles/nprogress.css';
 import '@/styles/quil.editor.css';
 import '@/styles/carousel.css';
+import '@/styles/hero-image.css';
+import { GeistSans } from 'geist/font/sans';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Loader2 } from 'lucide-react';
-
+import { GeistMono } from 'geist/font/mono';
 import { ThemeProvider } from 'next-themes';
 import { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
@@ -18,6 +20,8 @@ import nProgress from 'nprogress';
 import { useEffect } from 'react';
 import { Toaster } from 'sonner';
 import { match, P } from 'ts-pattern';
+import { cn } from '@/lib/utils';
+import { ClientOnly } from '@/components/Layouts/WrapperClient';
 
 const progress = nProgress.configure({ showSpinner: false });
 
@@ -47,28 +51,38 @@ export default function App({ Component, pageProps: { ...pageProps } }: AppProps
       <ProvideAuth>
         {/* <script src="https://unpkg.com/react-scan/dist/auto.global.js" async /> */}
         <Providers>
-          {isLogout && (
-            <div className="fixed bg-white/70 backdrop-blur-md inset-0 z-[23123] w-screen h-screen flex justify-center items-center">
-              <div className="flex flex-col items-center justify-center gap-2">
-                <Loader2 size={40} className="animate-spin" />
-                Loading Sign Out...
-              </div>
-            </div>
-          )}
-          {match(router.pathname)
-            .with(P.string.includes('/dashboard'), () => (
-              <Layout id={data?.batch || ''}>
-                <Component {...pageProps} />
-                <div className="print:hidden">
-                  <ReactQueryDevtools initialIsOpen={false} />
+          <main className={cn(GeistMono.className, GeistSans.className, 'font-sans')}>
+            {isLogout && (
+              <div className="fixed bg-white/70 backdrop-blur-md inset-0 z-[23123] w-screen h-screen flex justify-center items-center">
+                <div className="flex flex-col items-center justify-center gap-2">
+                  <Loader2 size={40} className="animate-spin" />
+                  Loading Sign Out...
                 </div>
-              </Layout>
-            ))
-            .otherwise(() => (
-              <Component {...pageProps} />
-            ))}
-          <ListMenuSearch />
-          <Toaster richColors visibleToasts={3} duration={3000} closeButton position="top-right" />
+              </div>
+            )}
+            {match(router.pathname)
+              .with(P.string.includes('/dashboard'), () => (
+                <Layout id={data?.batch || ''}>
+                  <Component {...pageProps} />
+                  <div className="print:hidden">
+                    <ReactQueryDevtools initialIsOpen={false} />
+                  </div>
+                </Layout>
+              ))
+              .otherwise(() => (
+                <ClientOnly>
+                  <Component {...pageProps} />
+                </ClientOnly>
+              ))}
+            <ListMenuSearch />
+            <Toaster
+              richColors
+              visibleToasts={3}
+              duration={3000}
+              closeButton
+              position="top-right"
+            />
+          </main>
         </Providers>
       </ProvideAuth>
     </ThemeProvider>

@@ -1,7 +1,8 @@
+'use client';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { cn } from '@/lib/utils';
-import { useMediaQuery } from '@uidotdev/usehooks';
 
-export default function LayoutSection({
+export default function LayoutNavbar({
   children,
   className = '',
   containerClassName = '',
@@ -11,12 +12,11 @@ export default function LayoutSection({
   containerClassName?: string;
 }) {
   const isMobile = useMediaQuery('(max-width: 768px)');
-  console.log(isMobile);
   return (
     <section className={cn('w-full border-custome-bottom', className)}>
       <div
         className={cn(
-          `container mx-auto lg:px-8 max-w-6xl py-8 ${containerClassName}`,
+          `container mx-auto lg:px-8 max-w-6xl   py-4 ${containerClassName}`,
           isMobile ? '' : 'border-custome-x',
         )}
       >

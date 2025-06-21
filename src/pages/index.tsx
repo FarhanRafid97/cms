@@ -8,7 +8,7 @@ import { ContactUs } from '@/components/modules/home-page/contact-us';
 export default function Home() {
   return (
     <LayoutWithNavbar>
-      <div className="grid grid-cols-1 gap-4">
+      <div className="grid grid-cols-1 relative ">
         <Hero7 />
         <TentangKomunistas />
 

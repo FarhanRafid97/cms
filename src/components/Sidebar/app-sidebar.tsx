@@ -27,7 +27,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 <div className="flex aspect-square size-8 items-center justify-center rounded-lg  text-sidebar-primary-foreground">
                   <div className="  rounded-xl">
                     <Image
-                      src="/book-logo.png"
+                      src="/main-logo.png"
                       width={40}
                       height={40}
                       alt="logo mass pro"

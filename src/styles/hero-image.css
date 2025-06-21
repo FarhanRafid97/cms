@@ -1,0 +1,142 @@
+.hero-image {
+  position: absolute;
+  border-radius: inherit;
+  inset: 0px;
+  background-image: url('/image-hero.svg');
+  background-repeat: repeat;
+  background-position: center center;
+  border: 0px;
+  background-size: 74px;
+}
+
+.wrapper-hero-image {
+  /* -webkit-mask: radial-gradient(
+      50% 40% at 50% 46.400000000000006%,
+      #000000 35.37612612612613%,
+      rgba(0, 0, 0, 0) 100%
+    )
+    add; */
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  left: 0;
+  width: 100%;
+  mask: radial-gradient(
+      50% 40% at 50% 46.400000000000006%,
+      rgba(0, 0, 0, 1) 35.37612612612613%,
+      rgba(0, 0, 0, 0) 100%
+    )
+    add;
+  opacity: 0.04;
+  overflow: visible;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 0;
+}
+
+:root {
+  --border-color: hsl(0, 0%, 79%, 0.7);
+  --border-length: 14px;
+  --width-border: 1.5px;
+}
+
+/* For top border only */
+.border-custome-top {
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--border-color),
+    var(--border-color) var(--border-length),
+    transparent var(--border-length),
+    transparent calc(var(--border-length) + 10px)
+  );
+  background-position: left top;
+  background-repeat: repeat-x;
+  background-size: 100% var(--width-border);
+}
+/* For top border only */
+.border-custome-bottom {
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--border-color),
+    var(--border-color) var(--border-length),
+    transparent var(--border-length),
+    transparent calc(var(--border-length) + 10px)
+  );
+  background-position: left bottom;
+  background-repeat: repeat-x;
+  background-size: 100% var(--width-border);
+}
+
+/* For left border only */
+.border-custome-left {
+  background-image: repeating-linear-gradient(
+    180deg,
+    var(--border-color),
+    var(--border-color) var(--border-length),
+    transparent var(--border-length),
+    transparent calc(var(--border-length) + 10px)
+  );
+  background-position: left top;
+  background-repeat: repeat-y;
+  background-size: var(--width-border) 100%;
+}
+
+/* For right border only */
+.border-custome-right {
+  background-image: repeating-linear-gradient(
+    180deg,
+    var(--border-color),
+    var(--border-color) var(--border-length),
+    transparent var(--border-length),
+    transparent calc(var(--border-length) + 10px)
+  );
+  background-position: right top;
+  background-repeat: repeat-y;
+  background-size: var(--width-border) 100%;
+}
+
+/* For horizontal borders (top and bottom) */
+.border-custome-y {
+  background-image: repeating-linear-gradient(
+      90deg,
+      var(--border-color),
+      var(--border-color) var(--border-length),
+      transparent var(--border-length),
+      transparent calc(var(--border-length) + 10px)
+    ),
+    repeating-linear-gradient(
+      90deg,
+      var(--border-color),
+      var(--border-color) var(--border-length),
+      transparent var(--border-length),
+      transparent calc(var(--border-length) + 10px)
+    );
+  background-position: left top, left bottom;
+  background-repeat: repeat-x, repeat-x;
+  background-size: 100% var(--width-border), 100% var(--width-border);
+}
+
+/* For vertical borders (left and right) */
+.border-custome-x {
+  background-image: repeating-linear-gradient(
+      180deg,
+      var(--border-color),
+      var(--border-color) var(--border-length),
+      transparent var(--border-length),
+      transparent calc(var(--border-length) + 10px)
+    ),
+    repeating-linear-gradient(
+      180deg,
+      var(--border-color),
+      var(--border-color) var(--border-length),
+      transparent var(--border-length),
+      transparent calc(var(--border-length) + 10px)
+    );
+  background-position: left top, right top;
+  background-repeat: repeat-y, repeat-y;
+  background-size: var(--width-border) 100%, var(--width-border) 100%;
+}
+/* End of Selection */

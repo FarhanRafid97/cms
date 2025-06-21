@@ -1,12 +1,11 @@
 import React from 'react';
 import LayoutSection from './layout-section';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import {
-  Accordion,
-  AccordionContent,
-  AccordionTrigger,
-  AccordionItem,
-} from '@/components/ui/accordion';
+import { Accordion, AccordionContent, AccordionItem } from '@/components/ui/accordion';
+import * as AccordionPrimitive from '@radix-ui/react-accordion';
+
+import { Plus } from 'lucide-react';
+
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 const listFaq = [
@@ -62,7 +61,7 @@ const Faq = () => {
   return (
     <LayoutSection>
       <div>
-        <Card className="relative col-span-full overflow-hidden sm:col-span-3 lg:col-span-2 bg-[#F5F5F5] py-4">
+        <Card className="relative col-span-full shadow-sm overflow-hidden sm:col-span-3 lg:col-span-2 bg-background py-4">
           <CardHeader>
             <CardTitle className="text-4xl font-bold text-primary text-center">
               Tanya jawab
@@ -72,24 +71,32 @@ const Faq = () => {
             </CardDescription>
           </CardHeader>
           <CardContent className="mt-16">
-            <div className="md:w-3/4 w-full mx-auto">
-              <Accordion type="single" collapsible>
-                {listFaq.map((fat) => {
-                  return (
-                    <AccordionItem value={fat.question} key={fat.question}>
-                      <AccordionTrigger className="md:text-lg text-sm text-start">
-                        {fat.question}
-                      </AccordionTrigger>
-                      <AccordionContent>
-                        <ul className="list-disc list-inside p-2 text-start md:text-md text-sm">
-                          {fat.answer.map((answer) => {
-                            return <li key={answer}>{answer}</li>;
-                          })}
-                        </ul>
-                      </AccordionContent>
-                    </AccordionItem>
-                  );
-                })}
+            <div className="md:w-10/12 w-full mx-auto">
+              <Accordion type="single" collapsible className="w-full -space-y-px" defaultValue="3">
+                {listFaq.map((item) => (
+                  <AccordionItem
+                    value={item.question}
+                    key={item.question}
+                    className="border bg-background px-4 py-1 first:rounded-t-lg last:rounded-b-lg"
+                  >
+                    <AccordionPrimitive.Header className="flex">
+                      <AccordionPrimitive.Trigger className="flex flex-1 items-center justify-between py-2 text-left text-[15px] font-semibold leading-6 transition-all [&>svg>path:last-child]:origin-center [&>svg>path:last-child]:transition-all [&>svg>path:last-child]:duration-200 [&[data-state=open]>svg>path:last-child]:rotate-90 [&[data-state=open]>svg>path:last-child]:opacity-0 [&[data-state=open]>svg]:rotate-180">
+                        {item.question}
+                        <Plus
+                          size={16}
+                          strokeWidth={2}
+                          className="shrink-0 opacity-60 transition-transform duration-200"
+                          aria-hidden="true"
+                        />
+                      </AccordionPrimitive.Trigger>
+                    </AccordionPrimitive.Header>
+                    <AccordionContent className="pb-2 text-muted-foreground">
+                      {item.answer.map((answer) => (
+                        <p key={answer}>{answer}</p>
+                      ))}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
               </Accordion>
             </div>
             <div className="mx-auto flex max-w-4xl flex-col items-center rounded-lg bg-white shadow p-4 text-center md:rounded-xl md:p-6 lg:p-8 mt-16">

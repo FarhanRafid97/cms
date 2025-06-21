@@ -1,9 +1,10 @@
+import LayoutNavbar from './layout-navbar';
+import { cn } from '@/lib/utils';
+import { motion } from 'motion/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useCallback, useEffect, useState } from 'react';
-import { motion } from 'motion/react';
 import { useRouter } from 'next/router';
-import { cn } from '@/lib/utils';
+import { useCallback, useEffect, useState } from 'react';
 const ListNavbar = [
   {
     path: '/',
@@ -39,19 +40,14 @@ export const Navbar = () => {
   }, [getActivePath]);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: -100 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="mx-auto w-full md:w-3/4 rounded-2xl bg-gray-400/5 backdrop-blur-sm sticky top-0 z-50 border border-[#dbdbdbd]"
-    >
-      <div className="max-w-7xl mx-auto px-4 py-3 grid grid-cols-5">
-        <div className="flex items-center gap-2 col-span-1">
+    <LayoutNavbar className="  sticky top-0 z-50 bg-[#f5f5f5]/95 md:py-0">
+      <div className="max-w-7xl mx-auto px-4  grid grid-cols-5">
+        <div className="flex items-center gap-2 col-span-2">
           <Link href="/">
-            <Image src="/book-logo.png" alt="Logo" width={30} height={30} />
+            <Image src="/main-logo.png" alt="Logo" width={70} height={70} />
           </Link>
         </div>
-        <div className=" items-center gap-2 col-span-3 flex justify-center ">
+        <div className=" items-center gap-2 col-span-3 flex justify-end ">
           <ul className="flex gap-2">
             {ListNavbar.map((tab) => (
               <Link key={tab.path} href={tab.path}>
@@ -78,13 +74,13 @@ export const Navbar = () => {
                       }}
                     />
                   ) : null}
-                  <span className="relative text-inherit">{tab.label}</span>
+                  <span className="relative   font-[400] text-primary/40">{tab.label}</span>
                 </motion.li>
               </Link>
             ))}
           </ul>
         </div>
       </div>
-    </motion.div>
+    </LayoutNavbar>
   );
 };
