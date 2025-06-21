@@ -7,188 +7,6 @@ import LayoutSection from './layout-section';
 import CarouselComunityPict from './list-pict-about-comunity';
 import TextWrapedBorder from './text-wrapped';
 
-// Natural spring presets for organic feel
-const naturalSpring = {
-  type: 'spring',
-  bounce: 0.3,
-};
-
-const softSpring = {
-  type: 'spring',
-  bounce: 0.3,
-};
-
-const bouncySpring = {
-  type: 'spring',
-  damping: 20,
-  stiffness: 140,
-  mass: 0.8,
-  restDelta: 0.001,
-  restSpeed: 0.001,
-};
-
-// Organic animation variants
-const organicContainerVariants = {
-  hidden: {
-    opacity: 0,
-  },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.1,
-      ...softSpring,
-    },
-  },
-};
-
-const flowingItemVariants = {
-  hidden: {
-    opacity: 0,
-    y: 30,
-    scale: 0.96,
-    rotateX: -10,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    rotateX: 0,
-    transition: {
-      ...naturalSpring,
-      duration: 0.8,
-    },
-  },
-};
-
-const gentleFadeVariants = {
-  hidden: {
-    opacity: 0,
-    y: 25,
-    filter: 'blur(4px)',
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    filter: 'blur(0px)',
-    transition: {
-      ...softSpring,
-      duration: 0.9,
-    },
-  },
-};
-
-const floatingSlideVariants = {
-  hidden: {
-    opacity: 0,
-
-    y: 15,
-    scale: 0.95,
-  },
-  visible: {
-    opacity: 1,
-
-    y: 0,
-    scale: 1,
-    transition: {
-      ...naturalSpring,
-      duration: 1,
-    },
-  },
-};
-
-const driftingSlideVariants = {
-  hidden: {
-    opacity: 0,
-
-    y: -10,
-    scale: 0.98,
-  },
-  visible: {
-    opacity: 1,
-
-    y: 0,
-    scale: 1,
-    transition: {
-      ...naturalSpring,
-      duration: 1.1,
-    },
-  },
-};
-
-const breathingScaleVariants = {
-  hidden: {
-    opacity: 0,
-    scale: 0.92,
-    rotateY: -5,
-  },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    rotateY: 0,
-    transition: {
-      ...bouncySpring,
-      duration: 0.7,
-    },
-  },
-};
-
-// Hover animations with natural feel
-const cardHoverVariants = {
-  hover: {
-    scale: 1.02,
-    y: -2,
-    rotateX: 2,
-    transition: {
-      ...naturalSpring,
-      duration: 0.4,
-    },
-  },
-  tap: {
-    scale: 0.98,
-    transition: {
-      ...naturalSpring,
-      duration: 0.2,
-    },
-  },
-};
-
-const featureHoverVariants = {
-  hover: {
-    x: 12,
-    scale: 1.01,
-    transition: {
-      ...softSpring,
-      duration: 0.5,
-    },
-  },
-  tap: {
-    scale: 0.98,
-    transition: {
-      ...naturalSpring,
-      duration: 0.2,
-    },
-  },
-};
-
-const buttonHoverVariants = {
-  hover: {
-    scale: 1.05,
-    y: -1,
-    transition: {
-      ...bouncySpring,
-      duration: 0.3,
-    },
-  },
-  tap: {
-    scale: 0.95,
-    transition: {
-      ...naturalSpring,
-      duration: 0.15,
-    },
-  },
-};
-
 const TentangKomunistas = () => {
   const features = [
     {
@@ -214,15 +32,15 @@ const TentangKomunistas = () => {
         {/* Header Section */}
         <motion.div
           className="text-center mb-16"
-          variants={gentleFadeVariants}
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0, y: 25, filter: 'blur(4px)' }}
+          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          transition={{ type: 'spring', bounce: 0.3, duration: 0.9 }}
           viewport={{ once: true, margin: '-30px' }}
         >
           <motion.div
-            variants={breathingScaleVariants}
-            initial="hidden"
-            whileInView="visible"
+            initial={{ opacity: 0, scale: 0.92, rotateY: -5 }}
+            whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
+            transition={{ type: 'spring', damping: 20, stiffness: 140, mass: 0.8, duration: 0.7 }}
             viewport={{ once: true, margin: '-50px' }}
           >
             <Badge variant="secondary" className="mb-4 px-4 py-2 text-sm font-medium">
@@ -246,21 +64,9 @@ const TentangKomunistas = () => {
 
           <motion.h1
             className="md:text-6xl text-2xl font-bold mb-6 to-secondary text-primary leading-tight"
-            initial="hidden"
-            whileInView="visible"
-            variants={{
-              hidden: { opacity: 0, y: 30, scale: 0.95 },
-              visible: {
-                opacity: 1,
-                y: 0,
-                scale: 1,
-                transition: {
-                  ...naturalSpring,
-                  delay: 0.2,
-                  duration: 1,
-                },
-              },
-            }}
+            initial={{ opacity: 0, y: 30, scale: 0.95 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ type: 'spring', bounce: 0.3, delay: 0.2, duration: 1 }}
             viewport={{ once: true }}
           >
             <TextWrapedBorder>Sekilas Komunitas ini</TextWrapedBorder>
@@ -268,20 +74,9 @@ const TentangKomunistas = () => {
 
           <motion.p
             className="md:text-xl text-xs text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed"
-            initial="hidden"
-            whileInView="visible"
-            variants={{
-              hidden: { opacity: 0, y: 20 },
-              visible: {
-                opacity: 1,
-                y: 0,
-                transition: {
-                  ...softSpring,
-                  delay: 0.4,
-                  duration: 0.8,
-                },
-              },
-            }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ type: 'spring', bounce: 0.3, delay: 0.4, duration: 0.8 }}
             viewport={{ once: true }}
           >
             Tempat berkumpulnya para penggemar buku untuk berbagi pengetahuan, pengalaman, dan
@@ -294,12 +89,16 @@ const TentangKomunistas = () => {
           {/* Text Content */}
           <motion.div
             className="space-y-8"
-            variants={floatingSlideVariants}
-            initial="hidden"
-            whileInView="visible"
+            initial={{ opacity: 0, y: 80, filter: 'blur(4px)' }}
+            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ type: 'spring', bounce: 0.3, duration: 0.9 }}
             viewport={{ once: true, margin: '-80px' }}
           >
-            <motion.div variants={cardHoverVariants} whileHover="hover" whileTap="tap">
+            <motion.div
+              whileHover={{ scale: 1.02, y: -2, rotateX: 2 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ type: 'spring', bounce: 0.3, duration: 0.4 }}
+            >
               <Card className="border-none bg-background">
                 <CardHeader className="space-y-4">
                   <div className="flex items-center gap-3">
@@ -338,21 +137,15 @@ const TentangKomunistas = () => {
             </motion.div>
 
             {/* Features */}
-            <motion.div
-              className="space-y-4"
-              variants={organicContainerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-40px' }}
-            >
+            <div className="space-y-4">
               {features.map((feature, index) => (
                 <motion.div
                   key={index}
-                  variants={flowingItemVariants}
-                  whileHover="hover"
-                  whileTap="tap"
-                  custom={index}
-                  {...featureHoverVariants}
+                  initial={{ opacity: 0, y: 80, filter: 'blur(4px)' }}
+                  whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                  transition={{ type: 'spring', bounce: 0.3, duration: 0.9 }}
+                  whileHover={{ x: 12, scale: 1.01 }}
+                  whileTap={{ scale: 0.98 }}
                 >
                   <Card className="border-none bg-background backdrop-blur-sm hover:bg-background/80 transition-all duration-500 group">
                     <CardContent className="p-6">
@@ -362,7 +155,7 @@ const TentangKomunistas = () => {
                           whileHover={{
                             scale: 1.1,
                             rotate: 5,
-                            transition: { ...softSpring, duration: 0.3 },
+                            transition: { type: 'spring', bounce: 0.3, duration: 0.3 },
                           }}
                         >
                           <feature.icon className="md:w-6 md:h-6 w-4 h-4 text-sky-500" />
@@ -380,7 +173,13 @@ const TentangKomunistas = () => {
                             x: 6,
                             scale: 1.2,
                             rotate: -10,
-                            transition: { ...bouncySpring, duration: 0.3 },
+                            transition: {
+                              type: 'spring',
+                              damping: 20,
+                              stiffness: 140,
+                              mass: 0.8,
+                              duration: 0.3,
+                            },
                           }}
                         >
                           <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-all duration-300" />
@@ -390,57 +189,49 @@ const TentangKomunistas = () => {
                   </Card>
                 </motion.div>
               ))}
-            </motion.div>
+            </div>
           </motion.div>
 
           {/* Image Section */}
           <motion.div
             className="h-full my-auto relative"
-            variants={driftingSlideVariants}
-            initial="hidden"
-            whileInView="visible"
+            initial={{ opacity: 0, y: 80, filter: 'blur(4px)' }}
+            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ type: 'spring', bounce: 0.3, duration: 0.9 }}
             viewport={{ once: true, margin: '-80px' }}
           >
-            <motion.div
-              animate={{
-                y: [0, -10, 0],
-                scale: [1, 1.02, 1],
-              }}
-              transition={{
-                duration: 6,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }}
-            >
-              <CarouselComunityPict />
-            </motion.div>
+            <CarouselComunityPict />
           </motion.div>
         </div>
 
         {/* Call to Action */}
         <motion.div
-          variants={gentleFadeVariants}
-          initial="hidden"
-          whileInView="visible"
+          initial={{ opacity: 0, y: 25, filter: 'blur(4px)' }}
+          whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          transition={{ type: 'spring', bounce: 0.3, duration: 0.9 }}
           viewport={{ once: true, margin: '-40px' }}
         >
-          <motion.div variants={cardHoverVariants} whileHover="hover" whileTap="tap">
+          <motion.div
+            whileHover={{ scale: 1.02, y: -2, rotateX: 2 }}
+            whileTap={{ scale: 0.98 }}
+            transition={{ type: 'spring', bounce: 0.3, duration: 0.4 }}
+          >
             <Card className="border-none bg-background border border-[#dbdbdb] shadow">
               <CardContent className="p-8 text-center">
                 <motion.h3
                   className="md:text-2xl text-xl font-bold mb-4"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ ...naturalSpring, delay: 0.2 }}
+                  transition={{ type: 'spring', bounce: 0.3, delay: 0.2 }}
                   viewport={{ once: true }}
                 >
                   Siap Bergabung dengan Komunitas Kami?
                 </motion.h3>
                 <motion.span
-                  className="md:text-lg text-sm text-muted-foreground mb-6 max-w-2xl mx-auto"
+                  className="md:text-md text-sm text-muted-foreground mb-6 max-w-2xl mx-auto"
                   initial={{ opacity: 0, y: 15 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ ...softSpring, delay: 0.4 }}
+                  transition={{ type: 'spring', bounce: 0.3, delay: 0.4 }}
                   viewport={{ once: true }}
                 >
                   Mulai perjalanan literasi Anda bersama ribuan pembaca lainnya. Dapatkan akses ke
@@ -448,21 +239,54 @@ const TentangKomunistas = () => {
                 </motion.span>
                 <motion.div
                   className="flex flex-col sm:flex-row gap-4 justify-center mt-6"
-                  variants={organicContainerVariants}
-                  initial="hidden"
-                  whileInView="visible"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{
+                    staggerChildren: 0.15,
+                    delayChildren: 0.1,
+                    type: 'spring',
+                    bounce: 0.3,
+                  }}
                   viewport={{ once: true }}
                 >
-                  <motion.div variants={flowingItemVariants}>
-                    <motion.div variants={buttonHoverVariants} whileHover="hover" whileTap="tap">
+                  <motion.div
+                    initial={{ opacity: 0, y: 30, scale: 0.96, rotateX: -10 }}
+                    whileInView={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }}
+                    transition={{ type: 'spring', bounce: 0.3, duration: 0.8 }}
+                  >
+                    <motion.div
+                      whileHover={{ scale: 1.05, y: -1 }}
+                      whileTap={{ scale: 0.95 }}
+                      transition={{
+                        type: 'spring',
+                        damping: 20,
+                        stiffness: 140,
+                        mass: 0.8,
+                        duration: 0.3,
+                      }}
+                    >
                       <Button size="lg" className="">
                         <Users className="w-5 h-5 mr-2" />
                         Bergabung Sekarang
                       </Button>
                     </motion.div>
                   </motion.div>
-                  <motion.div variants={flowingItemVariants}>
-                    <motion.div variants={buttonHoverVariants} whileHover="hover" whileTap="tap">
+                  <motion.div
+                    initial={{ opacity: 0, y: 30, scale: 0.96, rotateX: -10 }}
+                    whileInView={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }}
+                    transition={{ type: 'spring', bounce: 0.3, duration: 0.8 }}
+                  >
+                    <motion.div
+                      whileHover={{ scale: 1.05, y: -1 }}
+                      whileTap={{ scale: 0.95 }}
+                      transition={{
+                        type: 'spring',
+                        damping: 20,
+                        stiffness: 140,
+                        mass: 0.8,
+                        duration: 0.3,
+                      }}
+                    >
                       <Button
                         variant="outline"
                         size="lg"
