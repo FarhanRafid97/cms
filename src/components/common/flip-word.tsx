@@ -32,7 +32,13 @@ export const FlipWords = ({
   }, [isAnimating, duration, startAnimation]);
 
   return (
-    <motion.div animate={{ width: `${width || 0}px` }} layout>
+    <motion.div
+      animate={{
+        width: `${width || 0}px`,
+        transition: { type: 'spring', duration: 0.5, bounce: 0.4 },
+      }}
+      layout
+    >
       <AnimatePresence
         onExitComplete={() => {
           setIsAnimating(false);

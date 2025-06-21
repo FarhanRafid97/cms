@@ -104,7 +104,7 @@ const Hero7 = ({
       containerClassName="lg:px-0 md:px-0 pb-0"
     >
       {' '}
-      <div className="wrapper-hero-image bg-red-400">
+      <div className="wrapper-hero-image ">
         <div className="hero-image"></div>
       </div>
       <motion.div
