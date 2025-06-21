@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { BookOpen, MessageCircle, Send, Star, Users } from 'lucide-react';
 
 import { ButtonMovingBorder } from '@/components/common/moving-border';

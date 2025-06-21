@@ -2,7 +2,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ArrowRight, BookOpen, Heart, MessageCircle, Sparkles, Users } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import LayoutSection from './layout-section';
 import CarouselComunityPict from './list-pict-about-comunity';
 import TextWrapedBorder from './text-wrapped';
