@@ -175,7 +175,7 @@ const TentangKomunistas = () => {
                 <CardHeader className="space-y-4">
                   <div className="flex items-center gap-3">
                     <div className="p-2 bg-white5 border rounded-lg">
-                      <Heart className="w-6 h-6 text-rose-400 " />
+                      <Heart className="w-6 h-6 text-sky-500 " />
                     </div>
                     <CardTitle className="md:text-3xl text-xl font-bold">
                       Tentang Komunitas
@@ -218,7 +218,7 @@ const TentangKomunistas = () => {
                     <CardContent className="p-6">
                       <div className="flex items-start gap-4">
                         <div className="p-3 bg-background-new/95 border rounded-xl group-hover:bg-primary/5 transition-colors duration-300">
-                          <feature.icon className="md:w-6 md:h-6 w-4 h-4 text-rose-500 " />
+                          <feature.icon className="md:w-6 md:h-6 w-4 h-4 text-sky-500 " />
                         </div>
                         <div className="flex-1">
                           <h3 className="md:text-lg text-sm font-semibold mb-2 text-foreground">
