@@ -8,7 +8,7 @@ import { Input } from '@/components/ui/input';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { match } from 'ts-pattern';
 import LayoutSection from './layout-section';
-import TextWrapedBorder from './text-wrapped';
+import TextWrapedBorder from '../../common/text-wrapped';
 import { FlipWords } from '@/components/common/flip-word';
 
 interface Hero7Props {

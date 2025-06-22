@@ -2,7 +2,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Shield, Users } from 'lucide-react';
 import LayoutSection from './layout-section';
 import Image from 'next/image';
-import TextWrapedBorder from './text-wrapped';
+import TextWrapedBorder from '../../common/text-wrapped';
 
 export default function BentoSection() {
   return (

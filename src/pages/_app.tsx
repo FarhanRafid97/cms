@@ -19,6 +19,8 @@ import { useEffect } from 'react';
 import { Toaster } from 'sonner';
 import { match, P } from 'ts-pattern';
 import { ClientOnly } from '@/components/Layouts/WrapperClient';
+import { Navbar } from '@/components/Layouts/Navbar';
+import { Footerdemo } from '@/components/modules/home-page/footer';
 
 const progress = nProgress.configure({ showSpinner: false });
 
@@ -68,7 +70,14 @@ export default function App({ Component, pageProps: { ...pageProps } }: AppProps
               ))
               .otherwise(() => (
                 <ClientOnly>
-                  <Component {...pageProps} />
+                  <div className="relative bg-background-new">
+                    <Navbar />
+
+                    <Component {...pageProps} />
+                    <div>
+                      <Footerdemo />
+                    </div>
+                  </div>
                 </ClientOnly>
               ))}
             <ListMenuSearch />

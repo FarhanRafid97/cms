@@ -7,7 +7,7 @@ import { BookOpen, Users, MessageCircle, Star, TrendingUp, Calendar } from 'luci
 import Image from 'next/image';
 import { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
-import TextWraped from './text-wrapped';
+import TextWraped from '../../common/text-wrapped';
 
 // Floating Card Component - Refined styling to align with Shadcn aesthetic
 function FloatingCard({

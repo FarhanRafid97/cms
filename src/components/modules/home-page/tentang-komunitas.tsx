@@ -5,7 +5,7 @@ import { ArrowRight, BookOpen, Heart, MessageCircle, Sparkles, Users } from 'luc
 import { motion } from 'motion/react';
 import LayoutSection from './layout-section';
 import CarouselComunityPict from './list-pict-about-comunity';
-import TextWrapedBorder from './text-wrapped';
+import TextWrapedBorder from '../../common/text-wrapped';
 
 const TentangKomunistas = () => {
   const features = [
