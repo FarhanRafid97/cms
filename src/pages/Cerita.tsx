@@ -1,4 +1,5 @@
 import CardPostThumbnail from '@/components/common/card-post-thumbnail';
+import ToolbarFilter from '@/components/common/toolbar-filter';
 import TextWrapedBorder from '@/components/common/text-wrapped';
 import LayoutSection from '@/components/modules/home-page/layout-section';
 import { motion } from 'motion/react';
@@ -83,14 +84,14 @@ const Page = () => {
           viewport={{ once: true }}
         >
           <CardPostThumbnail
-            title="Cerita"
+            title={ceritaData[0].title}
             variant="lg"
             aspectRatio={{
               width: 9,
               height: 9,
             }}
-            description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos."
-            image="/thumbnail/example-thumbnail-5.webp"
+            description={ceritaData[0].description}
+            image={ceritaData[0].image}
           />
         </motion.div>
 
@@ -117,6 +118,7 @@ const Page = () => {
           ))}
         </div>
       </div>
+      <ToolbarFilter />
     </LayoutSection>
   );
 };
