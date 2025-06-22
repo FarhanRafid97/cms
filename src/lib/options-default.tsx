@@ -71,3 +71,42 @@ export const defaultAvatarSelect: { id: string; name: string; path: string }[] =
     path: '/default-avatar/notion-avatar-7.png',
   },
 ];
+
+export const dummyPost = [
+  {
+    title: 'Perjalanan Menjadi Developer di Usia 30',
+    description:
+      'Kisah inspiratif seorang karyawan yang memutuskan untuk beralih karir menjadi developer di usia yang tidak muda lagi.',
+    image: '/thumbnail/example-thumbnail.webp',
+  },
+  {
+    title: 'Membangun Startup dari Nol di Tengah Pandemi',
+    description:
+      'Pengalaman seru membangun platform edukasi online yang berhasil membantu ribuan siswa belajar dari rumah.',
+    image: '/thumbnail/example-thumbnail-2.webp',
+  },
+  {
+    title: 'Kolaborasi Tim Remote yang Sukses',
+    description:
+      'Tips dan trik mengelola tim developer yang tersebar di berbagai kota dan negara untuk project besar.',
+    image: '/thumbnail/example-thumbnail-3.webp',
+  },
+  {
+    title: 'Belajar AI/ML Tanpa Background Matematika',
+    description:
+      'Perjalanan seorang designer yang berhasil menguasai machine learning dan membuat aplikasi AI pertama.',
+    image: '/thumbnail/example-thumbnail-4.webp',
+  },
+  {
+    title: 'Mengoptimalkan Performa Website dari 3s ke 0.5s',
+    description:
+      'Case study lengkap tentang bagaimana tim kami berhasil meningkatkan kecepatan loading website secara drastis.',
+    image: '/thumbnail/example-thumbnail-5.webp',
+  },
+  {
+    title: 'Membangun Komunitas Tech yang Inklusif',
+    description:
+      'Cerita tentang bagaimana kami menciptakan ruang aman untuk developer perempuan dan minoritas di dunia tech.',
+    image: '/thumbnail/example-thumbnail-6.webp',
+  },
+];

@@ -24,7 +24,7 @@ const Page = () => {
             transition={{ type: 'spring', bounce: 0.1, duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            List Cerita
+            List Berita
             <TextWrapedBorder className="w-fit">Pilihan</TextWrapedBorder>
           </motion.span>
           <motion.p
@@ -34,8 +34,10 @@ const Page = () => {
             transition={{ type: 'spring', bounce: 0.1, duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
           >
-            Tempat berkumpulnya para penggemar buku untuk berbagi pengetahuan, pengalaman, dan
-            membangun masa depan literasi yang lebih baik
+            Dapatkan informasi terkini dan terpercaya seputar teknologi, bisnis, dan perkembangan
+            dunia digital. Kami menyajikan berita yang akurat, mendalam, dan relevan untuk membantu
+            Anda tetap terhubung dengan tren terbaru dalam industri teknologi dan inovasi digital
+            yang sedang berkembang pesat di era modern ini.
           </motion.p>
         </motion.div>
 
@@ -46,14 +48,14 @@ const Page = () => {
           viewport={{ once: true }}
         >
           <CardPostThumbnail
-            title={dummyPost[0].title}
+            title={dummyPost[3].title}
             variant="lg"
             aspectRatio={{
-              width: 9,
+              width: 12,
               height: 9,
             }}
-            description={dummyPost[0].description}
-            image={dummyPost[0].image}
+            description={dummyPost[3].description}
+            image={dummyPost[3].image}
           />
         </motion.div>
 
