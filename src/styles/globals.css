@@ -359,3 +359,13 @@ input[type='number'] {
 .tiptap p.is-empty:focus {
   background-color: red;
 }
+
+.wrapper-card-with-inner {
+  background-color: rgb(255, 255, 255);
+  max-width: 100%;
+  opacity: 1;
+  border-radius: 28px;
+  box-shadow: rgba(0, 0, 0, 0) 0px 24px 32px 0px;
+  width: 100%;
+  will-change: auto;
+}

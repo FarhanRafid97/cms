@@ -1,10 +1,7 @@
-import Image from 'next/image';
-import React from 'react';
-import { AspectRatio } from '../ui/aspect-ratio';
-import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
-import { Button } from '../ui/button';
-import { Search, Send } from 'lucide-react';
+import { cva, type VariantProps } from 'class-variance-authority';
+import Image from 'next/image';
+import { AspectRatio } from '../ui/aspect-ratio';
 
 const cardPostThumbnailVariants = cva('', {
   variants: {
@@ -42,11 +39,11 @@ const CardPostThumbnail = ({
   },
 }: CardPostThumbnailProps) => {
   return (
-    <div className=" bg-white p-4 rounded-3xl w-full shadow-lg hover:shadow-2xl transition-all duration-300 grid grid-cols-1 gap-4">
+    <div className="wrapper-card-with-inner bg-[#fff] p-1.5 rounded-[28px]  transition-all duration-300 grid grid-cols-1 gap-4 hover:translate-y-[-10px] cursor-pointer ease-in-out">
       <div
         className={cn(
           cardPostThumbnailVariants({ variant }),
-          'w-full bg-background-new rounded-[8px] overflow-hidden',
+          'w-full bg-background-new rounded-[22px] overflow-hidden',
         )}
       >
         <AspectRatio ratio={aspectRatio?.width / aspectRatio?.height} className="">
@@ -59,25 +56,9 @@ const CardPostThumbnail = ({
           />
         </AspectRatio>
       </div>
-      <div className="flex flex-col gap-2 p-2">
+      <div className="flex flex-col gap-2 p-2 pb-4">
         <h1 className="text-lg font-bold mb-2">{title}</h1>
         <p className="text-sm text-gray-500">{description}</p>
-      </div>
-      <div className="flex gap-2 justify-between">
-        <Button
-          variant="outline"
-          className="rounded-[8px] w-full flex items-center justify-center gap-4"
-        >
-          <Send className="w-4 h-4" />
-          Share
-        </Button>
-        <Button
-          variant="default"
-          className="rounded-[8px] w-full flex items-center justify-center gap-2"
-        >
-          <Search className="w-4 h-4" />
-          Detail
-        </Button>
       </div>
     </div>
   );

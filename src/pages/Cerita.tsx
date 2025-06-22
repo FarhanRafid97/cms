@@ -47,7 +47,7 @@ const ceritaData = [
 const Page = () => {
   return (
     <LayoutSection>
-      <div className="container mx-auto min-h-screen flex flex-col gap-8">
+      <div className="container mx-auto min-h-screen flex flex-col gap-6">
         <motion.div
           className="flex flex-col gap-2 items-center justify-center"
           initial={{ opacity: 0, y: 30, scale: 0.95 }}
@@ -95,7 +95,7 @@ const Page = () => {
           />
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {ceritaData.map((item, index) => (
             <motion.div
               key={index}
