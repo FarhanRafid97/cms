@@ -1,11 +1,11 @@
-import LayoutNavbar from './layout-navbar';
 import { cn } from '@/lib/utils';
 import { useMeasure } from '@uidotdev/usehooks';
-import { motion, AnimatePresence } from 'motion/react';
-import Image from 'next/image';
+import { AnimatePresence, motion } from 'motion/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
+import TextWrapedBorder from '../common/text-wrapped';
+import LayoutNavbar from './layout-navbar';
 
 const ListNavbar = [
   {
@@ -64,7 +64,20 @@ export const Navbar = () => {
       <div ref={ref} className="max-w-7xl  mx-auto px-4 grid grid-cols-5 relative">
         <div className="flex items-center gap-2 col-span-2">
           <Link href="/">
-            <Image src="/main-logo.png" alt="Logo" width={60} height={60} />
+            <motion.div
+              initial={{
+                scale: 0.85,
+                rotate: -3,
+              }}
+              whileHover={{
+                scale: 0.9,
+                rotate: 0,
+              }}
+            >
+              <TextWrapedBorder variant="sky" className="px-0.5   h-auto !py-1">
+                <span className="text-xl font-bold text-primary">Cagak.id</span>
+              </TextWrapedBorder>
+            </motion.div>
           </Link>
         </div>
 

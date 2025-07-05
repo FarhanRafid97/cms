@@ -138,29 +138,6 @@ const ToolbarFilter = () => {
             </Button>
           )}
         </div>
-
-        {/* Active Filters Display */}
-        {selectedCategories.length > 0 && (
-          <div className="flex items-center gap-2 mt-3 pt-3 border-t border-gray-100">
-            <span className="text-xs font-medium text-gray-500">Active filters:</span>
-            <div className="flex flex-wrap gap-1.5">
-              {selectedCategories.map((categoryId) => {
-                const category = categories.find((cat) => cat.id === categoryId);
-                return (
-                  <Badge
-                    key={categoryId}
-                    variant="secondary"
-                    className="h-6 px-2 text-xs bg-blue-100 text-blue-700 border-0 hover:bg-blue-200 cursor-pointer transition-colors"
-                    onClick={() => handleCategoryChange(categoryId, false)}
-                  >
-                    {category?.label}
-                    <X className="w-3 h-3 ml-1" />
-                  </Badge>
-                );
-              })}
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

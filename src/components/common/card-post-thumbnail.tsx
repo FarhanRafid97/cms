@@ -1,7 +1,9 @@
 import { cn } from '@/lib/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
+import { ArrowUpRight } from 'lucide-react';
 import Image from 'next/image';
 import { AspectRatio } from '../ui/aspect-ratio';
+import { Button } from '../ui/button';
 
 const cardPostThumbnailVariants = cva('', {
   variants: {
@@ -39,11 +41,11 @@ const CardPostThumbnail = ({
   },
 }: CardPostThumbnailProps) => {
   return (
-    <div className="wrapper-card-with-inner bg-[#fff] p-1.5 rounded-[28px]  transition-all duration-300 grid grid-cols-1 gap-4 hover:translate-y-[-10px] cursor-pointer ease-in-out">
+    <div className="wrapper-card-with-inner bg-[#fff] p-3 rounded-[28px]  transition-all duration-300 grid grid-cols-1 gap-4 cursor-pointer ease-in-out shadow">
       <div
         className={cn(
           cardPostThumbnailVariants({ variant }),
-          'w-full bg-background-new rounded-[22px] overflow-hidden',
+          'w-full bg-background-new rounded-[16px] overflow-hidden shadow',
         )}
       >
         <AspectRatio ratio={aspectRatio?.width / aspectRatio?.height} className="">
@@ -59,6 +61,19 @@ const CardPostThumbnail = ({
       <div className="flex flex-col gap-2 p-2 pb-4">
         <h1 className="text-lg font-bold mb-2">{title}</h1>
         <p className="text-sm text-gray-500">{description}</p>
+      </div>
+
+      <div className="px-2 mb-4">
+        <Button
+          variant="ghost"
+          className="h-auto p-0 text-blue-600 hover:text-blue-700 hover:bg-transparent font-medium text-sm group/btn"
+        >
+          <span className="group-hover/btn:underline underline-offset-4">Read More</span>
+          <ArrowUpRight
+            size={16}
+            className="ml-1 transition-transform duration-300 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1"
+          />
+        </Button>
       </div>
     </div>
   );
