@@ -1,13 +1,16 @@
-import { DotIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
+import { ArrowUpRight } from 'lucide-react';
+import Image from 'next/image';
+import { AspectRatio } from '../ui/aspect-ratio';
+import { Button } from '../ui/button';
 
 const cardPostThumbnailVariants = cva('', {
   variants: {
     variant: {
       xs: ' h-[100px]',
       sm: 'h-[200px]',
-      md: 'h-[285px]',
+      md: 'h-[245px]',
       lg: 'md:h-[400px] h-[285px]',
       xl: 'md:h-[500px] h-[285px]',
     },
@@ -20,55 +23,57 @@ const cardPostThumbnailVariants = cva('', {
 interface CardPostThumbnailProps extends VariantProps<typeof cardPostThumbnailVariants> {
   title: string;
   description: string;
-  date?: string;
-  category?: string;
-  image?: string;
-  isLast?: boolean;
+  image: string;
+  aspectRatio?: {
+    width: number;
+    height: number;
+  };
 }
 
 const CardPostThumbnail = ({
   title,
   description,
-  date = '11 November 2024',
-  category = 'Article',
-  isLast = false,
+  image,
+  variant,
+  aspectRatio = {
+    width: 7,
+    height: 9,
+  },
 }: CardPostThumbnailProps) => {
   return (
-    <div
-      className={cn(
-        'w-full py-8 md:py-14 hover:bg-background-new/50 transition-all duration-300 cursor-pointer group',
-        isLast ? 'border-b-0' : 'border-b',
-      )}
-    >
-      {/* Desktop Layout */}
-      <div className="hidden md:grid grid-cols-12 gap-6 items-start">
-        <div className="col-span-2">
-          <p className="text-sm font-[400] text-muted-foreground leading-relaxed">{date}</p>
-        </div>
-        <div className="col-span-4 grid grid-cols-1 gap-4">
-          <h1 className="text-[21px] font-[500] leading-tight text-black group-hover:text-black-shadow/80 transition-colors duration-300">
-            {title}
-          </h1>
-          <span className="text-sm font-[400] text-muted-foreground ">{category}</span>
-        </div>
-        <div className="col-span-6">
-          <p className="text-[15px] font-[400] text-black-shadow leading-relaxed">{description}</p>
-        </div>
+    <div className="wrapper-card-with-inner bg-[#fff] p-3 rounded-[28px]  transition-all duration-300 grid grid-cols-1 gap-4 cursor-pointer ease-in-out shadow-lg h-full">
+      <div
+        className={cn(
+          cardPostThumbnailVariants({ variant }),
+          'w-full bg-background-new rounded-[16px] overflow-hidden shadow',
+        )}
+      >
+        <AspectRatio ratio={aspectRatio?.width / aspectRatio?.height} className="">
+          <Image
+            src={image}
+            alt={title}
+            fill
+            className="object-fill rounded-xl"
+            sizes="(max-width: 768px) 20vw, (max-width: 1200px) 40vw, 33vw"
+          />
+        </AspectRatio>
+      </div>
+      <div className="flex flex-col gap-2 p-2 pb-4">
+        <h1 className="text-lg font-bold mb-2">{title}</h1>
+        <p className="text-sm text-gray-500">{description}</p>
       </div>
 
-      {/* Mobile/Vertical Layout */}
-      <div className="md:hidden space-y-4">
-        <div className="flex items-center justify-start gap-1">
-          <p className="text-sm font-[400] text-muted-foreground">{date}</p>
-          <DotIcon className="text-black-shadow" size={16} strokeWidth={1.5} />
-          <span className="text-sm font-[400] text-muted-foreground">{category}</span>
-        </div>
-        <div className="space-y-3">
-          <h1 className="text-lg md:text-xl font-[500] leading-tight text-black group-hover:text-black-shadow/80 transition-colors duration-300">
-            {title}
-          </h1>
-          <p className="text-sm font-[400] text-muted-foreground leading-relaxed">{description}</p>
-        </div>
+      <div className="px-2 mb-4">
+        <Button
+          variant="ghost"
+          className="h-auto p-0 text-blue-600 hover:text-blue-700 hover:bg-transparent font-medium text-sm group/btn"
+        >
+          <span className="group-hover/btn:underline underline-offset-4">Selengkapnya</span>
+          <ArrowUpRight
+            size={16}
+            className="ml-1 transition-transform duration-300 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1"
+          />
+        </Button>
       </div>
     </div>
   );

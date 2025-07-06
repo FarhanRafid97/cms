@@ -200,7 +200,6 @@
 
 @layer base {
   * {
-    font-family: 'Inter', sans-serif;
     @apply border-border;
   }
   body {

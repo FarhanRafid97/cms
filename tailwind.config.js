@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
   darkMode: ['class', 'class'],
   content: [
@@ -21,8 +22,8 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ['var(--font-geist-sans)'],
-        mono: ['var(--font-geist-mono)'],
+        'geist-sans': ['Geist Sans', 'sans-serif'],
+        'geist-mono': ['Geist Mono', 'monospace'],
       },
       colors: {
         border: 'hsl(var(--border))',

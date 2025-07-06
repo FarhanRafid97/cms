@@ -7,16 +7,7 @@ import { useEffect, useState } from 'react';
 import TextWrapedBorder from '../common/text-wrapped';
 import { Button } from '../ui/button';
 import LayoutNavbar from './layout-navbar';
-const ListNavbar = [
-  {
-    path: '/',
-    label: 'Home',
-  },
-  {
-    path: '/Blog',
-    label: 'Blog',
-  },
-];
+import { listMenu } from '@/lib/options-default';
 
 export const Navbar = () => {
   const [ref, { height }] = useMeasure();
@@ -55,67 +46,38 @@ export const Navbar = () => {
               }}
             >
               <TextWrapedBorder variant="black" className="px-0.5 h-auto !py-1">
-                <span className="text-xl font-bold text-primary">Cagak.id</span>
+                <span className="text-xl font-bold text-primary !font-geist-mono">Cagak.id</span>
               </TextWrapedBorder>
             </motion.div>
           </Link>
         </div>
         {/* Navigation Menu - Centered */}
         <div className=" items-center gap-2 hidden md:flex">
-          <Link href="/">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="relative"
-            >
-              <Button
-                variant="ghost"
-                className={`text-lg transition-colors relative hover:bg-black-shadow/10 ${
-                  isActive('/')
-                    ? 'text-primary font-semibold'
-                    : 'text-black-shadow hover:text-primary'
-                }`}
-              >
-                Home
-                {isActive('/') && (
-                  <motion.div
-                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full"
-                    layoutId="activeIndicator"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                )}
-              </Button>
-            </motion.div>
-          </Link>
-          <Link href="/Blog">
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.95 }}
-              className="relative"
-            >
-              <Button
-                variant="ghost"
-                className={`text-lg transition-colors relative hover:bg-black-shadow/10   ${
-                  isActive('/Blog')
-                    ? 'text-primary font-semibold'
-                    : 'text-black-shadow hover:text-primary'
-                }`}
-              >
-                Blog
-                {isActive('/Blog') && (
-                  <motion.div
-                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full"
-                    layoutId="activeIndicator"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                )}
-              </Button>
-            </motion.div>
-          </Link>
+          {listMenu.map((menu) => (
+            <Link key={menu.id} href={menu.link}>
+              <motion.div className="relative">
+                <Button
+                  variant="ghost"
+                  className={`text-md transition-colors relative hover:bg-black-shadow/10  ${
+                    isActive(menu.link)
+                      ? 'text-primary font-semibold'
+                      : 'text-black-shadow hover:text-primary'
+                  }`}
+                >
+                  {menu.title}
+                  {isActive(menu.link) && (
+                    <motion.div
+                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full"
+                      layoutId="activeIndicator"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  )}
+                </Button>
+              </motion.div>
+            </Link>
+          ))}
         </div>
         {/* Mobile Hamburger Button */}
         <div className="items-center col-span-3 flex justify-end md:hidden">
@@ -167,9 +129,9 @@ export const Navbar = () => {
             >
               <div className="max-w-7xl mx-auto px-4 py-4">
                 <ul className="flex flex-col space-y-2">
-                  {ListNavbar.map((tab, index) => (
+                  {listMenu.map((menu, index) => (
                     <motion.li
-                      key={tab.path}
+                      key={menu.id}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{
@@ -179,14 +141,15 @@ export const Navbar = () => {
                         bounce: 0.1,
                       }}
                     >
-                      <Link href={tab.path} onClick={handleMobileMenuClick}>
+                      <Link href={menu.link} onClick={handleMobileMenuClick}>
                         <div
                           className={cn(
                             'block px-4 py-3 rounded-lg text-base font-medium transition-colors',
                             'text-primary/70 hover:bg-primary/5 hover:text-primary',
+                            '',
                           )}
                         >
-                          {tab.label}
+                          {menu.title}
                         </div>
                       </Link>
                     </motion.li>

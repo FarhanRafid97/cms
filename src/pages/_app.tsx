@@ -22,6 +22,9 @@ import { match, P } from 'ts-pattern';
 import { ClientOnly } from '@/components/Layouts/WrapperClient';
 import { Navbar } from '@/components/Layouts/Navbar';
 import { Footerdemo } from '@/components/modules/home-page/footer';
+import { GeistSans } from 'geist/font/sans';
+import { GeistMono } from 'geist/font/mono';
+import { cn } from '@/lib/utils';
 
 const progress = nProgress.configure({ showSpinner: false });
 
@@ -51,7 +54,7 @@ export default function App({ Component, pageProps: { ...pageProps } }: AppProps
       <ProvideAuth>
         {/* <script src="https://unpkg.com/react-scan/dist/auto.global.js" async /> */}
         <Providers>
-          <main>
+          <main className={cn(GeistMono.className, GeistSans.className, '!font-geist-sans')}>
             {isLogout && (
               <div className="fixed bg-background-new/70 backdrop-blur-md inset-0 z-[23123] w-screen h-screen flex justify-center items-center">
                 <div className="flex flex-col items-center justify-center gap-2">

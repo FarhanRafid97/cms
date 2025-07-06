@@ -116,3 +116,47 @@ export const dummyPost = [
     date: '28 Oktober 2024',
   },
 ];
+
+export const pictCarousel = [
+  {
+    id: 1,
+    imagePath: '/carousel-image/thumbnail-1.jpeg',
+    label: 'Teknologi',
+    label_description: 'Eksplorasi inovasi terbaru dalam dunia teknologi',
+  },
+  {
+    id: 2,
+    imagePath: '/carousel-image/thumbnail-2.jpeg',
+    label: 'Startup',
+    label_description: 'Kisah sukses dan pembelajaran dari dunia startup',
+  },
+  {
+    id: 3,
+    imagePath: '/carousel-image/thumbnail-3.jpeg',
+    label: 'Karir',
+    label_description: 'Panduan dan tips untuk mengembangkan karir di industri tech',
+  },
+];
+
+export const listMenu = [
+  {
+    id: 1,
+    title: 'Artikel',
+    link: '/Artikel',
+  },
+  {
+    id: 2,
+    title: 'Berita',
+    link: '/Berita',
+  },
+  {
+    id: 3,
+    title: 'Cerita',
+    link: '/Cerita',
+  },
+  {
+    id: 4,
+    title: 'Kolase',
+    link: '/Kolase',
+  },
+];
