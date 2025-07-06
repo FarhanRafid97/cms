@@ -9,6 +9,7 @@ import '@/styles/nprogress.css';
 import '@/styles/quil.editor.css';
 import '@/styles/carousel.css';
 import '@/styles/hero-image.css';
+import '@/styles/bento-animations.css';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Loader2 } from 'lucide-react';
 import { ThemeProvider } from 'next-themes';
@@ -60,6 +61,11 @@ export default function App({ Component, pageProps: { ...pageProps } }: AppProps
               </div>
             )}
             {match(router.pathname)
+              .with('/login', '/update-biodata', () => (
+                <div>
+                  <Component {...pageProps} />
+                </div>
+              ))
               .with(P.string.includes('/dashboard'), () => (
                 <Layout id={data?.batch || ''}>
                   <Component {...pageProps} />

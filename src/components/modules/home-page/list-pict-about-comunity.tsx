@@ -86,7 +86,7 @@ const CarouselComunityPict: React.FC<PropType> = (props) => {
   }, [emblaApi, setTweenFactor, tweenOpacity]);
 
   return (
-    <div className="embla">
+    <div className="embla h-[400px]">
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
           {pictCarousel.map((process) => (

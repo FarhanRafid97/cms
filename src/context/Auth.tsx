@@ -40,10 +40,6 @@ function useProvideAuth(): AuthContextType {
   useEffect(() => {
     // Get initial session
     const getInitialSession = async () => {
-      if (user.session && user.detail_user) {
-        return;
-      }
-
       try {
         const {
           data: { session },
@@ -52,12 +48,14 @@ function useProvideAuth(): AuthContextType {
         console.log('session', !session);
         if (!session) {
           setUser({ detail_user: undefined, session: undefined });
+          setLoading(false);
           return;
         }
 
         const detailMySelf = await getMyself({ user_id: session?.user.id || '' });
         if (!detailMySelf) {
           setUser({ detail_user: undefined, session });
+          setLoading(false);
           return;
         }
         setSession(session);
@@ -70,7 +68,7 @@ function useProvideAuth(): AuthContextType {
     };
 
     getInitialSession();
-  }, [user]);
+  }, []); // Empty dependency array - only run once on mount
 
   return {
     user,

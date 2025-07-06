@@ -2,23 +2,21 @@
 
 import { CompleteInput } from '@/components/common/complete-input';
 import { CompleteTextArea } from '@/components/common/complete-text-area';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
-import { useAuth } from '@/context/Auth';
-import { CreateAuthor, CreateAuthorSchema } from '@/schema/user/author';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import { defaultAvatarSelect } from '@/lib/options-default';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { AvatarImage } from '@/components/ui/avatar';
-import { AlertCircle, Camera, Loader2, Upload, User } from 'lucide-react';
 import { Label } from '@/components/ui/label';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Input } from '@/components/ui/input';
-import { useState } from 'react';
+import { Separator } from '@/components/ui/separator';
+import { useAuth } from '@/context/Auth';
+import { defaultAvatarSelect } from '@/lib/options-default';
 import { useInsertBiodataUser } from '@/querries/user/user';
-import { toast } from 'sonner';
+import { CreateAuthor, CreateAuthorSchema } from '@/schema/user/author';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { AlertCircle, Camera, Loader2, User } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 
 export default function FormBiodata() {
   const router = useRouter();
@@ -135,7 +133,7 @@ export default function FormBiodata() {
 
                       <Separator />
 
-                      <div>
+                      {/* <div>
                         <Label htmlFor="photo-upload" className="font-medium">
                           Upload Your Own
                         </Label>
@@ -155,7 +153,7 @@ export default function FormBiodata() {
                           />
                         </div>
                         <p className="text-xs text-muted-foreground mt-1">PNG, JPG up to 10MB</p>
-                      </div>
+                      </div> */}
                     </div>
                   </PopoverContent>
                 </Popover>

@@ -54,7 +54,7 @@ export const Navbar = () => {
                 rotate: 0,
               }}
             >
-              <TextWrapedBorder variant="sky" className="px-0.5 h-auto !py-1">
+              <TextWrapedBorder variant="black" className="px-0.5 h-auto !py-1">
                 <span className="text-xl font-bold text-primary">Cagak.id</span>
               </TextWrapedBorder>
             </motion.div>
