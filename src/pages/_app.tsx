@@ -79,7 +79,7 @@ export default function App({ Component, pageProps: { ...pageProps } }: AppProps
               ))
               .otherwise(() => (
                 <ClientOnly>
-                  <div className="relative bg-background-new">
+                  <div className="relative ">
                     <Navbar />
 
                     <Component {...pageProps} />

@@ -16,7 +16,7 @@ export default function CarouselHero() {
   return (
     <div className="w-full h-full ">
       <Swiper
-        spaceBetween={30}
+        spaceBetween={0}
         centeredSlides={true}
         autoplay={{
           delay: 2500,

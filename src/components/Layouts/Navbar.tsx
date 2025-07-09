@@ -30,7 +30,7 @@ export const Navbar = () => {
   const isActive = (path: string) => pathname === path;
 
   return (
-    <LayoutNavbar className="sticky top-0 z-50 bg-background-new/95 md:py-0">
+    <LayoutNavbar className="sticky top-0 z-50 bg-background/95 md:py-0">
       <div ref={ref} className="max-w-7xl mx-auto px-4 flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center">

@@ -1,18 +1,16 @@
-import CardPostThumbnail from '@/components/common/card-post-thumbnail';
-import ToolbarFilter from '@/components/common/toolbar-filter';
+import ListCardPost from '@/components/common/list-card-post';
 import TextWrapedBorder from '@/components/common/text-wrapped';
+import ToolbarFilter from '@/components/common/toolbar-filter';
 import LayoutSection from '@/components/modules/home-page/layout-section';
-import { motion } from 'motion/react';
-import React from 'react';
 import { dummyPost } from '@/lib/options-default';
-import CardBanner from '@/components/common/card-banner';
+import { motion } from 'motion/react';
 
 const Page = () => {
   return (
     <LayoutSection>
       <div className="container mx-auto min-h-screen flex flex-col gap-6">
         <motion.div
-          className="flex flex-col gap-2 items-start justify-center md:mb-8 "
+          className="flex flex-col gap-2 items-center justify-center md:mb-8 "
           initial={{ opacity: 0, y: 30, scale: 0.95 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ type: 'spring', bounce: 0.3, duration: 0.8 }}
@@ -29,7 +27,7 @@ const Page = () => {
             <TextWrapedBorder className="w-fit ml-2">Pilihan</TextWrapedBorder>
           </motion.span>
           <motion.p
-            className="text-muted-foreground text-balance text-sm lg:text-lg text-start md:w-3/4 w-full"
+            className="text-muted-foreground text-balance text-sm lg:text-lg text-center  md:w-3/4 w-full"
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ type: 'spring', bounce: 0.1, duration: 0.6, delay: 0.4 }}
@@ -40,48 +38,14 @@ const Page = () => {
           </motion.p>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 40, scale: 0.9 }}
-          whileInView={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ type: 'spring', bounce: 0.3, duration: 0.8, delay: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <CardBanner
-            title={dummyPost[2].title}
-            description={dummyPost[2].description}
-            image="/carousel-image/thumbnail-1.jpeg"
-          />
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
-          <div className="md:hidden">
-            <CardPostThumbnail
-              title={dummyPost[2].title}
-              description={dummyPost[2].description}
-              image="/carousel-image/thumbnail-2.jpeg"
-            />
-          </div>
-          {dummyPost.map((item, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{
-                type: 'spring',
-                bounce: 0.1,
-                duration: 0.6,
-              }}
-              viewport={{ once: true, margin: '-40px' }}
-              className="h-full w-full"
-            >
-              <CardPostThumbnail
-                title={item.title}
-                description={item.description}
-                image={item.image}
-              />
-            </motion.div>
-          ))}
-        </div>
+        <ListCardPost
+          thumbnail={{
+            title: dummyPost[2].title,
+            description: dummyPost[2].description,
+            image: '/carousel-image/thumbnail-3.jpeg',
+          }}
+          dummyPost={dummyPost}
+        />
       </div>
       <ToolbarFilter />
     </LayoutSection>
