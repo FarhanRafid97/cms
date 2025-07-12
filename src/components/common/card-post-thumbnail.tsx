@@ -45,7 +45,7 @@ const CardPostThumbnail = ({
       <div
         className={cn(
           cardPostThumbnailVariants({ variant }),
-          'w-full bg-background-new rounded-[20px] overflow-hidden shadow',
+          'w-full bg-muted-foreground rounded-[20px] overflow-hidden shadow',
         )}
       >
         <AspectRatio ratio={aspectRatio?.width / aspectRatio?.height} className="">

@@ -3,9 +3,15 @@ import CarouselHero from './carousel-hero';
 
 const HeroSection = () => {
   return (
-    <div className="w-screen h-[500px] md:h-[85vh]">
+    <section className="relative w-full h-screen overflow-hidden">
+      {/* Hero Carousel */}
       <CarouselHero />
-    </div>
+
+      {/* Overlay for additional content if needed */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* You can add floating elements or additional content here */}
+      </div>
+    </section>
   );
 };
 

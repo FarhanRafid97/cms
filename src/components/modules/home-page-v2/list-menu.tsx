@@ -16,7 +16,7 @@ const ListMenu = () => {
               >
                 <div className="flex items-center justify-between px-4 py-3 md:px-6 md:py-4">
                   <div className="flex-1">
-                    <h2 className="text-base md:text-lg font-medium text-gray-800 group-hover:text-gray-900 font-geist-mono">
+                    <h2 className="text-base md:text-lg font-medium text-gray-800 group-hover:text-gray-900 font--mono">
                       {menu.title}
                     </h2>
                   </div>

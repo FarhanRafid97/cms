@@ -21,10 +21,6 @@ module.exports = {
       'max-height': 'var(--radix-popover-content-available-height)',
     },
     extend: {
-      fontFamily: {
-        'geist-sans': ['Geist Sans', 'sans-serif'],
-        'geist-mono': ['Geist Mono', 'monospace'],
-      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',

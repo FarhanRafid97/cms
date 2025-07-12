@@ -140,11 +140,12 @@ export function DataTableComplete<TData, TValue>({
 
   return (
     <div className={cn(' space-y-3 ')}>
-      <div className="px-6 pt-3">
-        {DataTableToolbar ? <DataTableToolbar table={table} setSearch={setSearch} /> : null}
-      </div>
-      <div className="rounded-none overflow-hidden border-t border-b p-[1px]">
+      <div className="rounded-none overflow-hidden border-t border-b  grid grid-cols-1  mt-4">
+        <div className="px-6 py-4">
+          {DataTableToolbar ? <DataTableToolbar table={table} setSearch={setSearch} /> : null}
+        </div>
         <TableComp
+          className="border-t"
           style={{
             ...columnSizeVars,
           }}
