@@ -3,7 +3,7 @@ import CarouselHero from './carousel-hero';
 
 const HeroSection = () => {
   return (
-    <section className="relative w-full h-screen overflow-hidden">
+    <section className="relative w-full h-[70vh] md:h-screen overflow-hidden">
       {/* Hero Carousel */}
       <CarouselHero />
 

@@ -4,11 +4,25 @@ import ToolbarFilter from '@/components/common/toolbar-filter';
 import LayoutSection from '@/components/modules/home-page/layout-section';
 import { dummyPost } from '@/lib/options-default';
 import { motion } from 'motion/react';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 
-const Page = () => {
+export const getServerSideProps: GetServerSideProps<{
+  slug: string;
+}> = async (context) => {
+  const slug = Array.isArray(context.query.slug) ? context.query.slug[0] : context.query.slug;
+
+  return {
+    props: {
+      slug: slug || '',
+    },
+  };
+};
+
+const Page = ({ slug }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  console.log(slug);
   return (
     <LayoutSection>
-      <div className="container mx-auto min-h-screen flex flex-col gap-6">
+      <div className=" mx-auto min-h-screen w-full flex flex-col gap-6">
         <motion.div
           className="flex flex-col gap-2 items-center justify-center md:mb-8 "
           initial={{ opacity: 0, y: 30, scale: 0.95 }}
@@ -17,13 +31,13 @@ const Page = () => {
           viewport={{ once: true }}
         >
           <motion.span
-            className="md:text-6xl text-2xl font-bold mb-2 md:mb-6 leading-tight"
+            className="md:text-6xl text-2xl font-bold mb-2 md:mb-6 leading-tight flex items-center justify-center gap-2"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ type: 'spring', bounce: 0.1, duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            List Artikel
+            <span>List {slug.charAt(0).toUpperCase() + slug.slice(1)}</span>
             <TextWrapedBorder className="w-fit">Pilihan</TextWrapedBorder>
           </motion.span>
           <motion.p

@@ -5,6 +5,7 @@ import { setCloudinaryData } from '@/store/cloudinary';
 import { Cloudinary } from '@/types/globals';
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useEffect } from 'react';
+
 export const getServerSideProps: GetServerSideProps<{
   data: { cloudinary: Cloudinary | null; slug: string };
 }> = async (context) => {
@@ -20,6 +21,7 @@ export const getServerSideProps: GetServerSideProps<{
     },
   };
 };
+
 const Page = ({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   useEffect(() => {
     if (!data.cloudinary) {

@@ -160,21 +160,21 @@ export const listMenu = [
   {
     id: 1,
     title: 'Artikel',
-    link: '/Artikel',
+    link: '/blog/Artikel',
   },
   {
     id: 2,
     title: 'Berita',
-    link: '/Berita',
+    link: '/blog/Berita',
   },
   {
     id: 3,
     title: 'Cerita',
-    link: '/Cerita',
+    link: '/blog/Cerita',
   },
   {
     id: 4,
     title: 'Kolase',
-    link: '/Kolase',
+    link: '/blog/Kolase',
   },
 ];

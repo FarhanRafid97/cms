@@ -365,7 +365,6 @@ input[type='number'] {
   background-color: rgb(255, 255, 255);
   max-width: 100%;
   opacity: 1;
-  border-radius: 28px;
 
   width: 100%;
   will-change: auto;
