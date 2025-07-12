@@ -20,36 +20,36 @@ const ListMenu = () => {
 
   return (
     <LayoutSection>
-      <div className="w-full">
+      <div className="w-full mt-10">
         {/* Header */}
-        <div className="mb-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">Kategori</h2>
-          <p className="text-gray-600">Jelajahi konten berdasarkan kategori</p>
+        <div className="mb-12">
+          <h2 className="text-4xl font-bold text-black mb-4">Jelajahi konten Lainnya</h2>
+          <p className="text-gray-600 text-lg">Temukan berbagai kategori konten yang menarik</p>
         </div>
 
-        {/* Category Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+        {/* Category List */}
+        <div className="space-y-2 grid">
           {listMenu.map((menu) => (
             <Link href={menu.link} key={menu.id}>
-              <div className="group bg-white border border-gray-200 rounded-lg p-6 hover:border-gray-300 hover:shadow-md transition-all duration-200 cursor-pointer">
-                {/* Icon */}
-                <div className="w-12 h-12 rounded-lg bg-blue-50 flex items-center justify-center mb-4 group-hover:bg-blue-100 transition-colors duration-200">
-                  <div className="text-blue-600">{getIcon(menu.title)}</div>
-                </div>
+              <div className="group bg-white border border-gray-200 rounded-xl p-6 hover:border-gray-300 hover:bg-gray-50 cursor-pointer">
+                <div className="flex items-center justify-between">
+                  {/* Left side - Icon and Content */}
+                  <div className="flex items-center space-x-6">
+                    <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center flex-shrink-0">
+                      <div className="text-white">{getIcon(menu.title)}</div>
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-xl font-bold text-black mb-2">{menu.title}</h3>
+                      <p className="text-gray-600 leading-relaxed">
+                        Jelajahi koleksi {menu.title.toLowerCase()} terbaru dan temukan konten yang
+                        sesuai dengan minat Anda
+                      </p>
+                    </div>
+                  </div>
 
-                {/* Content */}
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-200">
-                    {menu.title}
-                  </h3>
-                  <p className="text-sm text-gray-600 mb-4">
-                    Jelajahi koleksi {menu.title.toLowerCase()} terbaru
-                  </p>
-
-                  {/* Arrow */}
-                  <div className="flex items-center text-blue-600 text-sm font-medium">
-                    <span>Lihat Semua</span>
-                    <ArrowUpRight className="w-4 h-4 ml-1 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-200" />
+                  {/* Right side - Arrow */}
+                  <div className="text-gray-400 group-hover:text-black ml-6">
+                    <ArrowUpRight className="w-6 h-6" />
                   </div>
                 </div>
               </div>
@@ -58,10 +58,10 @@ const ListMenu = () => {
         </div>
 
         {/* Bottom CTA */}
-        <div className="mt-8 text-center">
-          <div className="inline-flex items-center gap-2 text-gray-600 hover:text-blue-600 transition-colors duration-200 cursor-pointer">
-            <span className="text-sm font-medium">Lihat semua kategori</span>
-            <ArrowUpRight className="w-4 h-4" />
+        <div className="mt-16 text-center">
+          <div className="inline-flex items-center gap-3 text-black font-semibold cursor-pointer border-2 border-black rounded-full px-8 py-4 hover:bg-black hover:text-white">
+            <span className="text-base">Lihat semua kategori</span>
+            <ArrowUpRight className="w-5 h-5" />
           </div>
         </div>
       </div>
