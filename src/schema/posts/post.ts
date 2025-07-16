@@ -14,7 +14,7 @@ export type Comment = Database['public']['Tables']['comments']['Row'];
 export type Media = Database['public']['Tables']['media']['Row'];
 export type NewsletterSubscriber = Database['public']['Tables']['newsletter_subscribers']['Row'];
 export type SiteSetting = Database['public']['Tables']['site_settings']['Row'];
-
+export type CompleteDetailPost = Database['public']['Views']['complete_detail_post']['Row'];
 // Extended interfaces for joined data
 export interface PostWithAuthor extends Post {
   username: string;

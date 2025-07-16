@@ -1,6 +1,6 @@
 import { DETAULT_DETAIL_POST, LIMIT_GET_POSTS } from '@/lib/constant';
 import { supabase } from '@/lib/supabase';
-import { CreatePost } from '@/schema/posts/post';
+import { CompleteDetailPost, CreatePost } from '@/schema/posts/post';
 import { toast } from 'sonner';
 
 export const getListCompletePosts = async ({
@@ -50,8 +50,12 @@ export const createNewPost = async ({ dataPost }: { dataPost: CreatePost }) => {
   return responseCreatePost;
 };
 
-export const getPostDetail = async ({ postId }: { postId: string }) => {
-  const { data, error } = await supabase.from('post_details').select('*').eq('post_id', postId);
+export const getPostDetail = async ({
+  postId,
+}: {
+  postId: string;
+}): Promise<CompleteDetailPost | null> => {
+  const { data, error } = await supabase.from('complete_detail_post').select('*').eq('id', postId);
   if (error) {
     toast.error(error.message);
     return null;
@@ -67,7 +71,7 @@ export const updatePostDetail = async ({
   const { error } = await supabase
     .from('post_details')
     .update({ content: payload.content })
-    .eq('id', payload.detail_post_id);
+    .eq('post_id', payload.detail_post_id);
   if (error) {
     toast.error(error.message);
     return false;

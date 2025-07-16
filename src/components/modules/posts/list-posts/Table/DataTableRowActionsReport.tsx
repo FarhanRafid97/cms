@@ -9,14 +9,9 @@ import {
 import { CompletePost } from '@/schema/posts/post';
 
 import { MoreHorizontal, Search, Trash } from 'lucide-react';
-
-import WrapperModalBase from '@/components/common/warpped-modal-create';
-import { useState } from 'react';
-import DetailPostData from './detail-post/DetailPostData';
+import Link from 'next/link';
 
 export function DataTableRowActionsReport({ row }: { row: CompletePost }) {
-  const [openDetailArticle, setOpenDetailArticle] = useState(false);
-  const [openDelete, setOpenDelete] = useState(false);
   return (
     <>
       <DropdownMenu>
@@ -26,29 +21,18 @@ export function DataTableRowActionsReport({ row }: { row: CompletePost }) {
         <DropdownMenuContent align="end" className="w-[200px]">
           <DropdownMenuLabel>Action</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem
-            className="flex gap-2 items-center"
-            onClick={() => {
-              setOpenDetailArticle(true);
-            }}
-          >
-            <Search size={16} />
-            Detail Artikel {openDelete}
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            className="flex gap-2 items-center"
-            onClick={() => {
-              setOpenDelete(true);
-            }}
-          >
+          <Link href={`/dashboard/post/detail/${row.id}`}>
+            <DropdownMenuItem className="flex gap-2 items-center">
+              <Search size={16} />
+              Detail Artikel
+            </DropdownMenuItem>
+          </Link>
+          <DropdownMenuItem className="flex gap-2 items-center">
             <Trash size={16} />
             Delete
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <WrapperModalBase open={openDetailArticle} setOpen={setOpenDetailArticle}>
-        <DetailPostData row={row} />
-      </WrapperModalBase>
     </>
   );
 }

@@ -50,7 +50,7 @@ const heading_list = [
   { label: 'heading', level: 5 as const },
   { label: 'heading', level: 6 as const },
 ];
-
+const ICON_SIZE = 16;
 const mapping_icon_heading: { [key: string]: LucideIcon } = {
   'heading-1': Heading1,
   'heading-2': Heading2,
@@ -118,7 +118,7 @@ export function EditorToolbar({ editor, onImageUpload, isUploading }: EditorTool
               className={cn(editor.isActive('bold') ? 'bg-accent' : '')}
               aria-label="Bold"
             >
-              <Bold className="h-4 w-4" />
+              <Bold size={ICON_SIZE} />
             </Button>
           </TooltipTrigger>
           <TooltipContent>Bold</TooltipContent>
@@ -133,7 +133,7 @@ export function EditorToolbar({ editor, onImageUpload, isUploading }: EditorTool
               className={cn(editor.isActive('italic') ? 'bg-accent' : '')}
               aria-label="Italic"
             >
-              <Italic className="h-4 w-4" />
+              <Italic size={ICON_SIZE} />
             </Button>
           </TooltipTrigger>
           <TooltipContent>Italic</TooltipContent>
@@ -148,7 +148,7 @@ export function EditorToolbar({ editor, onImageUpload, isUploading }: EditorTool
               className={cn(editor.isActive('strike') ? 'bg-accent' : '')}
               aria-label="Strikethrough"
             >
-              <Strikethrough className="h-4 w-4" />
+              <Strikethrough size={ICON_SIZE} />
             </Button>
           </TooltipTrigger>
           <TooltipContent>Strikethrough</TooltipContent>
@@ -159,8 +159,8 @@ export function EditorToolbar({ editor, onImageUpload, isUploading }: EditorTool
         {/* Headings Popover */}
         <Popover>
           <PopoverTrigger asChild>
-            <Button variant="ghost" size="sm">
-              <IconSelectedHeading size={16} />
+            <Button variant="ghost" size="icon">
+              <IconSelectedHeading size={ICON_SIZE} />
             </Button>
           </PopoverTrigger>
           <PopoverContent className="flex gap-2 p-1 w-fit" isContentWidthAuto={false}>
@@ -178,7 +178,7 @@ export function EditorToolbar({ editor, onImageUpload, isUploading }: EditorTool
                     editor.chain().focus().toggleHeading({ level: heading.level }).run()
                   }
                 >
-                  <IconHeading size={16} />
+                  <IconHeading size={ICON_SIZE} />
                 </Button>
               );
             })}
@@ -195,7 +195,7 @@ export function EditorToolbar({ editor, onImageUpload, isUploading }: EditorTool
               className={cn(editor.isActive('bulletList') ? 'bg-accent' : '')}
               aria-label="Bullet List"
             >
-              <List className="h-4 w-4" />
+              <List size={ICON_SIZE} />
             </Button>
           </TooltipTrigger>
           <TooltipContent>Bullet List</TooltipContent>
@@ -210,7 +210,7 @@ export function EditorToolbar({ editor, onImageUpload, isUploading }: EditorTool
               className={cn(editor.isActive('orderedList') ? 'bg-accent' : '')}
               aria-label="Ordered List"
             >
-              <ListOrdered className="h-4 w-4" />
+              <ListOrdered size={ICON_SIZE} />
             </Button>
           </TooltipTrigger>
           <TooltipContent>Ordered List</TooltipContent>
@@ -223,23 +223,23 @@ export function EditorToolbar({ editor, onImageUpload, isUploading }: EditorTool
                 {match(isTextAlignActive(editor, 'justify'))
                   .with(true, () => {
                     const Icon = textAlignIcons['justify'];
-                    return <Icon />;
+                    return <Icon size={ICON_SIZE} />;
                   })
                   .otherwise(() => {
                     return match(isTextAlignActive(editor, 'right'))
                       .with(true, () => {
                         const Icon = textAlignIcons['right'];
-                        return <Icon />;
+                        return <Icon size={ICON_SIZE} />;
                       })
                       .otherwise(() =>
                         match(isTextAlignActive(editor, 'center'))
                           .with(true, () => {
                             const Icon = textAlignIcons['center'];
-                            return <Icon />;
+                            return <Icon size={ICON_SIZE} />;
                           })
                           .otherwise(() => {
                             const Icon = textAlignIcons['left'];
-                            return <Icon />;
+                            return <Icon size={ICON_SIZE} />;
                           }),
                       );
                   })}
@@ -261,7 +261,7 @@ export function EditorToolbar({ editor, onImageUpload, isUploading }: EditorTool
             <TooltipTrigger asChild>
               <PopoverTrigger asChild>
                 <Button variant="ghost" size="sm" aria-label="Text Color">
-                  <Palette className="h-4 w-4" />
+                  <Palette size={ICON_SIZE} />
                 </Button>
               </PopoverTrigger>
             </TooltipTrigger>
@@ -309,7 +309,7 @@ export function EditorToolbar({ editor, onImageUpload, isUploading }: EditorTool
             <TooltipTrigger asChild>
               <PopoverTrigger asChild>
                 <Button variant="ghost" size="sm" aria-label="Highlight">
-                  <Highlighter className="h-4 w-4" />
+                  <Highlighter size={ICON_SIZE} />
                 </Button>
               </PopoverTrigger>
             </TooltipTrigger>
@@ -363,7 +363,7 @@ export function EditorToolbar({ editor, onImageUpload, isUploading }: EditorTool
               className={cn(editor.isActive('blockquote') ? 'bg-accent' : '')}
               aria-label="Quote"
             >
-              <Quote className="h-4 w-4" />
+              <Quote size={ICON_SIZE} />
             </Button>
           </TooltipTrigger>
           <TooltipContent>Quote</TooltipContent>
@@ -380,7 +380,7 @@ export function EditorToolbar({ editor, onImageUpload, isUploading }: EditorTool
                   className={cn(editor.isActive('link') ? 'bg-accent' : '')}
                   aria-label="Link"
                 >
-                  <LinkIcon className="h-4 w-4" />
+                  <LinkIcon size={ICON_SIZE} />
                 </Button>
               </PopoverTrigger>
             </TooltipTrigger>
@@ -429,7 +429,7 @@ export function EditorToolbar({ editor, onImageUpload, isUploading }: EditorTool
               onClick={() => editor.chain().focus().setHorizontalRule().run()}
               aria-label="Horizontal Rule"
             >
-              <Minus className="h-4 w-4" />
+              <Minus size={ICON_SIZE} />
             </Button>
           </TooltipTrigger>
           <TooltipContent>Horizontal Rule</TooltipContent>
@@ -446,9 +446,9 @@ export function EditorToolbar({ editor, onImageUpload, isUploading }: EditorTool
               aria-label="Upload Image"
             >
               {isUploading ? (
-                <Loader2 className="h-4 w-4 animate-spin" />
+                <Loader2 size={ICON_SIZE} className="animate-spin" />
               ) : (
-                <ImageIcon className="h-4 w-4" />
+                <ImageIcon size={ICON_SIZE} />
               )}
             </Button>
           </TooltipTrigger>

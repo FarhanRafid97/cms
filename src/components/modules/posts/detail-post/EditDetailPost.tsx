@@ -3,9 +3,8 @@
 import { EditorToolbar } from '@/components/tip-tap/editor-toolbar';
 import Link from '@/components/tip-tap/extension/link-extension';
 import { Button } from '@/components/ui/button';
-import { ScrollArea } from '@/components/ui/scroll-area';
 import { useUpdatePostDetail } from '@/querries/posts/post';
-import { CompletePost, PostDetail } from '@/schema/posts/post';
+import { CompleteDetailPost } from '@/schema/posts/post';
 import { useGetCloudinary } from '@/store/cloudinary';
 import { CloudinaryUploadResponse } from '@/types/cloudinary';
 import { TypeLevelHeader } from '@/types/globals';
@@ -19,21 +18,19 @@ import TextStyle from '@tiptap/extension-text-style';
 import { EditorContent, mergeAttributes, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import axios from 'axios';
-import { Loader2, Save, X } from 'lucide-react';
+import { Loader2, Save } from 'lucide-react';
 import type React from 'react';
-import { SetStateAction, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { toast } from 'sonner';
 import ImageResize from 'tiptap-extension-resize-image';
 import { match } from 'ts-pattern';
 
 export function Editor({
-  row,
-  detaiil_content,
-  setEdit,
+  id,
+  complete_detail_post,
 }: {
-  row: CompletePost;
-  detaiil_content: PostDetail;
-  setEdit: React.Dispatch<SetStateAction<boolean>>;
+  id: string;
+  complete_detail_post: CompleteDetailPost;
 }) {
   const [isUploading, setIsUploading] = useState(false);
   const { cloudinary: cloudinarySign } = useGetCloudinary();
@@ -46,7 +43,6 @@ export function Editor({
       Color,
       ImageResize,
       Placeholder.configure({
-        // Use a placeholder:
         placeholder: 'Tuilis Sesuatu…',
       }),
       TextStyle,
@@ -74,7 +70,7 @@ export function Editor({
       }),
       Link.configure({ openOnClick: false }),
     ],
-    content: detaiil_content.content,
+    content: complete_detail_post.content,
     immediatelyRender: false,
     autofocus: true,
 
@@ -84,7 +80,7 @@ export function Editor({
         autocorrect: 'off',
         autocapitalize: 'off',
         'aria-label': 'Main content area, start typing to enter text.',
-        class: 'prose prose-sm dark:prose-invert focus:outline-none max-w-full min-h-[400px] p-4',
+        class: 'tiptap prose prose-sm sm:prose l focus:outline-none max-w-full',
       },
       handleKeyDown: (view, event) => {
         // Handle Tab key to create indentation
@@ -147,7 +143,7 @@ export function Editor({
   const handleSave = async () => {
     const new_content = editor.getHTML();
     const is_no_changes = match(new_content.replace(/\s*id="[^"]*"/g, ''))
-      .with(detaiil_content.content.replace(/\s*id="[^"]*"/g, ''), () => {
+      .with(complete_detail_post.content?.replace(/\s*id="[^"]*"/g, '') || '', () => {
         toast.info('Tidak Ada Perubahan');
         return true;
       })
@@ -156,35 +152,32 @@ export function Editor({
       });
 
     if (is_no_changes) {
-      setEdit(false);
       return;
     }
-    if (row.id) {
+    if (id) {
       await updatePostDetail({
         payload: {
-          postId: row.id || '',
+          postId: id || '',
           content: editor.getHTML() || '',
-          detail_post_id: detaiil_content.id || '',
+          detail_post_id: complete_detail_post.id || '',
         },
       });
-      setEdit(false);
     }
   };
 
   return (
     <>
-      <div className="flex flex-col h-full  w-full max-h-[90vh] border ">
-        {/* Header */}
-        <div className="flex items-center justify-between p-6">
-          <div className="flex-1 min-w-0">
-            <h2 className="text-lg font-semibold text-foreground truncate">Editing: {row.title}</h2>
-            <p className="text-sm text-muted-foreground">Make changes to your post content</p>
+      <div className="flex flex-col min-h-screen relative">
+        {/* Toolbar */}
+        <div className="w-full grid grid-cols-6 bg-background border-b sticky top-16 z-10 self-start p-1 border-t">
+          <div className="flex items-center space-x-1 w-fit col-span-4 md:col-span-5 flex-wrap">
+            <EditorToolbar
+              editor={editor}
+              onImageUpload={handleImageUpload}
+              isUploading={isUploading}
+            />
           </div>
-          <div className="flex items-center gap-2 ml-4">
-            <Button variant="outline" size="sm" onClick={() => setEdit(false)} disabled={isPending}>
-              <X className="h-4 w-4 mr-1" />
-              Cancel
-            </Button>
+          <div className="flex start-center gap-1 col-span-2 md:col-span-1 justify-end">
             <Button
               size="sm"
               onClick={() => {
@@ -197,40 +190,24 @@ export function Editor({
               ) : (
                 <Save className="h-4 w-4 mr-1" />
               )}
-              Save Changes
+              Simpan
             </Button>
           </div>
         </div>
 
-        {/* Toolbar */}
-
-        <div className="flex items-center justify-center ">
-          <div className="flex items-center space-x-1 border-t botder-b bg-background p-1 shadow-sm w-full">
-            <EditorToolbar
+        {/* Editor Content */}
+        <div className="flex-1 p-4">
+          <div className="max-w-4xl mx-auto">
+            <EditorContent
+              ref={refEditor}
               editor={editor}
-              onImageUpload={handleImageUpload}
-              isUploading={isUploading}
+              className="min-h-[600px] focus-within:outline-none prose prose-sm sm:prose lg:prose-lg max-w-none "
             />
           </div>
         </div>
-
-        {/* Editor Content */}
-        <div className="flex-1 overflow-hidden">
-          <ScrollArea className="h-full">
-            <div className="p-6">
-              <EditorContent
-                ref={refEditor}
-                editor={editor}
-                className="min-h-[400px] focus-within:outline-none"
-              />
-            </div>
-          </ScrollArea>
-        </div>
-
-        {/* Status Bar */}
       </div>
       {(isPending || isUploading) && (
-        <div className="border-t bg-muted/40 px-6 py-3  fixed inset-0 grid place-items-center place-content-center ">
+        <div className="border-t bg-muted/40 px-6 py-3 fixed inset-0 grid place-items-center place-content-center">
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <Loader2 className="h-4 w-4 animate-spin" />
             <span>{isUploading ? 'Uploading image...' : 'Saving changes...'}</span>

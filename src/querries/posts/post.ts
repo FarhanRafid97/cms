@@ -115,7 +115,7 @@ export const useCreateNewPost = () => {
   });
 };
 
-export const useGetPostDetail = ({ postId }: { postId?: string }) => {
+export const useGetPostDetail = ({ postId }: { postId: string }) => {
   return useQuery({
     queryKey: [UNIQUE_KEY, 'detail', postId],
     enabled: !!postId,
