@@ -1,4 +1,4 @@
-import { Rss, Settings2, Users } from 'lucide-react';
+import { Settings2, Users } from 'lucide-react';
 import { ReactNode } from 'react';
 const ICON_SIZE = 16;
 
@@ -36,24 +36,6 @@ export const listMenu: {
       {
         title: 'Role',
         href: '/dashboard/user/role',
-      },
-    ],
-  },
-  {
-    groupMenu: 'Post',
-    icon: <Rss size={ICON_SIZE} />,
-    menus: [
-      {
-        title: 'Artikel',
-        href: '/dashboard/posts/artikel',
-      },
-      {
-        title: 'Cerita',
-        href: '/dashboard/posts/cerita',
-      },
-      {
-        title: 'Berita',
-        href: '/dashboard/posts/berita',
       },
     ],
   },
