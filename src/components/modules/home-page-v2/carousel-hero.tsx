@@ -3,21 +3,22 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
+import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import 'swiper/css/effect-fade';
 
 // import required modules
-import { pictCarousel } from '@/lib/options-default';
-import { ChevronLeft, ChevronRight, ArrowRight, Calendar, User, Clock, Tag } from 'lucide-react';
-import Image from 'next/image';
-import { Autoplay, Navigation, Pagination, EffectFade } from 'swiper/modules';
 import { useMobile } from '@/hooks/use-ismobile';
+import { pictCarousel } from '@/lib/options-default';
+import { ArrowUpRight, Calendar, ChevronLeft, ChevronRight, User } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Autoplay, EffectFade, Navigation, Pagination } from 'swiper/modules';
 
 export default function CarouselHero() {
   const isMobile = useMobile();
   return (
-    <div className="relative w-full h-[70vh]  md:h-screen group overflow-hidden">
+    <div className="relative w-full h-[60vh]  md:h-[80vh] group overflow-hidden rounded-xl">
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-gray-100 opacity-30" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(120,119,198,0.05),transparent_50%)]" />
@@ -63,70 +64,51 @@ export default function CarouselHero() {
                 />
 
                 {/* News-style Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/40" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/90 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/50" />
               </div>
 
               {/* Content Container - Mobile Optimized */}
-              <div className="relative z-10 flex items-end h-full px-4 sm:px-6 lg:px-8 pb-16 md:pb-20">
-                <div className="w-full max-w-4xl mx-auto">
+              <div className="relative z-10 flex items-end h-full px-4 sm:px-6 lg:px-8 pb-4 md:pb-8">
+                <div className="w-full  md:px-12">
                   {/* News Header */}
                   <div className="mb-4 md:mb-6">
                     {/* Category Badge */}
-                    <div className="inline-flex items-center gap-1.5 px-2.5 py-1 md:px-3 md:py-1.5 bg-emerald-600 text-white text-xs font-medium uppercase tracking-wide rounded-lg mb-3 md:mb-4">
-                      <Tag className="w-2.5 h-2.5 md:w-3 md:h-3" />
-                      <span className="text-xs">Artikel Terbaru</span>
-                    </div>
 
                     {/* Main Headline */}
-                    <h1 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-3 md:mb-4 leading-tight tracking-tight">
-                      {pict.label}
-                    </h1>
 
-                    {/* Subtitle/Excerpt */}
-                    <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-200 leading-relaxed max-w-3xl mb-4 md:mb-6 line-clamp-2 md:line-clamp-none">
-                      {pict.label_description}
-                    </p>
-                  </div>
+                    <div className="grid grid-cols-12  space-x-4">
+                      <div className="col-span-11 pr-2">
+                        <h1 className="text-xl sm:text-2x md:text-4xl font-bold text-white mb-3 md:mb-4 leading-tight tracking-tight">
+                          {pict.label}
+                        </h1>
+                        <p className="text-sm  text-gray-200 leading-relaxed  mb-4 md:mb-6 ">
+                          {pict.label_description}
+                        </p>
 
-                  {/* News Meta Information */}
-                  <div className="flex flex-wrap items-center gap-3 md:gap-6 text-gray-300 text-xs md:text-sm mb-4 md:mb-6">
-                    {/* Author */}
-                    <div className="flex items-center gap-1.5 md:gap-2">
-                      <div className="w-6 h-6 md:w-8 md:h-8 bg-gray-600 rounded-full flex items-center justify-center">
-                        <User className="w-3 h-3 md:w-4 md:h-4 text-white" />
+                        <div className="flex items-center gap-3  text-gray-300">
+                          <div className="flex items-center gap-1.5 md:gap-2">
+                            <div className="w-6 h-6 md:w-8 md:h-8 bg-gray-600 rounded-full flex items-center justify-center">
+                              <User className="w-3 h-3 md:w-4 md:h-4 text-white" />
+                            </div>
+                            <span className="font-medium text-xs md:text-sm">{pict.author}</span>
+                          </div>
+                          <div className="flex items-center gap-1.5 md:gap-2">
+                            <Calendar className="w-3 h-3 md:w-4 md:h-4" />
+                            <span className="text-xs md:text-sm">{pict.publish_date}</span>
+                          </div>
+                        </div>
                       </div>
-                      <span className="font-medium text-xs md:text-sm">{pict.author}</span>
-                    </div>
-
-                    {/* Publication Date */}
-                    <div className="flex items-center gap-1.5 md:gap-2">
-                      <Calendar className="w-3 h-3 md:w-4 md:h-4" />
-                      <span className="text-xs md:text-sm">{pict.publish_date}</span>
-                    </div>
-
-                    {/* Reading Time */}
-                    <div className="flex items-center gap-1.5 md:gap-2">
-                      <Clock className="w-3 h-3 md:w-4 md:h-4" />
-                      <span className="text-xs md:text-sm">5 min read</span>
-                    </div>
-
-                    {/* Article Type */}
-                    <div className="flex items-center gap-1.5 md:gap-2">
-                      <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-green-400 rounded-full"></div>
-                      <span className="text-xs md:text-sm">Featured</span>
+                      <div className="col-span-1 flex  justify-end">
+                        <Link href={`/article/${pict.id}`}>
+                          <button className="w-fit hover:bg-white/40 rounded-md text-white">
+                            <ArrowUpRight size={34} />
+                          </button>
+                        </Link>
+                      </div>
                     </div>
                   </div>
-
-                  {/* News-style CTA */}
-                  <div className="flex flex-col sm:flex-row items-start gap-3 md:gap-4">
-                    <button className="group/btn relative px-4 py-2.5 md:px-6 md:py-3 bg-white text-black font-semibold rounded-lg hover:bg-gray-100 transition-all duration-300 border-2 border-white hover:border-gray-300">
-                      <span className="flex items-center gap-1.5 md:gap-2 text-xs md:text-sm uppercase tracking-wide">
-                        Baca Selengkapnya
-                        <ArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover/btn:translate-x-1 transition-transform" />
-                      </span>
-                    </button>
-                  </div>
+                  {/* Subtitle/Excerpt */}
                 </div>
               </div>
 

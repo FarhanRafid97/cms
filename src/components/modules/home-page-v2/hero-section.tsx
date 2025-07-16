@@ -1,17 +1,20 @@
 import React from 'react';
 import CarouselHero from './carousel-hero';
+import LayoutSection from '../home-page/layout-section';
 
 const HeroSection = () => {
   return (
-    <section className="relative w-full h-[70vh] md:h-screen overflow-hidden">
-      {/* Hero Carousel */}
-      <CarouselHero />
+    <LayoutSection>
+      <div className="w-full  ">
+        {/* Hero Carousel */}
+        <CarouselHero />
 
-      {/* Overlay for additional content if needed */}
-      <div className="absolute inset-0 pointer-events-none">
-        {/* You can add floating elements or additional content here */}
+        {/* Overlay for additional content if needed */}
+        <div className="absolute inset-0 pointer-events-none">
+          {/* You can add floating elements or additional content here */}
+        </div>
       </div>
-    </section>
+    </LayoutSection>
   );
 };
 
