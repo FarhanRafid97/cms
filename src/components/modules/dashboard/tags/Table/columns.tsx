@@ -6,7 +6,6 @@ import { DataTableColumnHeaderComplete } from '@/components/DataTableComplete/Co
 import { DataTableRowActionsReport } from './DataTableRowActionsReport';
 
 import { Tag } from '@/schema/paramter/tag';
-import { formatedDateDDMMYYY } from '@/lib/utils';
 
 export const columns: ColumnDef<Tag>[] = [
   {
@@ -39,13 +38,16 @@ export const columns: ColumnDef<Tag>[] = [
     ),
   },
   {
-    accessorKey: 'created_at',
+    accessorKey: 'color',
     header: ({ column, header }) => (
-      <DataTableColumnHeaderComplete header={header} column={column} title="Created At" />
+      <DataTableColumnHeaderComplete header={header} column={column} title="Warna" />
     ),
     cell: ({ row, column }) => (
       <TableCellCostume id={column.id}>
-        {formatedDateDDMMYYY(row.original.created_at || new Date().toISOString())}
+        <div
+          className="w-6 h-6 rounded border border-border"
+          style={{ backgroundColor: row.original.color || '' }}
+        />
       </TableCellCostume>
     ),
   },

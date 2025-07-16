@@ -1,5 +1,6 @@
 import { CompleteInput } from '@/components/common/complete-input';
 import { Button } from '@/components/ui/button';
+import ColorPicker from '@/components/ui/color-picker';
 import {
   Dialog,
   DialogContent,
@@ -10,6 +11,7 @@ import {
   DialogTrigger,
   DialogWrapperContent,
 } from '@/components/ui/dialog';
+import { Label } from '@/components/ui/label';
 import { useCreateNewTag } from '@/querries/parameter/tags';
 import { CreateTag, CreateTagSchema } from '@/schema/paramter/tag';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -23,7 +25,8 @@ const CreateNewTag = () => {
     register,
     handleSubmit,
     reset,
-
+    getValues,
+    setValue,
     formState: { errors },
   } = useForm<CreateTag>({
     resolver: zodResolver(CreateTagSchema),
@@ -67,6 +70,16 @@ const CreateNewTag = () => {
               error={errors.name?.message}
               {...register('name')}
             />
+            <div className="grid grid-cols-1 items-center gap-2">
+              <Label>Warna Tag</Label>{' '}
+              <ColorPicker
+                value={getValues('color')}
+                error={errors.color?.message}
+                handleColorChange={(value) => {
+                  setValue('color', value);
+                }}
+              />{' '}
+            </div>
           </form>{' '}
         </DialogWrapperContent>
         <DialogFooter className="sm:justify-between">

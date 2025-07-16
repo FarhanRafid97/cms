@@ -1,5 +1,6 @@
 import { CompleteInput } from '@/components/common/complete-input';
 import { Button } from '@/components/ui/button';
+import ColorPicker from '@/components/ui/color-picker';
 import {
   Dialog,
   DialogContent,
@@ -9,8 +10,8 @@ import {
   DialogTitle,
   DialogWrapperContent,
 } from '@/components/ui/dialog';
+import { Label } from '@/components/ui/label';
 import { useUpdateTag } from '@/querries/parameter/tags';
-import { UpdateCategory } from '@/schema/paramter/category';
 import { Tag, UpdateTag, UpdateTagSchema } from '@/schema/paramter/tag';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader2 } from 'lucide-react';
@@ -32,6 +33,8 @@ const EditTag = ({
     register,
     handleSubmit,
     reset,
+    getValues,
+    setValue,
     formState: { errors },
   } = useForm<UpdateTag>({
     resolver: zodResolver(UpdateTagSchema),
@@ -39,16 +42,18 @@ const EditTag = ({
       id: row.id.toString(),
       name: row.name || '',
       slug: row.slug || '',
+      color: row.color || '',
     },
   });
   const { mutateAsync: updateTag, isPending } = useUpdateTag();
 
-  const onSubmit = async (data: UpdateCategory) => {
+  const onSubmit = async (data: UpdateTag) => {
     const isNothingDifferent = match(data)
       .with(
         {
           id: P.when((id) => id === row.id),
           name: P.when((name) => name === row.name),
+          color: P.when((color) => color === row.color),
         },
         () => true,
       )
@@ -91,7 +96,17 @@ const EditTag = ({
               disabled={isPending}
               error={errors.name?.message}
               {...register('name')}
-            />
+            />{' '}
+            <div className="grid grid-cols-1 items-center gap-2">
+              <Label>Warna Tag</Label>{' '}
+              <ColorPicker
+                value={getValues('color')}
+                error={errors.color?.message}
+                handleColorChange={(value) => {
+                  setValue('color', value);
+                }}
+              />{' '}
+            </div>
           </form>
         </DialogWrapperContent>
         <DialogFooter className="sm:justify-between">

@@ -44,8 +44,6 @@ export const useCreateNewPostType = () => {
       const newData: PostType & AdditionalData = {
         id: response.id,
         name: response.name,
-        description: response.description,
-        created_at: response.created_at,
         isNew: true,
       };
 
@@ -81,7 +79,6 @@ export const useUpdatePostType = () => {
         if (item.id === payload.id) {
           const newData: PostType & AdditionalData = {
             ...item,
-            description: payload.description || null,
             name: payload.name,
             isUpdate: true,
           };

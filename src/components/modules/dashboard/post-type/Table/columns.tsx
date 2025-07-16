@@ -5,7 +5,6 @@ import { DataTableColumnHeaderComplete } from '@/components/DataTableComplete/Co
 
 import { DataTableRowActionsReport } from './DataTableRowActionsReport';
 
-import { formatedDateDDMMYYY } from '@/lib/utils';
 import { PostType } from '@/schema/paramter/post-type';
 
 export const columns: ColumnDef<PostType>[] = [
@@ -27,27 +26,6 @@ export const columns: ColumnDef<PostType>[] = [
     ),
     cell: ({ row, column }) => (
       <TableCellCostume id={column.id}>{row.original.name}</TableCellCostume>
-    ),
-  },
-  {
-    accessorKey: 'description',
-    header: ({ column, header }) => (
-      <DataTableColumnHeaderComplete header={header} column={column} title="Description" />
-    ),
-    cell: ({ row, column }) => (
-      <TableCellCostume id={column.id}>{row.original.description}</TableCellCostume>
-    ),
-  },
-
-  {
-    accessorKey: 'created_at',
-    header: ({ column, header }) => (
-      <DataTableColumnHeaderComplete header={header} column={column} title="Created At" />
-    ),
-    cell: ({ row, column }) => (
-      <TableCellCostume id={column.id}>
-        {formatedDateDDMMYYY(row.original.created_at || new Date().toISOString())}
-      </TableCellCostume>
     ),
   },
   {

@@ -1,5 +1,4 @@
 import { CompleteInput } from '@/components/common/complete-input';
-import { CompleteTextArea } from '@/components/common/complete-text-area';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -37,9 +36,7 @@ const EditPostType = ({
     resolver: zodResolver(UpdatePostTypeSchema),
     defaultValues: {
       id: row.id,
-      created_at: row.created_at,
       name: row.name || '',
-      description: row.description || '',
     },
   });
   const { mutateAsync: updatePostType, isPending } = useUpdatePostType();
@@ -50,7 +47,6 @@ const EditPostType = ({
         {
           id: P.when((id) => id === row.id),
           name: P.when((name) => name === row.name),
-          description: P.when((desc) => desc === row.description),
         },
         () => true,
       )
@@ -90,13 +86,6 @@ const EditPostType = ({
               disabled={isPending}
               error={errors.name?.message}
               {...register('name')}
-            />
-            <CompleteTextArea
-              label="Deskripsi Tipe Post"
-              isRequired
-              disabled={isPending}
-              error={errors.description?.message}
-              {...register('description')}
             />
           </form>
         </DialogWrapperContent>

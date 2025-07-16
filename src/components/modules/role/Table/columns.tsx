@@ -3,7 +3,6 @@ import { ColumnDef } from '@tanstack/react-table';
 import { TableCellCostume } from '@/components/DataTableComplete/CellBaseComp';
 import { DataTableColumnHeaderComplete } from '@/components/DataTableComplete/ColumnHeaderComplete';
 
-import { formatedDateDDMMYYY } from '@/lib/utils';
 import { Role } from '@/schema/user/role';
 
 export const columns: ColumnDef<Role>[] = [
@@ -27,19 +26,6 @@ export const columns: ColumnDef<Role>[] = [
     ),
     cell: ({ row, column }) => (
       <TableCellCostume id={column.id}>{row.original.role}</TableCellCostume>
-    ),
-  },
-
-  {
-    accessorKey: 'created_at',
-    enableResizing: false,
-    header: ({ column, header }) => (
-      <DataTableColumnHeaderComplete header={header} column={column} title="Tanggal Dibuat" />
-    ),
-    cell: ({ row, column }) => (
-      <TableCellCostume id={column.id}>
-        {formatedDateDDMMYYY(row.original.created_at || new Date().toISOString())}
-      </TableCellCostume>
     ),
   },
 ];

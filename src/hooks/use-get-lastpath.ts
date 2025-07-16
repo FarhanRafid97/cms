@@ -11,9 +11,9 @@ export const useGetPostTypeId = (): PostType => {
   if (!result) {
     return {
       id: 1,
-      name: 'Artikel',
-      description: 'Artikel',
-      created_at: new Date().toISOString(),
+      name: 'unknown',
+      isNew: false,
+      isUpdate: false,
     };
   }
   return result[0];

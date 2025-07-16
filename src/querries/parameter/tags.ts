@@ -75,6 +75,7 @@ export const useUpdateTag = () => {
             ...item,
             name: payload.name || '',
             slug: payload.slug || '',
+            color: payload.color || '',
             isUpdate: true,
           };
           return newData;
