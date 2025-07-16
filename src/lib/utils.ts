@@ -95,3 +95,10 @@ export const getStatusIcon = (status: string): LucideIcon => {
       return CircleDotDashed;
   }
 };
+
+export function capitalizeWords(str: string): string {
+  return str
+    .split(' ')
+    .map((word) => (word.length > 0 ? word[0].toUpperCase() + word.slice(1).toLowerCase() : ''))
+    .join(' ');
+}

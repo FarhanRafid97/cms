@@ -1,4 +1,5 @@
 import { supabase } from '@/lib/supabase';
+import { capitalizeWords } from '@/lib/utils';
 import { CreatePostType, UpdatePostType } from '@/schema/paramter/post-type';
 import { toast } from 'sonner';
 
@@ -6,7 +7,7 @@ export const getListPostType = async () => {
   const { data, error } = await supabase
     .from('post_type')
     .select('*')
-    .order('created_at', { ascending: false });
+    .order('id', { ascending: true });
   if (error) {
     toast.error(`Error fetching categories: ${error.message}`);
     return [];
@@ -22,8 +23,7 @@ export const createNewPostType = async (payload: CreatePostType) => {
   const { data, error } = await supabase
     .from('post_type')
     .insert({
-      name: payload.name,
-      description: payload.description,
+      name: capitalizeWords(payload.name),
     })
     .select('*')
     .single();
@@ -37,7 +37,7 @@ export const createNewPostType = async (payload: CreatePostType) => {
 export const updatePostType = async (payload: UpdatePostType) => {
   const { error } = await supabase
     .from('post_type')
-    .update({ description: payload.description, name: payload.name })
+    .update({ name: capitalizeWords(payload.name) })
     .eq('id', payload.id);
 
   if (error) {

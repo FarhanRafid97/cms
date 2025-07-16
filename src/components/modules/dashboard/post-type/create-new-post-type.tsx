@@ -1,5 +1,4 @@
 import { CompleteInput } from '@/components/common/complete-input';
-import { CompleteTextArea } from '@/components/common/complete-text-area';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -65,13 +64,6 @@ const CreateNewPostType = () => {
               disabled={isPending}
               error={errors.name?.message}
               {...register('name')}
-            />
-            <CompleteTextArea
-              label="Deskripsi Tipe Post"
-              isRequired
-              disabled={isPending}
-              error={errors.description?.message}
-              {...register('description')}
             />
           </form>{' '}
         </DialogWrapperContent>
