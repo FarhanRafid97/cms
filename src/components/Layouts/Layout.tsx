@@ -6,10 +6,9 @@ import { AppSidebar } from '../Sidebar/app-sidebar';
 import { ScrollArea } from '../ui/scroll-area';
 import { Separator } from '../ui/separator';
 import { SidebarInset, SidebarProvider, SidebarTrigger } from '../ui/sidebar';
+import ProtectedRoute from './Protection';
 import SearchMenu from './SearchMenu';
 import UserLogged from './UserLogged';
-import ProtectedRoute from './Protection';
-import BreadcrumbURL from '../BreadcrumbURL';
 
 interface ILayoutProps {
   children: ReactNode;
@@ -26,7 +25,6 @@ const Layout: React.FC<ILayoutProps> = ({ children }) => {
             <div className="flex items-center gap-2 ">
               <SidebarTrigger className="-ml-1" />
               <Separator orientation="vertical" className="h-4  mr-2" />
-              <BreadcrumbURL />
             </div>
             <div className="flex gap-4 items-center ml-auto ">
               <SearchMenu />

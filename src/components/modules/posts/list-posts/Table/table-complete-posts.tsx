@@ -12,7 +12,7 @@ export default function TableListPosts({ postTypeSelected }: { postTypeSelected:
   const { data, isFetching } = useGetCompletePosts({
     offsetFrom: Number(searchParams?._offsetFrom || 0),
     offsetTo: Number(searchParams?._offsetTo),
-    post_type_id: Number(postTypeSelected),
+    post_type: postTypeSelected,
     author_id: user?.detail_user?.id || '',
   });
 

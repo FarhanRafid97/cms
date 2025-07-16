@@ -33,6 +33,7 @@ export function AddNewPosts() {
   const { mutateAsync, isPending } = useCreateNewPost();
   const [randomNumb, setRandomNumb] = useState(1);
   const postTypeSelected = useGetPostTypeId();
+  console.log('postTypeSelected', postTypeSelected);
 
   const { handleSubmit, formState, watch, register, setValue, setError, clearErrors, reset } =
     useForm<CreatePost>({
