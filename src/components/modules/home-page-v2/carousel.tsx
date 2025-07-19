@@ -99,7 +99,7 @@ const JumpToIndex = ({ items }: { items: (typeof pictCarousel)[0][] }) => {
 
 export const CarouselMd = () => {
   return (
-    <Carousel.Root className="    gap-1 h-full flex  ">
+    <Carousel.Root className="    gap-1 h-full flex w-full  ">
       <div className="md:w-3/4 w-full min-h-[50vh] relative md:h-auto  shadow-sm border   rounded-xl bg-background border-border-clean">
         <Carousel.PrevTrigger className="absolute top-1/2 left-4 z-10 flex size-9 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-alpha-white/90 p-2 text-fg-secondary outline-focus-ring backdrop-blur-xs focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:bg-disabled_subtle disabled:text-fg-disabled">
           <ChevronLeft className="size-5" />

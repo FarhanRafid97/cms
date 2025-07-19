@@ -28,7 +28,7 @@ interface CardPostThumbnailProps extends VariantProps<typeof cardPostThumbnailVa
 
 const CardPostThumbnail = ({ title, description, image, variant }: CardPostThumbnailProps) => {
   return (
-    <div className=" border bg-[#fff] p-5 rounded-2xl transition-all duration-300  flex flex-col gap-3 cursor-pointer ease-in-out shadow-lg h-full">
+    <div className=" border-[0.5px] bg-[#fff] p-5 rounded-2xl transition-all duration-300  flex flex-col gap-3 cursor-pointer ease-in-out h-full shadow">
       <div className="flex justify-start gap-2 h-fit">
         <Badge
           variant="default"
