@@ -15,7 +15,8 @@ const WrapperSideContent = ({
 }: {
   children: React.ReactNode;
   isMobile: boolean;
-  setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
+  // eslint-disable-next-line no-unused-vars
+  setIsEdit: (value: boolean) => void;
   isEdit: boolean;
 }) => {
   if (isMobile) {
@@ -32,13 +33,12 @@ const WrapperSideContent = ({
   }
   return (
     <motion.div
-      animate={{ width: !isEdit ? '0%' : '20rem' }}
-      transition={{ type: 'spring', bounce: 0.1, duration: 0.3 }}
-      style={{ position: 'relative' }}
+      animate={{ marginLeft: isEdit ? '0px' : '-320px', x: isEdit ? '0px' : '320px' }}
+      transition={{ ease: [0.79, 0.14, 0.15, 0.86], duration: 0.15 }}
     >
-      <div className="w-80 flex-shrink-0  absolute  md:sticky top-16 h-[calc(100vh-5rem)] overflow-y-auto bg-sidebar/10 border-l p-4">
+      <div className="w-80 flex-shrink-0    md:sticky top-12 h-[calc(100vh-5rem)]  bg-background border-l-[0.5px] border-border-clean p-4">
         <div className="disabled:pointer-events-none  w-full ">
-          <div className="bg-red-400 w-full h-full flex">{children}</div>
+          <div className="w-full h-full flex">{children}</div>
         </div>
       </div>
     </motion.div>
@@ -51,7 +51,8 @@ export const SideContent = ({
   isEdit,
 }: {
   isMobile: boolean;
-  setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
+  // eslint-disable-next-line no-unused-vars
+  setIsEdit: (value: boolean) => void;
   isEdit: boolean;
 }) => {
   return (

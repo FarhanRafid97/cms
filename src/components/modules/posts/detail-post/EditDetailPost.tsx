@@ -169,7 +169,7 @@ export function Editor({
     <>
       <div className="flex flex-col min-h-screen relative">
         {/* Toolbar */}
-        <div className="w-full grid grid-cols-6 bg-background border-b sticky top-16 z-10 self-start p-1 border-t">
+        <div className="w-full grid grid-cols-6 bg-background  border-y-[0.5px] sticky top-12 z-10 self-start p-1 border-y-border-clean">
           <div className="flex items-center space-x-1 w-fit col-span-4 md:col-span-5 flex-wrap">
             <EditorToolbar
               editor={editor}
@@ -197,11 +197,11 @@ export function Editor({
 
         {/* Editor Content */}
         <div className="flex-1 p-4">
-          <div className="max-w-4xl mx-auto">
+          <div className="  flex justify-center mx-auto">
             <EditorContent
               ref={refEditor}
               editor={editor}
-              className="min-h-[600px] focus-within:outline-none prose prose-sm sm:prose lg:prose-lg max-w-none "
+              className="min-h-[600px] focus-within:outline-none prose prose-sm sm:prose lg:prose-lg "
             />
           </div>
         </div>

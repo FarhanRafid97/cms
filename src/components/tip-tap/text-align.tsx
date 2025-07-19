@@ -46,6 +46,7 @@ export const TextAlignButton = React.forwardRef<HTMLButtonElement, TextAlignButt
         className={className.trim()}
         disabled={isDisabled}
         tooltip={label}
+        size="icon"
         variant={isActive ? 'secondary' : 'ghost'}
         shortcutKeys={shortcutKey}
         onClick={handleClick}
