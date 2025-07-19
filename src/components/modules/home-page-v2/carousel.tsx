@@ -35,7 +35,7 @@ const JumpToIndex = ({ items }: { items: (typeof pictCarousel)[0][] }) => {
           onClick={() => jumpToSlide(index)}
           className={cn(
             'group relative bg-white/95 backdrop-blur-md shadow-sm border w-full  p-1 border-border-clean',
-            'grid grid-cols-[160px_1fr] gap-4 rounded-xl cursor-pointer ',
+            'grid grid-cols-[190px_1fr] gap-4 rounded-xl cursor-pointer ',
             'transition-all duration-300 ease-out hover:shadow-lg ',
             'hover:bg-white hover:border-gray-300/60',
             selectedIndex === index && 'bg-blue-50/80',
@@ -100,7 +100,7 @@ const JumpToIndex = ({ items }: { items: (typeof pictCarousel)[0][] }) => {
 export const CarouselMd = () => {
   return (
     <Carousel.Root className="    gap-1 h-full flex w-full  ">
-      <div className="md:w-3/4 w-full min-h-[50vh] relative md:h-auto  shadow-sm border   rounded-xl bg-background border-border-clean">
+      <div className="md:w-3/4 w-full min-h-[50vh] relative md:min-h-[65vh]  shadow-sm border   rounded-xl bg-background border-border-clean">
         <Carousel.PrevTrigger className="absolute top-1/2 left-4 z-10 flex size-9 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-alpha-white/90 p-2 text-fg-secondary outline-focus-ring backdrop-blur-xs focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:bg-disabled_subtle disabled:text-fg-disabled">
           <ChevronLeft className="size-5" />
         </Carousel.PrevTrigger>

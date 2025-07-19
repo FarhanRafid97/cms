@@ -28,33 +28,12 @@ interface CardPostThumbnailProps extends VariantProps<typeof cardPostThumbnailVa
 
 const CardPostThumbnail = ({ title, description, image, variant }: CardPostThumbnailProps) => {
   return (
-    <div className=" border-[0.5px] bg-[#fff] p-5 rounded-2xl transition-all duration-300  flex flex-col gap-3 cursor-pointer ease-in-out h-full shadow">
-      <div className="flex justify-start gap-2 h-fit">
-        <Badge
-          variant="default"
-          className="gap-1 h-8 rounded-lg bg-emerald-50 text-emerald-800 shadow-none border border-emerald-200 hover:bg-emerald-100 hover:text-emerald-900"
-        >
-          Budaya
-        </Badge>
-        <Badge
-          variant="default"
-          className="gap-1 h-8 rounded-lg bg-sky-50 text-sky-800 shadow-none border border-sky-200 hover:bg-sky-100 hover:text-sky-900"
-        >
-          Kota
-        </Badge>
-
-        <Badge
-          variant="default"
-          className="gap-1 h-8 rounded-lg bg-purple-50 text-purple-800 shadow-none border border-purple-200 hover:bg-purple-100 hover:text-purple-900"
-        >
-          Terbaru
-        </Badge>
-      </div>
-      <div className="flex flex-col gap-4">
+    <div className=" border-[0.5px] bg-[#fff] rounded-2xl overflow-hidden transition-all duration-300  flex flex-col gap-3 cursor-pointer ease-in-out h-full shadow">
+      <div className="flex flex-col gap-2">
         <div
           className={cn(
             cardPostThumbnailVariants({ variant }),
-            'w-full rounded-xl overflow-hidden shadow relative col-span-1 h-[250px]',
+            'w-full  overflow-hidden shadow relative col-span-1 h-[300px]',
           )}
         >
           <Image
@@ -67,7 +46,16 @@ const CardPostThumbnail = ({ title, description, image, variant }: CardPostThumb
           />
         </div>
 
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-6 p-4">
+          <div className="flex justify-start gap-2 h-fit">
+            <Badge
+              variant="default"
+              className="gap-1 h-8 rounded-lg bg-emerald-50 text-emerald-800 shadow-none border border-emerald-200 hover:bg-emerald-50 hover:text-emerald-900"
+            >
+              <div className="w-2 h-2 rounded-full bg-emerald-500" />
+              Budaya
+            </Badge>
+          </div>
           <div className="grid grid-cols-1 gap-2">
             <h1 className="text-md font-bold">{title}</h1>
             <div className="flex flex-col gap-1">
@@ -81,19 +69,18 @@ const CardPostThumbnail = ({ title, description, image, variant }: CardPostThumb
           </div>
           <p className="text-sm text-gray-500">{description}</p>
         </div>
-
-        <div className="mt-auto">
-          <Button
-            variant="ghost"
-            className="h-auto p-0 text-blue-600 hover:text-blue-700 hover:bg-transparent font-medium text-sm group/btn"
-          >
-            <span className="group-hover/btn:underline underline-offset-4">Selengkapnya</span>
-            <ArrowUpRight
-              size={16}
-              className="ml-1 transition-transform duration-300 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1"
-            />
-          </Button>
-        </div>
+      </div>{' '}
+      <div className="mt-auto px-4 pb-4">
+        <Button
+          variant="ghost"
+          className="h-auto p-0 text-blue-600 hover:text-blue-700 hover:bg-transparent font-medium text-sm group/btn"
+        >
+          <span className="group-hover/btn:underline underline-offset-4">Selengkapnya</span>
+          <ArrowUpRight
+            size={16}
+            className="ml-1 transition-transform duration-300 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1"
+          />
+        </Button>
       </div>
     </div>
   );
