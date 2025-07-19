@@ -10,12 +10,8 @@ export default function LayoutSection({
   containerClassName?: string;
 }) {
   return (
-    <section className={cn('w-full border-custome-bottom px-2', className)}>
-      <div
-        className={cn(
-          `container mx-auto md:px-12 border-custome-x max-w-7xl py-8 px-4  ${containerClassName}`,
-        )}
-      >
+    <section className={cn('w-full  px-2', className)}>
+      <div className={cn(`container mx-auto md:px-6   max-w-7xl py-8 px-4  ${containerClassName}`)}>
         {children}
       </div>
     </section>

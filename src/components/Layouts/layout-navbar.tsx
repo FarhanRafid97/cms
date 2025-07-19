@@ -11,12 +11,8 @@ export default function LayoutNavbar({
   containerClassName?: string;
 }) {
   return (
-    <section className={cn('w-full border-custome-bottom  px-3', className)}>
-      <div
-        className={cn(
-          `container mx-auto lg:px-6 max-w-7xl border-custome-x  px-1 py-4 ${containerClassName}`,
-        )}
-      >
+    <section className={cn('w-full  px-3', className)}>
+      <div className={cn(`container mx-auto lg:px-6  px-1 py-4 ${containerClassName}`)}>
         {children}
       </div>
     </section>

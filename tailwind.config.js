@@ -26,7 +26,7 @@ module.exports = {
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
         background: 'hsl(var(--background))',
-        'background-new': '#f0f0f0',
+        'background-new': '#F5F5F5',
         foreground: 'hsl(var(--foreground))',
         'vercel-seconday': '#FAFAFA',
         'my-blue': '#2463EB',

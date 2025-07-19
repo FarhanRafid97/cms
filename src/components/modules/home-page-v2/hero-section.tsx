@@ -1,13 +1,12 @@
-import React from 'react';
-import CarouselHero from './carousel-hero';
 import LayoutSection from '../home-page/layout-section';
+import { CarouselMd } from './carousel';
 
 const HeroSection = () => {
   return (
     <LayoutSection>
       <div className="w-full  ">
         {/* Hero Carousel */}
-        <CarouselHero />
+        <CarouselMd />
 
         {/* Overlay for additional content if needed */}
         <div className="absolute inset-0 pointer-events-none">
