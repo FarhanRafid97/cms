@@ -2,6 +2,7 @@
 
 import { Carousel, useCarousel } from '@/components/custom/carousel';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
+import { Card, CardContent } from '@/components/ui/card';
 import { pictCarousel } from '@/lib/options-default';
 import { cn } from '@/lib/utils';
 import { Calendar, ChevronLeft, ChevronRight, User } from 'lucide-react';
@@ -99,7 +100,7 @@ const JumpToIndex = ({ items }: { items: (typeof pictCarousel)[0][] }) => {
 export const CarouselMd = () => {
   return (
     <Carousel.Root className="    gap-1 h-full flex  ">
-      <div className="md:w-3/4 w-full min-h-[50vh] relative md:h-auto overflow-hidden  shadow-sm border   border-border-clean">
+      <div className="md:w-3/4 w-full min-h-[50vh] relative md:h-auto  shadow-sm border   rounded-xl bg-background border-border-clean">
         <Carousel.PrevTrigger className="absolute top-1/2 left-4 z-10 flex size-9 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-alpha-white/90 p-2 text-fg-secondary outline-focus-ring backdrop-blur-xs focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:bg-disabled_subtle disabled:text-fg-disabled">
           <ChevronLeft className="size-5" />
         </Carousel.PrevTrigger>
@@ -107,25 +108,26 @@ export const CarouselMd = () => {
           <ChevronRight className="size-5" />
         </Carousel.NextTrigger>
 
-        <div className="absolute bottom-4 left-1/2 z-10 -translate-x-1/2 ">
-          <Carousel.IndicatorGroup>
-            <Carousel.Indicator index={0} />
+        <div className="absolute bottom-4 left-1/2 z-10 -translate-x-1/2 rounded-xl ">
+          <Carousel.IndicatorGroup className="rounded-xl">
+            <Carousel.Indicator index={0} className="rounded-xl" />
           </Carousel.IndicatorGroup>
         </div>
 
         <Carousel.Content className="gap-2 h-full   ">
           {pictCarousel.map((pict) => (
-            <Carousel.Item
-              key={pict.id}
-              className=" w-full h-full relative border-xl overflow-hidden"
-            >
-              <Image
-                src={pict.imagePath}
-                alt={pict.label}
-                objectFit="cover"
-                fill
-                className="w-full h-full top-0 left-0 object-cover  "
-              />
+            <Carousel.Item key={pict.id} className=" w-full h-full   relative rounded-xl  ">
+              <Card className="h-full overflow-hidden">
+                <CardContent className=" h-full overflow-hidden">
+                  <Image
+                    src={pict.imagePath}
+                    alt={pict.label}
+                    objectFit="cover"
+                    fill
+                    className="w-full h-full top-0 left-0 object-cover relative   rounded-xl overflow-hidden"
+                  />
+                </CardContent>
+              </Card>
               {/* CONTENT */}{' '}
               <div className="absolute bottom-0 left-0 z-10 w-full md:px-12 px-5">
                 {/* Overlay for readability */}
