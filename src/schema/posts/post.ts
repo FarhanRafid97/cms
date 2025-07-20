@@ -77,6 +77,8 @@ export const CreatePostSchema = z.object({
     .min(1, { message: MESSAGE_FIELD_REQUIRED })
     .max(255, { message: `${MESSAGE_MAXIMUM_CHARACTER} 255` })
     .default(''),
+  real_author_email: z.string().email().optional().default(''),
+  real_author_name: z.string().min(1, { message: MESSAGE_FIELD_REQUIRED }).optional().default(''),
   slug: z
     .string()
     .min(1, { message: MESSAGE_FIELD_REQUIRED })

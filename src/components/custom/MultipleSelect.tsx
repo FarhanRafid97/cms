@@ -20,7 +20,6 @@ import { useState } from 'react';
 
 export function MultipleSelectDropdown({
   isPending,
-
   selectedData,
   label,
   options,
@@ -105,13 +104,14 @@ export function MultipleSelectDropdown({
                         className="bg-blue-50 rounded-sm px-1 text-[10px] font-bold text-blue-700"
                       >
                         {option?.[1] || ''}{' '}
-                        <X
-                          size={14}
-                          className="ml-1"
-                          strokeWidth={3}
+                        {/* Wrap X in a span with tabIndex and role to prevent Popover from closing */}
+                        <span
+                          tabIndex={0}
+                          role="button"
                           onClick={(e) => {
                             e.stopPropagation();
                             e.preventDefault();
+                            // Prevent Popover from closing by not letting the event bubble up
                             const selectedMap = handleChangeSelectCategories({
                               value: option?.[1] || '',
                               key: option?.[0] || '',
@@ -119,7 +119,18 @@ export function MultipleSelectDropdown({
                             const multipleSelectData = Array.from(selectedMap.keys()).join(',');
                             handleChange(multipleSelectData);
                           }}
-                        />
+                          onMouseDown={(e) => {
+                            // Prevent focus loss which can close the popover
+                            e.preventDefault();
+                          }}
+                          style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            cursor: 'pointer',
+                          }}
+                        >
+                          <X size={14} className="ml-1" strokeWidth={3} />
+                        </span>
                       </Badge>
                     ))
                   )}

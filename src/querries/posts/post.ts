@@ -1,9 +1,16 @@
 import { useGetFilterSearchparams } from '@/hooks/useGetSearchParams';
-import { CompletePost, CreatePost, PostDetail } from '@/schema/posts/post';
+import {
+  CompleteDetailPost,
+  CompletePost,
+  CreatePost,
+  PostDetail,
+  UpdatePost,
+} from '@/schema/posts/post';
 import {
   createNewPost,
   getListCompletePosts,
   getPostDetail,
+  updatePost,
   updatePostDetail,
 } from '@/service/posts/posts';
 import { AdditionalData } from '@/types/globals';
@@ -111,6 +118,36 @@ export const useCreateNewPost = () => {
         totalData: totalData + 1,
       });
       return newData;
+    },
+  });
+};
+
+export const useUpdatePost = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({ payload, postId }: { payload: UpdatePost; postId: string }) => {
+      const result = await updatePost({ payload, postId });
+      return { payload, postId, result };
+    },
+    onSuccess: ({ payload, postId }) => {
+      if (payload) {
+        toast.success('Sukses mengubah artikel', {
+          description: `Artikel ${payload.title} berhasil diubah `,
+        });
+        const CURRENT_QUERRY = [UNIQUE_KEY, 'detail', postId];
+        const previousData = queryClient.getQueryData(CURRENT_QUERRY) as CompleteDetailPost;
+        console.log('previousData', previousData);
+        if (!previousData) {
+          return;
+        }
+
+        const updatedData = {
+          ...previousData,
+          ...payload,
+        };
+        queryClient.setQueryData(CURRENT_QUERRY, updatedData);
+      }
     },
   });
 };

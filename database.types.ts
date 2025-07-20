@@ -362,6 +362,8 @@ export type Database = {
           post_type_id: number | null
           published_at: string | null
           reading_time: number | null
+          real_author_email: string | null
+          real_author_name: string | null
           slug: string
           status: string | null
           title: string
@@ -381,6 +383,8 @@ export type Database = {
           post_type_id?: number | null
           published_at?: string | null
           reading_time?: number | null
+          real_author_email?: string | null
+          real_author_name?: string | null
           slug: string
           status?: string | null
           title: string
@@ -400,6 +404,8 @@ export type Database = {
           post_type_id?: number | null
           published_at?: string | null
           reading_time?: number | null
+          real_author_email?: string | null
+          real_author_name?: string | null
           slug?: string
           status?: string | null
           title?: string
@@ -420,6 +426,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "categories"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "posts_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "complete_detail_post"
+            referencedColumns: ["category_id"]
           },
           {
             foreignKeyName: "posts_post_type_id_fkey"
@@ -501,8 +514,10 @@ export type Database = {
     Views: {
       complete_detail_post: {
         Row: {
+          author_id: string | null
           avatar_url: string | null
           category_color: string | null
+          category_id: string | null
           category_name: string | null
           category_slug: string | null
           content: string | null
@@ -517,6 +532,8 @@ export type Database = {
           post_type_id: number | null
           published_at: string | null
           reading_time: number | null
+          real_author_email: string | null
+          real_author_name: string | null
           slug: string | null
           status: string | null
           title: string | null
@@ -525,6 +542,13 @@ export type Database = {
           word_count: number | null
         }
         Relationships: [
+          {
+            foreignKeyName: "posts_author_id_fkey"
+            columns: ["author_id"]
+            isOneToOne: false
+            referencedRelation: "authors"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "posts_post_type_id_fkey"
             columns: ["post_type_id"]
@@ -584,6 +608,13 @@ export type Database = {
             referencedRelation: "categories"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "posts_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "complete_detail_post"
+            referencedColumns: ["category_id"]
+          },
         ]
       }
       published_posts_with_author: {
@@ -627,6 +658,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "categories"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "posts_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "complete_detail_post"
+            referencedColumns: ["category_id"]
           },
           {
             foreignKeyName: "posts_post_type_id_fkey"
