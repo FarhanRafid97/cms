@@ -35,7 +35,6 @@ export const useGetCompletePosts = ({
     refetchOnWindowFocus: false,
     enabled: !!post_type && !!author_id,
     refetchOnReconnect: false,
-    staleTime: 1000 * 60 * 5, // 5 minutes.
     retry: false,
     queryFn: async () => {
       const result = await getListCompletePosts({ offsetFrom, offsetTo, post_type, author_id });
@@ -52,26 +51,26 @@ export const useCreateNewPost = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async ({ payload }: { payload: CreatePost }) => {
+    mutationFn: async ({ payload, postType }: { payload: CreatePost; postType: string }) => {
       try {
         const response = await createNewPost({ dataPost: payload });
 
         if (!response) {
           toast.error('Gagal menambahkan artikel baru');
-          return { payload: null, response: null };
+          return { payload: null, response: null, postType: null };
         }
         toast.success('Sukses menambahkan artikel baru');
-        return { payload, response };
+        return { payload, response, postType };
       } catch (error) {
-        return { payload: null, response: null };
+        return { payload: null, response: null, postType: null };
       }
     },
-    onSuccess: ({ response, payload }) => {
+    onSuccess: ({ response, payload, postType }) => {
       const CURRENT_QUERRY = [
         UNIQUE_KEY,
         search._offsetFrom,
         search._offsetTo,
-        payload?.post_type_id || 1,
+        postType,
         payload?.author_id || '',
       ];
 
@@ -112,6 +111,12 @@ export const useCreateNewPost = () => {
         post_type: response.post_type?.name || null,
         post_type_id: response.post_type?.id || null,
       };
+      if (!previousData) {
+        queryClient.setQueryData(CURRENT_QUERRY, {
+          data: [newData],
+          totalData: 1,
+        });
+      }
 
       queryClient.setQueryData(CURRENT_QUERRY, {
         data: [newData, ...previousData],

@@ -81,7 +81,7 @@ export const CreatePostSchema = z.object({
   real_author_name: z.string().min(1, { message: MESSAGE_FIELD_REQUIRED }).optional().default(''),
   slug: z
     .string()
-    .min(1, { message: MESSAGE_FIELD_REQUIRED })
+
     .max(255, { message: `${MESSAGE_MAXIMUM_CHARACTER} 255` })
 
     .default(''),
@@ -90,7 +90,7 @@ export const CreatePostSchema = z.object({
     .max(500, { message: `${MESSAGE_MAXIMUM_CHARACTER} 255` })
     .optional()
     .default(''),
-  featured_image_url: z.string().min(1, { message: MESSAGE_FIELD_REQUIRED }).optional().default(''),
+  featured_image_url: z.string().optional().default(''),
   meta_title: z
     .string()
     .max(255, { message: `${MESSAGE_MAXIMUM_CHARACTER} 255` })

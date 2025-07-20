@@ -1,5 +1,4 @@
 import { CompleteInput } from '@/components/common/complete-input';
-import { MultipleSelectDropdown } from '@/components/custom/MultipleSelect';
 import SelectDropdown from '@/components/custom/SelectDropdown';
 import { Button } from '@/components/ui/button';
 import {
@@ -14,28 +13,26 @@ import {
 } from '@/components/ui/dialog';
 import { useAuth } from '@/context/Auth';
 import { useGetListCategory } from '@/querries/parameter/category';
-import { useGetListTag } from '@/querries/parameter/tags';
 import { useCreateNewPost } from '@/querries/posts/post';
 import { CreatePost, CreatePostSchema } from '@/schema/posts/post';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Loader2, Plus } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import UploadThumbnail from './UploadThumbnail';
 import { useGetPostTypeId } from '@/hooks/use-get-lastpath';
+import { useRouter } from 'next/navigation';
 
 export function AddNewPosts() {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const { user } = useAuth();
 
   const { data: dataCategory, isFetching: isFetchingCategory } = useGetListCategory();
-  const { data: dataTags, isFetching: isFetchingTags } = useGetListTag();
   const { mutateAsync, isPending } = useCreateNewPost();
-  const [randomNumb, setRandomNumb] = useState(1);
   const postTypeSelected = useGetPostTypeId();
-  console.log('postTypeSelected', postTypeSelected);
 
-  const { handleSubmit, formState, watch, register, setValue, setError, clearErrors, reset } =
+  const { push } = useRouter();
+
+  const { handleSubmit, formState, watch, register, setValue, clearErrors, reset } =
     useForm<CreatePost>({
       resolver: zodResolver(CreatePostSchema),
       defaultValues: {
@@ -47,17 +44,22 @@ export function AddNewPosts() {
       },
     });
 
+  console.log('postTypeSelected', formState.errors);
   const watchValueCategory = watch('category_id');
-  const watchValueTag = watch('slug');
 
   const onSubmit = async (payload: CreatePost) => {
-    await mutateAsync({
-      payload: { ...payload, post_type_id: postTypeSelected.id },
+    const { response } = await mutateAsync({
+      payload: {
+        ...payload,
+        post_type_id: postTypeSelected.id || 1,
+        slug: `${payload.title}`.toLowerCase().replace(/ /g, '-'),
+      },
+      postType: postTypeSelected.name || '',
     });
     reset();
     setIsOpenModal(false);
-    setRandomNumb((prev) => (prev === 1 ? 2 : 1));
 
+    push(`/dashboard/post/detail/${response?.id}`);
     return;
   };
 
@@ -72,7 +74,6 @@ export function AddNewPosts() {
       <DialogContent
         className="sm:max-w-2/4"
         onCloseAutoFocus={() => {
-          setRandomNumb((prev) => (prev === 1 ? 2 : 1));
           clearErrors();
           reset();
         }}
@@ -90,6 +91,16 @@ export function AddNewPosts() {
               {...register('title')}
               label={`Judul ${postTypeSelected.name}`}
               error={formState.errors.title?.message}
+            />
+            <CompleteInput
+              {...register('real_author_name')}
+              label="Nama Pengirim"
+              error={formState.errors.real_author_name?.message}
+            />
+            <CompleteInput
+              {...register('real_author_email')}
+              label="Email Pengirim"
+              error={formState.errors.real_author_email?.message}
             />
             <SelectDropdown
               disabled={isPending}
@@ -109,40 +120,6 @@ export function AddNewPosts() {
               }}
               error={formState.errors.category_id?.message}
               isPending={isFetchingCategory}
-            />
-
-            <UploadThumbnail
-              isDisabled={isPending}
-              clearErrors={clearErrors}
-              errors={formState.errors}
-              register={register}
-              setError={setError}
-              setValue={setValue}
-              watch={watch}
-            />
-
-            <MultipleSelectDropdown
-              label="Hashtag"
-              key={`triggerd-${randomNumb}`}
-              handleChange={(value) => {
-                setValue('slug', value);
-                if (value.length > 0) {
-                  clearErrors('slug');
-                }
-              }}
-              options={
-                dataTags
-                  ? dataTags.map((tag) => {
-                      return {
-                        label: tag.name,
-                        value: tag.slug,
-                      };
-                    })
-                  : []
-              }
-              selectedData={watchValueTag}
-              isPending={isFetchingTags}
-              error={formState.errors.slug?.message}
             />
           </form>{' '}
         </DialogWrapperContent>
