@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Home } from 'lucide-react';
 import Link from 'next/link';
 
-export default function NotFound() {
+export default function PageNotFound() {
   return (
     <div className="min-h-screen bg-white flex items-center justify-center px-4">
       <div className="max-w-md w-full text-center space-y-8">

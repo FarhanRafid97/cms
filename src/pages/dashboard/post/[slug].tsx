@@ -1,5 +1,5 @@
 import TableListPosts from '@/components/modules/posts/list-posts/Table/table-complete-posts';
-import NotFound from '@/components/NotFound';
+import PageNotFound from '@/components/NotFound';
 import { signUpload } from '@/lib/cloudinary.server';
 import { setCloudinaryData } from '@/store/cloudinary';
 import { Cloudinary } from '@/types/globals';
@@ -33,7 +33,7 @@ const Page = ({ data }: InferGetServerSidePropsType<typeof getServerSideProps>) 
   if (!data.slug) {
     return (
       <div>
-        <NotFound />
+        <PageNotFound />
       </div>
     );
   }
