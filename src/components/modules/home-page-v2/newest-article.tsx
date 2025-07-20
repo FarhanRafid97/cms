@@ -1,6 +1,6 @@
 import CardPostThumbnail from '@/components/common/card-post-thumbnail';
 import { Button } from '@/components/ui/button';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
 import LayoutSection from '../home-page/layout-section';
 
@@ -37,9 +37,9 @@ const NewestArticle = ({
             </motion.div>
           ))}
         </div>
-        <Button className="flex items-center gap-2 md:w-fit w-full">
+        <Button className="flex items-center gap-2 md:w-fit w-full px-8 py-4 h-12 rounded-3xl ml-auto">
           <p>Lihat Semua </p>
-          <ArrowUpRight />
+          <ArrowRight />
         </Button>
       </div>
     </LayoutSection>
