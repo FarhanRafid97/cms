@@ -1,7 +1,9 @@
+import { Button } from '@/components/ui/button';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useGetPostDetail } from '@/querries/posts/post';
 import { useRightSidebarStore } from '@/store/right-sidebar';
-import { LayersIcon } from '@radix-ui/react-icons';
+import { ArrowLeftIcon } from '@radix-ui/react-icons';
+import { useRouter } from 'next/router';
 import { Editor } from './EditDetailPost';
 import LoadingArticle from './LoadingDetailArticle';
 import { SideContent } from './SideContent';
@@ -10,7 +12,7 @@ export const PageDetailPost = ({ id }: { id: string }) => {
   const { data, isLoading } = useGetPostDetail({ postId: id });
   const { isOpen, setIsOpen } = useRightSidebarStore();
   const isMobile = useIsMobile();
-
+  const router = useRouter();
   if (isLoading) {
     return (
       <div className="w-full flex justify-center items-start">
@@ -33,7 +35,9 @@ export const PageDetailPost = ({ id }: { id: string }) => {
         {/* Header */}
         <div className="flex items-center justify-between p-6">
           <div className="flex gap-2 items-center min-w-0">
-            <LayersIcon className="w-6 h-6" />
+            <Button size="icon" onClick={() => router.back()}>
+              <ArrowLeftIcon className="w-6 h-6" />
+            </Button>
             <h1 className="text-4xl text-foreground truncate capitalize">{data.title}</h1>
           </div>
         </div>
